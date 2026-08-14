@@ -1,0 +1,93 @@
+<ion-content class="accueil-content" [fullscreen]="true">
+  <div class="accueil-screen">
+
+    <div class="accueil-header">
+      <div class="accueil-top">
+        <div class="brand-mark">
+          <ion-icon name="leaf-outline"></ion-icon>
+        </div>
+        <h1 class="brand-title">SunuAgri</h1>
+        <p class="tagline">L'agriculture sénégalaise, accompagnée par l'intelligence artificielle.</p>
+      </div>
+
+      <nav class="dashboard-strip">
+        <a class="nav-link" routerLink="/tabs/diagnostic">
+          <ion-icon name="camera-outline"></ion-icon>
+          <span>Diagnostic</span>
+        </a>
+        <a class="nav-link" routerLink="/tabs/parcelles">
+          <ion-icon name="leaf-outline"></ion-icon>
+          <span>Parcelles</span>
+        </a>
+        <a class="nav-link" routerLink="/tabs/assistant">
+          <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
+          <span>Assistant</span>
+        </a>
+        <a class="nav-link" routerLink="/tabs/calendrier">
+          <ion-icon name="calendar-outline"></ion-icon>
+          <span>Calendrier</span>
+        </a>
+        <a class="nav-link" routerLink="/tabs/alertes">
+          <ion-icon name="notifications-outline"></ion-icon>
+          <span>Alertes</span>
+        </a>
+      </nav>
+    </div>
+
+    <div class="hero-photo">
+      <img src="photos/accueil-hero.jpeg" alt="Agriculture au Senegal" />
+    </div>
+
+    <div class="accueil-body">
+      <div class="how-it-works">
+        <h2 class="section-title">Comment ça marche</h2>
+
+        <div class="how-card">
+          <div class="how-icon"><ion-icon name="camera-outline"></ion-icon></div>
+          <div class="how-text">
+            <h3>Diagnostic par photo</h3>
+            <p>Photographie une feuille et laisse l'IA identifier la maladie en quelques secondes, avec un score de confiance.</p>
+          </div>
+        </div>
+
+        <div class="how-card">
+          <div class="how-icon"><ion-icon name="calendar-outline"></ion-icon></div>
+          <div class="how-text">
+            <h3>Calendrier cultural</h3>
+            <p>Consulte les periodes de semis, de floraison et de recolte adaptees a ta culture et a ta zone.</p>
+          </div>
+        </div>
+
+        <div class="how-card">
+          <div class="how-icon"><ion-icon name="chatbubble-ellipses-outline"></ion-icon></div>
+          <div class="how-text">
+            <h3>Assistant IA</h3>
+            <p>Pose tes questions en langage naturel et reçois des conseils personnalises, a tout moment.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="languages">
+  <p class="languages-label">Disponible dans tes langues</p>
+  <div class="lang-chips">
+    <span class="lang-chip">Français</span>
+    <span class="lang-chip">Wolof</span>
+    <span class="lang-chip">Pulaar</span>
+    <span class="lang-chip">Sérère</span>
+    <span class="lang-chip">Diola</span>
+  </div>
+</div>
+<p class="app-footer">SunuAgri · Version de démonstration · Mémoire Master 2 SIR</p>
+
+      <div class="accueil-actions">
+        <ion-button expand="block" fill="outline" class="cta-outline" routerLink="/register">
+          Creer un compte
+        </ion-button>
+        <ion-button expand="block" class="cta" routerLink="/login">
+          Se connecter
+        </ion-button>
+      </div>
+    </div>
+
+  </div>
+</ion-content>

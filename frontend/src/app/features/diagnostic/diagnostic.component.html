@@ -1,0 +1,79 @@
+<ion-content class="sa-content" [fullscreen]="true">
+  <div class="page-header">
+    <h1>Diagnostic</h1>
+    <p>Identifie une maladie en photographiant une feuille</p>
+  </div>
+
+  <div class="page-body">
+
+    <div class="plant-picker">
+      <button
+        *ngFor="let p of plantes"
+        class="plant-chip"
+        [class.active]="p.id === planteSelectionneeId"
+        (click)="selectionnerPlante(p.id)">
+        <ion-icon name="leaf-outline"></ion-icon>
+        {{ p.nomCommun }}
+      </button>
+    </div>
+
+    <div class="photo-zone" [class.has-photo]="photoDataUrl" (click)="prendrePhoto()">
+      <ng-container *ngIf="!photoDataUrl">
+        <div class="photo-zone-icon"><ion-icon name="camera-outline"></ion-icon></div>
+        <p class="photo-zone-title">Prendre une photo</p>
+        <p class="photo-zone-sub">ou choisir depuis la galerie</p>
+      </ng-container>
+      <img *ngIf="photoDataUrl" [src]="photoDataUrl" alt="Photo de la feuille" />
+    </div>
+
+    <ion-button expand="block" class="cta" *ngIf="photoDataUrl && !resultat" (click)="analyser()" [disabled]="analyseEnCours">
+      <ion-spinner *ngIf="analyseEnCours" name="dots"></ion-spinner>
+      <span *ngIf="!analyseEnCours">Analyser la photo</span>
+    </ion-button>
+
+    <ion-button expand="block" fill="clear" *ngIf="photoDataUrl" (click)="reinitialiser()" class="link-btn">
+      Reprendre une photo
+    </ion-button>
+
+    <div class="resultat-card" *ngIf="resultat">
+      <div class="resultat-top">
+        <div class="resultat-icon"><ion-icon name="alert-circle-outline"></ion-icon></div>
+        <div>
+          <p class="resultat-label">{{ planteSelectionnee()?.nomCommun }}</p>
+          <h2>{{ resultat.maladieNom }}</h2>
+        </div>
+      </div>
+
+      <div class="confiance-bar">
+        <div class="confiance-bar-fill" [style.width.%]="niveauConfiance()"></div>
+      </div>
+      <p class="confiance-label">Confiance du diagnostic : {{ niveauConfiance() }}%</p>
+
+      <ion-button expand="block" fill="outline" class="cta-outline">
+        <ion-icon name="checkmark-circle-outline" slot="start"></ion-icon>
+        Voir le traitement recommandé
+      </ion-button>
+    </div>
+
+    <p class="mock-note" *ngIf="!resultat">Résultat simulé — le vrai modèle IA sera branché via le micro-service model_ia.</p>
+
+    <div class="historique-section" *ngIf="historique.length">
+      <div class="historique-title">
+        <ion-icon name="time-outline"></ion-icon>
+        <span>Diagnostics récents</span>
+      </div>
+
+      <div class="historique-item" *ngFor="let h of historique">
+        <div class="historique-thumb">
+          <ion-icon name="leaf-outline"></ion-icon>
+        </div>
+        <div class="historique-info">
+          <p class="historique-maladie">{{ h.maladieNom }}</p>
+          <p class="historique-meta">{{ h.planteNom }} · {{ h.dateDiagnostic | date:'d MMM' }}</p>
+        </div>
+        <ion-icon name="chevron-forward-outline" class="historique-chevron"></ion-icon>
+      </div>
+    </div>
+
+  </div>
+</ion-content>

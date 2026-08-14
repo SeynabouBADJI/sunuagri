@@ -1,0 +1,60 @@
+<ion-content class="login-content" [fullscreen]="true">
+  <div class="login-screen">
+    <div class="login-wrap">
+
+      <div class="brand">
+        <div class="brand-mark">
+          <ion-icon name="leaf-outline"></ion-icon>
+        </div>
+        <h1>Creer un compte</h1>
+        <p>Rejoins SunuAgri pour suivre tes cultures au quotidien.</p>
+      </div>
+
+      <form (ngSubmit)="sInscrire()" class="login-card">
+
+        <div class="field-row">
+          <div class="field">
+            <ion-icon name="person-outline"></ion-icon>
+            <input type="text" [(ngModel)]="prenom" name="prenom" placeholder="Prenom" required />
+          </div>
+          <div class="field">
+            <ion-icon name="person-outline"></ion-icon>
+            <input type="text" [(ngModel)]="nom" name="nom" placeholder="Nom" required />
+          </div>
+        </div>
+
+        <div class="field">
+          <ion-icon name="mail-outline"></ion-icon>
+          <input type="email" [(ngModel)]="email" name="email" placeholder="Email" required />
+        </div>
+
+        <div class="field">
+          <ion-icon name="call-outline"></ion-icon>
+          <input type="tel" [(ngModel)]="telephone" name="telephone" placeholder="Telephone" required />
+        </div>
+
+        <div class="field">
+          <ion-icon name="lock-closed-outline"></ion-icon>
+          <input type="password" [(ngModel)]="motDePasse" name="motDePasse" placeholder="Mot de passe" required />
+        </div>
+
+        <div class="field">
+          <ion-icon name="lock-closed-outline"></ion-icon>
+          <input type="password" [(ngModel)]="confirmationMotDePasse" name="confirmationMotDePasse" placeholder="Confirmer le mot de passe" required />
+        </div>
+
+        <p class="error-msg" *ngIf="erreur">{{ erreur }}</p>
+
+        <ion-button expand="block" type="submit" [disabled]="chargement" class="cta">
+          <ion-spinner *ngIf="chargement" name="dots"></ion-spinner>
+          <span *ngIf="!chargement">S'inscrire</span>
+        </ion-button>
+
+        <ion-button expand="block" fill="clear" type="button" class="link-btn" routerLink="/login">
+          Deja un compte ? <strong>Se connecter</strong>
+        </ion-button>
+      </form>
+
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,58 @@
+/* You can add global styles to this file, and also import other style files */
+/* Ionic core + structure */
+@import "@ionic/angular/css/core.css";
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import "@ionic/angular/css/display.css";
+
+/* Utilitaires Ionic optionnels */
+@import "@ionic/angular/css/padding.css";
+@import "@ionic/angular/css/float-elements.css";
+@import "@ionic/angular/css/text-alignment.css";
+@import "@ionic/angular/css/flex-utils.css";
+
+:root {
+  --sa-green: #2F6B4F;
+  --sa-green-dark: #1F4A36;
+  --sa-green-light: #E3EFE7;
+
+  --sa-amber: #C98A2C;
+  --sa-amber-dark: #8A5E1A;
+  --sa-amber-light: #FBF0DD;
+
+  --sa-clay: #B15E3E;
+  --sa-clay-dark: #7A3F29;
+  --sa-clay-light: #F7E7DF;
+
+  --sa-bg: #F6F7F2;
+  --sa-text: #23291F;
+  --sa-text-muted: #6B7268;
+  --sa-border: #DDE3D8;
+
+  --ion-font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --sa-font-display: 'Fraunces', Georgia, serif;
+
+  --ion-color-primary: #2F6B4F;
+  --ion-color-primary-rgb: 47, 107, 79;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #295e46;
+  --ion-color-primary-tint: #447a61;
+
+  --ion-background-color: var(--sa-bg);
+  --ion-text-color: var(--sa-text);
+}
+
+ion-content {
+  --color: var(--sa-text);
+}
+
+html, body {
+  height: 100%;
+}
+
+app-root, ion-app {
+  display: block;
+  height: 100%;
+}

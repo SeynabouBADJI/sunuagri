@@ -1,0 +1,49 @@
+<ion-content class="login-content" [fullscreen]="true">
+  <div class="login-screen">
+    <div class="login-wrap">
+
+      <div class="brand">
+        <div class="brand-mark">
+          <ion-icon name="leaf-outline"></ion-icon>
+        </div>
+        <h1>SunuAgri</h1>
+        <p>Ton assistant intelligent pour une agriculture plus sereine.</p>
+      </div>
+
+      <form (ngSubmit)="seConnecter()" class="login-card">
+        <div class="field">
+          <ion-icon name="mail-outline"></ion-icon>
+          <input
+            type="email"
+            [(ngModel)]="email"
+            name="email"
+            placeholder="Email"
+            required
+          />
+        </div>
+
+        <div class="field">
+          <ion-icon name="lock-closed-outline"></ion-icon>
+          <input
+            type="password"
+            [(ngModel)]="motDePasse"
+            name="motDePasse"
+            placeholder="Mot de passe"
+            required
+          />
+        </div>
+
+        <ion-button expand="block" type="submit" [disabled]="chargement" class="cta">
+          <ion-spinner *ngIf="chargement" name="dots"></ion-spinner>
+          <span *ngIf="!chargement">Se connecter</span>
+        </ion-button>
+
+        <ion-button expand="block" fill="clear" type="button" class="link-btn" routerLink="/register">
+        Pas encore de compte ? <strong>S'inscrire</strong>
+        </ion-button>
+      </form>
+
+      <p class="mock-note">Donnees factices — aucune connexion reelle au serveur pour l'instant.</p>
+    </div>
+  </div>
+</ion-content>
