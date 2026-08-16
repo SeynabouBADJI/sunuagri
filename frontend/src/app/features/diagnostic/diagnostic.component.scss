@@ -1,291 +1,1045 @@
-.sa-content {
+/* =========================================================
+   DIAGNOSTIC - GLOBAL
+   ========================================================= */
+
+.diagnostic-content {
   --background: var(--sa-bg);
+  color: var(--sa-text);
 }
 
-.page-header {
-  padding: max(20px, env(safe-area-inset-top)) 20px 18px;
-  background: white;
-  border-bottom: 1px solid var(--sa-border);
 
-  h1 {
-    font-family: var(--sa-font-display);
-    font-size: 22px;
-    font-weight: 700;
-    color: var(--sa-green-dark);
-    margin: 0 0 4px;
-  }
+/* =========================================================
+   HEADER
+   ========================================================= */
 
-  p {
-    font-size: 13px;
-    color: var(--sa-text-muted);
-    margin: 0;
-  }
-}
-
-.page-body {
-  padding: 20px;
-}
-
-.plant-picker {
-  display: flex;
-  gap: 8px;
-  overflow-x: auto;
-  padding-bottom: 4px;
-  margin-bottom: 18px;
-  scrollbar-width: none;
-
-  &::-webkit-scrollbar { display: none; }
-}
-
-.plant-chip {
+.diagnostic-header {
   display: flex;
   align-items: center;
-  gap: 6px;
-  flex-shrink: 0;
-  background: white;
-  border: 1px solid var(--sa-border);
-  border-radius: 999px;
-  padding: 9px 16px;
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--sa-text);
-  font-family: inherit;
+  justify-content: space-between;
+
+  padding: 18px 20px;
+  padding-top: max(18px, env(safe-area-inset-top));
+
+  background: linear-gradient(
+    160deg,
+    var(--sa-green-dark) 0%,
+    var(--sa-green) 100%
+  );
+
+  color: white;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.back-button {
+  --color: white;
+  --padding-start: 6px;
+  --padding-end: 6px;
+
+  margin: 0;
 
   ion-icon {
-    font-size: 15px;
-    color: var(--sa-text-muted);
-  }
-
-  &.active {
-    background: var(--sa-green);
-    border-color: var(--sa-green);
-    color: white;
-
-    ion-icon { color: white; }
+    font-size: 25px;
   }
 }
 
-.photo-zone {
-  border: 2px dashed var(--sa-border);
-  border-radius: 20px;
-  min-height: 220px;
+.header-label {
+  display: block;
+
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+
+  color: rgba(255, 255, 255, 0.7);
+
+  margin-bottom: 2px;
+}
+
+.header-left {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.back-button {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  border: none;
+  background: rgba(255, 255, 255, 0.14);
+  color: white;
+  display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  overflow: hidden;
-  margin-bottom: 16px;
-  background: white;
 
-  &.has-photo {
-    border-style: solid;
-    border-color: transparent;
-  }
-
-  .photo-zone-icon {
-    width: 56px;
-    height: 56px;
-    border-radius: 16px;
-    background: var(--sa-green-light);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 12px;
-
-    ion-icon {
-      font-size: 26px;
-      color: var(--sa-green-dark);
-    }
-  }
-
-  .photo-zone-title {
-    font-size: 14.5px;
-    font-weight: 600;
-    color: var(--sa-text);
-    margin: 0 0 2px;
-  }
-
-  .photo-zone-sub {
-    font-size: 12.5px;
-    color: var(--sa-text-muted);
-    margin: 0;
-  }
-
-  img {
-    width: 100%;
-    height: 100%;
-    min-height: 220px;
-    object-fit: cover;
+  ion-icon {
+    font-size: 20px;
   }
 }
 
-.cta {
+.header-title h1 {
+  margin: 0;
+
+  font-family: var(--sa-font-display);
+  font-size: 23px;
+  font-weight: 700;
+
+  color: white;
+}
+
+.header-icon {
+  width: 44px;
+  height: 44px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 14px;
+
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+
+  ion-icon {
+    font-size: 23px;
+    color: white;
+  }
+}
+
+/* =========================================================
+   INTRO
+   ========================================================= */
+
+.diagnostic-intro {
+  width: min(850px, 88%);
+
+  margin: 55px auto 30px;
+
+  text-align: center;
+}
+
+.section-label {
+  display: inline-block;
+
+  margin-bottom: 10px;
+
+  color: var(--sa-green);
+
+  font-size: 10px;
+  font-weight: 800;
+
+  letter-spacing: 0.12em;
+}
+
+.diagnostic-intro h2 {
+  margin: 0 0 14px;
+
+  font-family: var(--sa-font-display);
+
+  font-size: clamp(29px, 5vw, 45px);
+
+  line-height: 1.12;
+
+  letter-spacing: -0.04em;
+
+  color: var(--sa-text);
+}
+
+.diagnostic-intro h2 span {
+  display: block;
+
+  color: var(--sa-green);
+}
+
+.diagnostic-intro p {
+  max-width: 620px;
+
+  margin: auto;
+
+  color: var(--sa-text-muted);
+
+  font-size: 14px;
+
+  line-height: 1.65;
+}
+
+
+/* =========================================================
+   CARTE PRINCIPALE
+   ========================================================= */
+
+.diagnostic-card {
+  width: min(800px, 88%);
+
+  margin: 0 auto 35px;
+
+  padding: 30px;
+
+  background: white;
+
+  border: 1px solid var(--sa-border);
+
+  border-radius: 24px;
+
+  box-shadow:
+    0 18px 45px -28px rgba(35, 41, 31, 0.28);
+}
+
+
+/* =========================================================
+   ZONE UPLOAD
+   ========================================================= */
+
+.upload-zone {
+  padding: 35px 20px;
+
+  text-align: center;
+
+  border: 2px dashed rgba(47, 107, 79, 0.22);
+
+  border-radius: 18px;
+
+  background: #fbfdfb;
+}
+
+.upload-icon {
+  width: 70px;
+  height: 70px;
+
+  margin: 0 auto 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 22px;
+
+  background: var(--sa-green-light);
+
+  ion-icon {
+    font-size: 32px;
+
+    color: var(--sa-green-dark);
+  }
+}
+
+.upload-zone h3 {
+  margin: 0 0 8px;
+
+  font-family: var(--sa-font-display);
+
+  font-size: 20px;
+
+  color: var(--sa-text);
+}
+
+.upload-zone p {
+  max-width: 480px;
+
+  margin: 0 auto 25px;
+
+  color: var(--sa-text-muted);
+
+  font-size: 13px;
+
+  line-height: 1.6;
+}
+
+
+/* =========================================================
+   BOUTONS UPLOAD
+   ========================================================= */
+
+.upload-actions {
+  display: flex;
+  justify-content: center;
+
+  gap: 10px;
+
+  flex-wrap: wrap;
+}
+
+.primary-button {
+  --background: var(--sa-green);
+  --background-activated: var(--sa-green-dark);
+  --border-radius: 11px;
+
+  height: 48px;
+
+  font-weight: 700;
+
+  text-transform: none;
+}
+
+.secondary-button {
+  --border-color: var(--sa-green);
+  --color: var(--sa-green-dark);
+  --border-radius: 11px;
+
+  height: 48px;
+
+  font-weight: 600;
+
+  text-transform: none;
+}
+
+
+/* =========================================================
+   IMAGE SÉLECTIONNÉE
+   ========================================================= */
+
+.image-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 15px;
+}
+
+.image-header span {
+  display: block;
+
+  margin-bottom: 4px;
+
+  color: var(--sa-text-muted);
+
+  font-size: 9px;
+  font-weight: 800;
+
+  letter-spacing: 0.1em;
+}
+
+.image-header strong {
+  color: var(--sa-text);
+
+  font-size: 13px;
+}
+
+.remove-button {
+  --color: #b64c4c;
+
+  margin: 0;
+}
+
+.plant-image-wrapper {
+  width: 100%;
+  height: 350px;
+
+  overflow: hidden;
+
+  margin-bottom: 18px;
+
+  border-radius: 17px;
+
+  background: #eef3ee;
+}
+
+.plant-image {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+}
+
+
+/* =========================================================
+   BOUTON ANALYSE
+   ========================================================= */
+
+.analyze-button {
   --background: var(--sa-green);
   --background-activated: var(--sa-green-dark);
   --border-radius: 12px;
-  height: 48px;
-  font-weight: 600;
+
+  height: 52px;
+
+  font-weight: 700;
+
   text-transform: none;
 }
 
-.link-btn {
-  --color: var(--sa-text-muted);
-  font-size: 13.5px;
-  text-transform: none;
-}
 
-.cta-outline {
-  --border-color: var(--sa-green);
-  --color: var(--sa-green-dark);
-  --border-radius: 12px;
-  margin-top: 14px;
-  text-transform: none;
-}
+/* =========================================================
+   CHARGEMENT
+   ========================================================= */
 
-.resultat-card {
-  margin-top: 20px;
-  padding: 18px;
-  border-radius: 18px;
-  background: var(--sa-amber-light);
-  border: 1px solid var(--sa-amber);
-}
+.analysis-loading {
+  width: min(800px, 88%);
 
-.resultat-top {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 14px;
-}
+  margin: 0 auto 35px;
 
-.resultat-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  background: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
+  padding: 25px;
 
-  ion-icon {
-    font-size: 22px;
-    color: var(--sa-amber-dark);
-  }
-}
-
-.resultat-label {
-  margin: 0 0 2px;
-  font-size: 11.5px;
-  font-weight: 600;
-  color: var(--sa-amber-dark);
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
-}
-
-.resultat-card h2 {
-  margin: 0;
-  font-size: 18px;
-  color: var(--sa-amber-dark);
-}
-
-.confiance-bar {
-  height: 6px;
-  border-radius: 999px;
-  background: rgba(138, 94, 26, 0.15);
-  overflow: hidden;
-  margin-bottom: 6px;
-}
-
-.confiance-bar-fill {
-  height: 100%;
-  background: var(--sa-amber-dark);
-  border-radius: 999px;
-  transition: width 0.4s ease;
-}
-
-.confiance-label {
-  font-size: 12px;
-  color: var(--sa-amber-dark);
-  margin: 0;
-}
-
-.mock-note {
   text-align: center;
-  font-size: 11.5px;
-  color: var(--sa-text-muted);
-  margin-top: 16px;
-}
 
-.historique-section {
-  margin-top: 28px;
-}
-
-.historique-title {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin-bottom: 12px;
-
-  ion-icon {
-    font-size: 15px;
-    color: var(--sa-text-muted);
-  }
-
-  span {
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--sa-text);
-  }
-}
-
-.historique-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
   background: white;
+
   border: 1px solid var(--sa-border);
-  border-radius: 14px;
-  padding: 12px;
-  margin-bottom: 8px;
+
+  border-radius: 20px;
 }
 
-.historique-thumb {
-  width: 38px;
-  height: 38px;
-  border-radius: 10px;
-  background: var(--sa-green-light);
+.loading-icon {
+  width: 55px;
+  height: 55px;
+
+  margin: 0 auto 14px;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
+
+  border-radius: 16px;
+
+  background: var(--sa-green-light);
 
   ion-icon {
-    font-size: 18px;
+    font-size: 27px;
+
     color: var(--sa-green-dark);
   }
 }
 
-.historique-info {
-  flex: 1;
-  min-width: 0;
+.analysis-loading h3 {
+  margin: 0 0 7px;
+
+  font-family: var(--sa-font-display);
+
+  font-size: 17px;
 }
 
-.historique-maladie {
+.analysis-loading p {
+  margin: 0 auto 18px;
+
+  color: var(--sa-text-muted);
+
+  font-size: 12.5px;
+}
+
+.analysis-loading ion-progress-bar {
+  --progress-background: var(--sa-green);
+  --background: var(--sa-green-light);
+}
+
+
+/* =========================================================
+   RÉSULTAT
+   ========================================================= */
+
+.result-section {
+  width: min(800px, 88%);
+
+  margin: 0 auto 60px;
+}
+
+.result-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 18px;
+}
+
+.result-header h2 {
   margin: 0;
+
+  font-family: var(--sa-font-display);
+
+  font-size: 25px;
+}
+
+.success-icon {
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: var(--sa-green);
+
+  ion-icon {
+    font-size: 23px;
+
+    color: white;
+  }
+}
+
+
+/* =========================================================
+   RÉSULTAT PRINCIPAL
+   ========================================================= */
+
+.result-main-card {
+  display: flex;
+  align-items: center;
+
+  gap: 18px;
+
+  padding: 22px;
+
+  margin-bottom: 14px;
+
+  background: var(--sa-green-dark);
+
+  border-radius: 19px;
+
+  color: white;
+}
+
+.disease-icon {
+  width: 58px;
+  height: 58px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 17px;
+
+  background: rgba(255, 255, 255, 0.12);
+
+  ion-icon {
+    font-size: 28px;
+  }
+}
+
+.disease-info span {
+  display: block;
+
+  margin-bottom: 4px;
+
+  color: rgba(255, 255, 255, 0.62);
+
+  font-size: 9px;
+  font-weight: 800;
+
+  letter-spacing: 0.1em;
+}
+
+.disease-info h3 {
+  margin: 0 0 4px;
+
+  font-family: var(--sa-font-display);
+
+  font-size: 21px;
+}
+
+.disease-info p {
+  margin: 0;
+
+  color: rgba(255, 255, 255, 0.72);
+
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   CONFIANCE
+   ========================================================= */
+
+.confidence-card {
+  padding: 20px;
+
+  margin-bottom: 14px;
+
+  background: white;
+
+  border: 1px solid var(--sa-border);
+
+  border-radius: 17px;
+}
+
+.confidence-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 14px;
+}
+
+.confidence-header span {
+  display: block;
+
+  margin-bottom: 3px;
+
+  color: var(--sa-text-muted);
+
+  font-size: 9px;
+  font-weight: 800;
+
+  letter-spacing: 0.1em;
+}
+
+.confidence-header strong {
+  font-family: var(--sa-font-display);
+
+  font-size: 25px;
+
+  color: var(--sa-green-dark);
+}
+
+.confidence-header ion-icon {
+  font-size: 24px;
+
+  color: var(--sa-green);
+}
+
+.confidence-card ion-progress-bar {
+  height: 8px;
+
+  --background: var(--sa-green-light);
+  --progress-background: var(--sa-green);
+
+  border-radius: 999px;
+}
+
+.confidence-card p {
+  margin: 10px 0 0;
+
+  color: var(--sa-text-muted);
+
+  font-size: 11px;
+}
+
+
+/* =========================================================
+   CARTES D'INFORMATIONS
+   ========================================================= */
+
+.information-card,
+.recommendation-card {
+  padding: 20px;
+
+  margin-bottom: 14px;
+
+  background: white;
+
+  border: 1px solid var(--sa-border);
+
+  border-radius: 17px;
+}
+
+.information-title {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  margin-bottom: 16px;
+}
+
+.information-title h3 {
+  margin: 0;
+
+  font-family: var(--sa-font-display);
+
+  font-size: 16px;
+}
+
+.small-icon {
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+
+  background: var(--sa-green-light);
+
+  ion-icon {
+    font-size: 17px;
+
+    color: var(--sa-green-dark);
+  }
+}
+
+
+/* Symptômes */
+
+.information-card ul {
+  margin: 0;
+
+  padding-left: 20px;
+}
+
+.information-card li {
+  margin-bottom: 8px;
+
+  color: var(--sa-text-muted);
+
   font-size: 13px;
+
+  line-height: 1.5;
+}
+
+.information-card li:last-child {
+  margin-bottom: 0;
+}
+
+
+/* =========================================================
+   RECOMMANDATIONS
+   ========================================================= */
+
+.recommendation-list {
+  display: flex;
+  flex-direction: column;
+
+  gap: 12px;
+}
+
+.recommendation {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 9px;
+
+  color: var(--sa-text);
+
+  font-size: 13px;
+
+  line-height: 1.5;
+}
+
+.recommendation ion-icon {
+  flex-shrink: 0;
+
+  margin-top: 1px;
+
+  color: var(--sa-green);
+
+  font-size: 18px;
+}
+
+
+/* =========================================================
+   AVERTISSEMENT
+   ========================================================= */
+
+.result-warning {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 10px;
+
+  padding: 14px;
+
+  margin-bottom: 18px;
+
+  border-radius: 13px;
+
+  background: #fff8e8;
+
+  border: 1px solid #f0dfb4;
+
+  ion-icon {
+    flex-shrink: 0;
+
+    font-size: 18px;
+
+    color: #a87520;
+  }
+}
+
+.result-warning p {
+  margin: 0;
+
+  color: #765c2d;
+
+  font-size: 11.5px;
+
+  line-height: 1.5;
+}
+
+
+/* Nouveau diagnostic */
+
+.new-diagnostic-button {
+  --border-color: var(--sa-green);
+  --color: var(--sa-green-dark);
+  --border-radius: 11px;
+
+  height: 48px;
+
   font-weight: 600;
+
+  text-transform: none;
+}
+
+
+/* =========================================================
+   HISTORIQUE
+   ========================================================= */
+
+.history-section {
+  padding: 70px 6%;
+
+  background: white;
+
+  border-top: 1px solid var(--sa-border);
+}
+
+.section-heading {
+  width: min(900px, 100%);
+
+  margin: 0 auto 25px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.section-heading h2 {
+  margin: 0;
+
+  font-family: var(--sa-font-display);
+
+  font-size: 25px;
+}
+
+.see-all-button {
+  --color: var(--sa-green-dark);
+
+  font-size: 12px;
+
+  text-transform: none;
+}
+
+.history-list {
+  width: min(900px, 100%);
+
+  margin: auto;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 10px;
+}
+
+.history-card {
+  display: flex;
+  align-items: center;
+
+  gap: 13px;
+
+  padding: 14px 16px;
+
+  background: var(--sa-bg);
+
+  border: 1px solid var(--sa-border);
+
+  border-radius: 14px;
+}
+
+.history-icon {
+  width: 42px;
+  height: 42px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 12px;
+
+  background: var(--sa-green-light);
+
+  ion-icon {
+    color: var(--sa-green-dark);
+
+    font-size: 20px;
+  }
+}
+
+.history-info {
+  flex: 1;
+}
+
+.history-info h3 {
+  margin: 0 0 3px;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
   color: var(--sa-text);
 }
 
-.historique-meta {
-  margin: 2px 0 0;
-  font-size: 11.5px;
+.history-info p {
+  margin: 0;
+
   color: var(--sa-text-muted);
+
+  font-size: 11px;
 }
 
-.historique-chevron {
+.history-confidence {
+  text-align: right;
+}
+
+.history-confidence strong {
+  display: block;
+
+  color: var(--sa-green-dark);
+
+  font-size: 13px;
+}
+
+.history-confidence span {
   color: var(--sa-text-muted);
-  font-size: 16px;
-  flex-shrink: 0;
+
+  font-size: 9px;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.diagnostic-footer {
+  padding: 35px 6% 25px;
+
+  text-align: center;
+
+  background: #17251d;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  color: white;
+
+  font-family: var(--sa-font-display);
+}
+
+.footer-mark {
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+
+  background: rgba(255, 255, 255, 0.1);
+
+  ion-icon {
+    color: #d2ead6;
+  }
+}
+
+.diagnostic-footer p {
+  margin: 10px auto 0;
+
+  max-width: 400px;
+
+  color: rgba(255, 255, 255, 0.5);
+
+  font-size: 10.5px;
+
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+  .diagnostic-intro {
+    margin-top: 40px;
+  }
+
+  .diagnostic-intro h2 {
+    font-size: 30px;
+  }
+
+  .diagnostic-card {
+    padding: 16px;
+
+    border-radius: 19px;
+  }
+
+  .upload-zone {
+    padding: 30px 15px;
+  }
+
+  .upload-actions {
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+  .primary-button,
+  .secondary-button {
+    width: 100%;
+  }
+
+  .plant-image-wrapper {
+    height: 280px;
+  }
+
+  .result-main-card {
+    padding: 18px;
+  }
+
+  .disease-info h3 {
+    font-size: 18px;
+  }
+
+  .history-section {
+    padding: 55px 18px;
+  }
+
+  .section-heading {
+    align-items: center;
+  }
+
+  .history-card {
+    padding: 12px;
+  }
+
+  .history-confidence {
+    display: none;
+  }
+
+}
+
+@media (max-width: 380px) {
+
+  .diagnostic-header {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .diagnostic-card,
+  .result-section {
+    width: 92%;
+  }
+
+  .diagnostic-intro {
+    width: 92%;
+  }
+
 }

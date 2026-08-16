@@ -1,0 +1,59 @@
+<ion-content class="alertes-content" [fullscreen]="true">
+
+  <div class="alertes-header">
+    <div class="header-left">
+    <button class="back-button" routerLink="/accueil">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+    </button>
+    <div class="header-title">
+        <span class="header-label">SUNUAGRI</span>
+        <h1>Alertes</h1>
+    </div>
+    </div>
+    <div class="header-icon">
+      <ion-icon name="notifications-outline"></ion-icon>
+    </div>
+  </div>
+
+  <section class="alertes-intro">
+    <span class="section-label">SURVEILLANCE</span>
+    <h2>Reste informé <span>des risques autour de toi</span></h2>
+    <p>Suis les alertes de maladies détectées dans ta zone pour protéger tes cultures à temps.</p>
+  </section>
+
+  <section class="alertes-list">
+
+    <ng-container *ngIf="chargement">
+      <div class="alerte-card skeleton" *ngFor="let i of [1,2,3]"></div>
+    </ng-container>
+
+    <div class="alerte-card" *ngFor="let a of alertes">
+      <div class="alerte-top">
+        <div class="alerte-icon">
+          <ion-icon name="warning-outline"></ion-icon>
+        </div>
+        <div class="alerte-titre">
+          <span class="alerte-type">{{ a.type }}</span>
+          <h3>{{ a.titre }}</h3>
+        </div>
+      </div>
+
+      <p class="alerte-message">{{ a.message }}</p>
+
+      <div class="alerte-footer">
+        <span class="alerte-region">
+          <ion-icon name="location-outline"></ion-icon>
+          {{ a.region }}
+        </span>
+        <span class="alerte-date">{{ a.dateCreation }}</span>
+      </div>
+    </div>
+
+    <div class="empty-state" *ngIf="!chargement && !alertes.length">
+      <ion-icon name="checkmark-circle-outline"></ion-icon>
+      <p>Aucune alerte active pour le moment.</p>
+    </div>
+
+  </section>
+
+</ion-content>

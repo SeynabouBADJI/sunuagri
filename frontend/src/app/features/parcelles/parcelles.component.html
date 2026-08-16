@@ -1,0 +1,78 @@
+<ion-content class="parcelles-content" [fullscreen]="true">
+
+  <div class="parcelles-header">
+    <div class="header-left">
+    <button class="back-button" routerLink="/accueil">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+    </button>
+    <div class="header-title">
+        <span class="header-label">SUNUAGRI</span>
+        <h1>Mes parcelles</h1>
+    </div>
+    </div>
+    <div class="header-icon">
+      <ion-icon name="leaf-outline"></ion-icon>
+    </div>
+  </div>
+
+  <section class="parcelles-intro">
+    <span class="section-label">GESTION DES TERRES</span>
+    <h2>Suis tes parcelles <span>en un coup d'œil</span></h2>
+    <p>Retrouve la superficie, la localisation et les cultures en cours de chacune de tes parcelles.</p>
+  </section>
+
+  <div class="stats-row">
+    <div class="stat-card">
+      <span class="stat-value">{{ totalParcelles }}</span>
+      <span class="stat-label">Parcelles</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-value">{{ totalSuperficie }}</span>
+      <span class="stat-label">Hectares au total</span>
+    </div>
+  </div>
+
+  <section class="parcelles-list">
+
+    <ng-container *ngIf="chargement">
+      <div class="parcelle-card skeleton" *ngFor="let i of [1,2,3]"></div>
+    </ng-container>
+
+    <div class="parcelle-card" *ngFor="let parcelle of parcelles">
+      <div class="parcelle-top">
+        <div class="parcelle-icon">
+          <ion-icon name="leaf-outline"></ion-icon>
+        </div>
+        <div class="parcelle-titre">
+          <h3>{{ parcelle.nom }}</h3>
+          <p><ion-icon name="location-outline"></ion-icon> {{ parcelle.localisation }}</p>
+        </div>
+        <div class="parcelle-superficie">
+          <strong>{{ parcelle.superficie }}</strong>
+          <span>ha</span>
+        </div>
+      </div>
+
+      <div class="parcelle-culture">
+        <ion-icon name="calendar-outline"></ion-icon>
+        <span>{{ culturesActuelles(parcelle.id) }}</span>
+      </div>
+
+      <p class="parcelle-notes" *ngIf="parcelle.notes">{{ parcelle.notes }}</p>
+
+      <div class="parcelle-footer">
+        <div class="parcelle-carnet">
+          <ion-icon name="book-outline"></ion-icon>
+          <span>{{ nombreEntreesCarnet(parcelle.id) }} entrée(s) au carnet</span>
+        </div>
+        <ion-icon name="chevron-forward-outline" class="parcelle-chevron"></ion-icon>
+      </div>
+    </div>
+
+    <p class="empty-state" *ngIf="!chargement && !parcelles.length">
+      Aucune parcelle enregistrée pour l'instant.
+    </p>
+
+  </section>
+
+</ion-content>

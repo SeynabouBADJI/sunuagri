@@ -1,0 +1,223 @@
+.assistant-content {
+  --background: var(--sa-bg);
+  color: var(--sa-text);
+}
+
+.assistant-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 20px;
+  padding-top: max(18px, env(safe-area-inset-top));
+  background: linear-gradient(160deg, var(--sa-green-dark) 0%, var(--sa-green) 100%);
+  color: white;
+}
+
+.header-label {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 2px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.back-button {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  border: none;
+  background: rgba(255, 255, 255, 0.14);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  ion-icon {
+    font-size: 20px;
+  }
+}
+
+.assistant-header h1 {
+  margin: 0;
+  font-family: var(--sa-font-display);
+  font-size: 23px;
+  font-weight: 700;
+  color: white;
+}
+
+.header-icon {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+
+  ion-icon {
+    font-size: 22px;
+    color: white;
+  }
+}
+
+.messages {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: calc(100% - 90px);
+}
+
+.bubble-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+
+  &.mine {
+    justify-content: flex-end;
+  }
+}
+
+.avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  &.bot-avatar {
+    background: var(--sa-green-light);
+
+    ion-icon {
+      font-size: 15px;
+      color: var(--sa-green-dark);
+    }
+  }
+}
+
+.bubble {
+  max-width: 74%;
+  padding: 11px 15px;
+  border-radius: 16px;
+  font-size: 13.5px;
+  line-height: 1.45;
+}
+
+.bubble-assistant {
+  background: white;
+  border: 1px solid var(--sa-border);
+  color: var(--sa-text);
+  border-bottom-left-radius: 4px;
+}
+
+.bubble-mine {
+  background: var(--sa-green);
+  color: white;
+  border-bottom-right-radius: 4px;
+}
+
+.typing {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 14px 16px;
+
+  span {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--sa-text-muted);
+    animation: typing-bounce 1.2s infinite ease-in-out;
+
+    &:nth-child(2) { animation-delay: 0.15s; }
+    &:nth-child(3) { animation-delay: 0.3s; }
+  }
+}
+
+@keyframes typing-bounce {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+  30% { transform: translateY(-4px); opacity: 1; }
+}
+
+.suggestions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.suggestion-chip {
+  align-self: flex-start;
+  background: white;
+  border: 1px solid var(--sa-green);
+  color: var(--sa-green-dark);
+  border-radius: 999px;
+  padding: 10px 16px;
+  font-size: 12.5px;
+  font-weight: 600;
+  font-family: inherit;
+}
+
+.input-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  padding-bottom: max(10px, env(safe-area-inset-bottom));
+  background: white;
+  border-top: 1px solid var(--sa-border);
+
+  input {
+    flex: 1;
+    height: 44px;
+    border: 1px solid var(--sa-border);
+    border-radius: 22px;
+    padding: 0 18px;
+    font-size: 13.5px;
+    font-family: inherit;
+    outline: none;
+    background: var(--sa-bg);
+    color: var(--sa-text);
+
+    &:focus {
+      border-color: var(--sa-green);
+    }
+
+    &::placeholder {
+      color: var(--sa-text-muted);
+    }
+  }
+}
+
+.send-btn {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: none;
+  background: var(--sa-green);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  ion-icon {
+    font-size: 19px;
+  }
+
+  &:disabled {
+    background: var(--sa-border);
+    color: var(--sa-text-muted);
+  }
+}

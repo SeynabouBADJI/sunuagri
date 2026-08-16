@@ -1,0 +1,82 @@
+<ion-content class="calendrier-content" [fullscreen]="true">
+
+  <div class="calendrier-header">
+    <div class="header-left">
+    <button class="back-button" routerLink="/accueil">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+    </button>
+    <div class="header-left">
+    <button class="back-button" routerLink="/accueil">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+    </button>
+    <div class="header-title">
+        <span class="header-label">SUNUAGRI</span>
+        <h1>Calendrier cultural</h1>
+    </div>
+    </div>
+    </div>
+    <div class="header-icon">
+      <ion-icon name="calendar-outline"></ion-icon>
+    </div>
+  </div>
+
+  <section class="calendrier-intro">
+    <span class="section-label">PLANIFICATION</span>
+    <h2>Sème et récolte <span>au bon moment</span></h2>
+    <p>Consulte les périodes clés de chaque culture, adaptées à ta zone agro-écologique.</p>
+  </section>
+
+  <section class="calendrier-list">
+
+    <ng-container *ngIf="chargement">
+      <div class="calendrier-card skeleton" *ngFor="let i of [1,2,3]"></div>
+    </ng-container>
+
+    <div class="calendrier-card" *ngFor="let c of calendriers">
+      <div class="calendrier-top">
+        <div class="calendrier-icon">
+          <ion-icon name="leaf-outline"></ion-icon>
+        </div>
+        <div class="calendrier-titre">
+          <h3>{{ c.planteNom }}</h3>
+          <p><ion-icon name="location-outline"></ion-icon> {{ c.region }}</p>
+        </div>
+        <span class="calendrier-saison">{{ c.saison }}</span>
+      </div>
+
+      <div class="timeline">
+        <div class="etape">
+          <div class="etape-point semis"></div>
+          <div class="etape-ligne"></div>
+          <div class="etape-texte">
+            <span class="etape-label">Semis</span>
+            <p>{{ c.periodeSemis }}</p>
+          </div>
+        </div>
+
+        <div class="etape">
+          <div class="etape-point floraison"></div>
+          <div class="etape-ligne"></div>
+          <div class="etape-texte">
+            <span class="etape-label">Floraison</span>
+            <p>{{ c.periodeFloraison }}</p>
+          </div>
+        </div>
+
+        <div class="etape etape-last">
+          <div class="etape-point recolte"></div>
+          <div class="etape-texte">
+            <span class="etape-label">Récolte</span>
+            <p>{{ c.periodeRecolte }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="empty-state" *ngIf="!chargement && !calendriers.length">
+      Aucun calendrier disponible pour l'instant.
+    </p>
+
+  </section>
+
+</ion-content>
