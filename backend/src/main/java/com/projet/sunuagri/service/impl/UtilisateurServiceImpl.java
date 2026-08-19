@@ -3,6 +3,7 @@ package com.projet.sunuagri.service.impl;
 import com.projet.sunuagri.service.UtilisateurService;
 import com.projet.sunuagri.dto.UtilisateurCreateDTO;
 import com.projet.sunuagri.dto.UtilisateurDTO;
+import com.projet.sunuagri.dto.LoginDTO;
 import com.projet.sunuagri.entity.Utilisateur;
 import com.projet.sunuagri.repository.UtilisateurRepository;
 import org.springframework.stereotype.Service;
@@ -73,5 +74,17 @@ public class UtilisateurServiceImpl implements UtilisateurService {
             throw new RuntimeException("Utilisateur introuvable avec l'id " + id);
         }
         utilisateurRepository.deleteById(id);
+    }
+
+    @Override
+    public UtilisateurDTO authentifier(LoginDTO dto) {
+        Utilisateur utilisateur = utilisateurRepository.findByEmail(dto.getEmail())
+                .orElseThrow(() -> new RuntimeException("Email ou mot de passe incorrect"));
+
+        if (!utilisateur.getMotDePasse().equals(dto.getMotDePasse())) {
+            throw new RuntimeException("Email ou mot de passe incorrect");
+        }
+
+        return UtilisateurDTO.fromEntity(utilisateur);
     }
 }
