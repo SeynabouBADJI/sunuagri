@@ -2,8 +2,10 @@ import { Injectable } from '@angular/core';
 import { Observable, of, delay } from 'rxjs';
 import { MockDataService } from './mock-data.service';
 import { Parcelle } from '../models/parcelle.model';
-import { EntreeCarnet } from '../models/entree-carnet.model';
 import { Plantation } from '../models/plantation.model';
+import { EntreeCarnet, TypeEntree } from '../models/entree-carnet.model';
+import { REGIONS_SENEGAL, RegionSenegal } from '../data/senegal-reference';
+
 
 @Injectable({ providedIn: 'root' })
 export class ParcelleService {
@@ -29,5 +31,23 @@ export class ParcelleService {
     const nouvelle: EntreeCarnet = { ...entree, id: this.mock.entreesCarnet.length + 1 };
     this.mock.entreesCarnet.push(nouvelle);
     return of(nouvelle).pipe(delay(300));
+  }
+
+  modifierEntreeCarnet(id: number, type: TypeEntree, description: string): Observable<EntreeCarnet> {
+    const entree = this.mock.entreesCarnet.find(e => e.id === id);
+    if (entree) {
+      entree.type = type;
+      entree.description = description;
+    }
+    return of(entree!).pipe(delay(300));
+  }
+
+  supprimerEntreeCarnet(id: number): Observable<void> {
+    this.mock.entreesCarnet = this.mock.entreesCarnet.filter(e => e.id !== id);
+    return of(undefined).pipe(delay(300));
+  }
+
+  getRegions(): RegionSenegal[] {
+    return REGIONS_SENEGAL;
   }
 }

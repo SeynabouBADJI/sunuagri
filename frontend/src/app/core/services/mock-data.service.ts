@@ -30,8 +30,10 @@ export class MockDataService {
   ];
 
   parcelles: Parcelle[] = [
-    { id: 1, nom: 'Parcelle Nord', superficie: 2.5, localisation: 'Bambey', notes: 'Sol sablonneux', utilisateurId: 1 },
-    { id: 2, nom: 'Parcelle Sud', superficie: 1.2, localisation: 'Bambey', utilisateurId: 1 },
+    { id: 1, nom: 'Parcelle Nord', superficie: 2.5, localisation: 'Bambey, Diourbel', notes: 'Sol sablonneux, bien draine', utilisateurId: 1 },
+    { id: 2, nom: 'Parcelle Sud', superficie: 1.2, localisation: 'Bambey, Diourbel', utilisateurId: 1 },
+    { id: 3, nom: 'Champ de la vallee', superficie: 3.0, localisation: 'Podor, Saint-Louis', notes: 'Irrigation par pompe', utilisateurId: 1 },
+    { id: 4, nom: 'Verger casamançais', superficie: 1.8, localisation: 'Bignona, Ziguinchor', notes: 'Zone humide, anacardiers', utilisateurId: 1 },
   ];
 
   plantations: Plantation[] = [

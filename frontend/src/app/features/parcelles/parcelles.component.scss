@@ -292,3 +292,172 @@
   color: var(--sa-text-muted);
   padding: 40px 0;
 }
+
+.parcelle-card {
+  cursor: pointer;
+}
+
+.modal-toolbar {
+  --background: var(--sa-bg);
+  --color: var(--sa-green-dark);
+}
+
+.modal-content {
+  --background: var(--sa-bg);
+}
+
+.carnet-form {
+  background: white;
+  border: 1px solid var(--sa-border);
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 20px;
+
+  label {
+    display: block;
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--sa-text);
+    margin-bottom: 10px;
+  }
+
+  select, textarea {
+    width: 100%;
+    border: 1px solid var(--sa-border);
+    border-radius: 10px;
+    padding: 10px 12px;
+    font-size: 13.5px;
+    font-family: inherit;
+    color: var(--sa-text);
+    outline: none;
+    margin-bottom: 10px;
+    background: var(--sa-bg);
+
+    &:focus {
+      border-color: var(--sa-green);
+    }
+  }
+
+  textarea {
+    resize: none;
+  }
+}
+
+.ajouter-btn {
+  width: 100%;
+  height: 44px;
+  border: none;
+  border-radius: 10px;
+  background: var(--sa-green);
+  color: white;
+  font-size: 13.5px;
+  font-weight: 600;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+
+  ion-icon { font-size: 17px; }
+
+  &:disabled {
+    background: var(--sa-border);
+    color: var(--sa-text-muted);
+  }
+}
+
+.carnet-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.carnet-item {
+  background: white;
+  border: 1px solid var(--sa-border);
+  border-radius: 14px;
+  padding: 14px;
+}
+
+.carnet-type {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  padding: 3px 10px;
+  border-radius: 999px;
+  margin-bottom: 8px;
+  background: var(--sa-green-light);
+  color: var(--sa-green-dark);
+
+  &[data-type="TRAITEMENT"] {
+    background: var(--sa-clay-light);
+    color: var(--sa-clay-dark);
+  }
+
+  &[data-type="ARROSAGE"] {
+    background: var(--sa-amber-light);
+    color: var(--sa-amber-dark);
+  }
+}
+
+.carnet-desc {
+  font-size: 13px;
+  color: var(--sa-text);
+  margin: 0 0 6px;
+  line-height: 1.4;
+}
+
+.carnet-date {
+  font-size: 11px;
+  color: var(--sa-text-muted);
+  margin: 0;
+}
+.form-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.ajouter-btn {
+  flex: 1;
+}
+
+.annuler-btn {
+  height: 44px;
+  padding: 0 16px;
+  border: 1px solid var(--sa-border);
+  border-radius: 10px;
+  background: white;
+  color: var(--sa-text-muted);
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+}
+
+.carnet-item-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.carnet-actions {
+  display: flex;
+  gap: 4px;
+
+  button {
+    width: 28px;
+    height: 28px;
+    border: none;
+    background: var(--sa-bg);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    ion-icon {
+      font-size: 15px;
+      color: var(--sa-text-muted);
+    }
+  }
+}
