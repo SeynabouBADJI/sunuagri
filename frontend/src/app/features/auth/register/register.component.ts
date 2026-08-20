@@ -33,9 +33,17 @@ export class RegisterComponent {
     }
 
     this.chargement = true;
-    this.auth.register(this.nom, this.prenom, this.email, this.motDePasse, this.telephone).subscribe(() => {
-      this.chargement = false;
-      this.router.navigateByUrl('/tabs/diagnostic');
+    this.auth.register(this.nom, this.prenom, this.email, this.motDePasse, this.telephone).subscribe({
+      next: () => {
+        this.chargement = false;
+        this.router.navigateByUrl('/tabs/diagnostic');
+      },
+      error: (err) => {
+        this.chargement = false;
+        this.erreur = err.status === 400
+          ? 'Verifie les champs du formulaire.'
+          : 'Un compte existe peut-etre deja avec cet email.';
+      },
     });
   }
 }

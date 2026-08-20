@@ -35,6 +35,7 @@
 
         <ion-button expand="block" type="submit" [disabled]="chargement" class="cta">
           <ion-spinner *ngIf="chargement" name="dots"></ion-spinner>
+          <p class="error-msg" *ngIf="erreur">{{ erreur }}</p>
           <span *ngIf="!chargement">Se connecter</span>
         </ion-button>
 
