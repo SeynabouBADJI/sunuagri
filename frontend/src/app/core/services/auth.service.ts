@@ -1,106 +1,166 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
-import { environment } from '../../../environments/environment';
-import { Utilisateur } from '../models/utilisateur.model';
 
-interface LoginPayload {
-  email: string;
-  motDePasse: string;
-}
-
-interface RegisterPayload {
+export interface Utilisateur {
+  id: number;
   nom: string;
   prenom: string;
   email: string;
-  motDePasse: string;
   telephone: string;
   localisation?: string;
+  role?: string;
+  dateCreation?: string;
 }
 
-@Injectable({ providedIn: 'root' })
+export interface LoginRequest {
+  email: string;
+  motDePasse: string;
+}
+
+export interface RegisterRequest {
+  nom: string;
+  prenom: string;
+  email: string;
+  telephone: string;
+  motDePasse: string;
+  localisation: string;
+}
+
+export interface AuthResponse {
+  token: string;
+  utilisateur: Utilisateur;
+}
+
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthService {
 
-  private apiUrl = `${environment.apiUrl}/auth`;
+  private readonly API_URL = 'http://localhost:8080/api/auth';
 
-  private utilisateurActuel: Utilisateur | null = null;
+  private utilisateur: Utilisateur | null = null;
 
   constructor(private http: HttpClient) {
-    // Restaurer l'utilisateur après un rafraîchissement de la page
-    const utilisateur = localStorage.getItem('utilisateur');
-
-    if (utilisateur) {
-      this.utilisateurActuel = JSON.parse(utilisateur);
-    }
+    this.restaurerSession();
   }
 
-  login(email: string, motDePasse: string): Observable<Utilisateur> {
+  // ============================
+  // CONNEXION
+  // ============================
 
-    const payload: LoginPayload = {
+  login(email: string, motDePasse: string): Observable<AuthResponse> {
+
+    const donnees: LoginRequest = {
       email,
       motDePasse
     };
 
     return this.http
-      .post<Utilisateur>(`${this.apiUrl}/login`, payload)
+      .post<AuthResponse>(`${this.API_URL}/login`, donnees)
       .pipe(
-        tap(utilisateur => {
+        tap((response) => {
 
-          this.utilisateurActuel = utilisateur;
+          console.log('Connexion réussie :', response);
 
           localStorage.setItem(
-            'utilisateur',
-            JSON.stringify(utilisateur)
+            'sunuagri_token',
+            response.token
           );
+
+          localStorage.setItem(
+            'sunuagri_utilisateur',
+            JSON.stringify(response.utilisateur)
+          );
+
+          this.utilisateur = response.utilisateur;
         })
       );
   }
+
+  // ============================
+  // INSCRIPTION
+  // ============================
 
   register(
     nom: string,
     prenom: string,
     email: string,
-    motDePasse: string,
     telephone: string,
-    localisation?: string
+    motDePasse: string,
+    localisation: string
   ): Observable<Utilisateur> {
 
-    const payload: RegisterPayload = {
+    const donnees: RegisterRequest = {
       nom,
       prenom,
       email,
-      motDePasse,
       telephone,
+      motDePasse,
       localisation
     };
 
-    return this.http
-      .post<Utilisateur>(`${this.apiUrl}/register`, payload)
-      .pipe(
-        tap(utilisateur => {
-
-          this.utilisateurActuel = utilisateur;
-
-          localStorage.setItem(
-            'utilisateur',
-            JSON.stringify(utilisateur)
-          );
-        })
-      );
+    return this.http.post<Utilisateur>(
+      `${this.API_URL}/register`,
+      donnees
+    );
   }
+
+  // ============================
+  // UTILISATEUR CONNECTÉ
+  // ============================
+
+  utilisateurCourant(): Utilisateur | null {
+    return this.utilisateur;
+  }
+
+  // ============================
+  // TOKEN
+  // ============================
+
+  getToken(): string | null {
+    return localStorage.getItem('sunuagri_token');
+  }
+
+  
+  restaurerSession(): void {
+
+  const token = localStorage.getItem('sunuagri_token');
+  const utilisateur = localStorage.getItem('sunuagri_utilisateur');
+
+  if (token && utilisateur) {
+
+    try {
+      this.utilisateur = JSON.parse(utilisateur);
+    } catch {
+      this.logout();
+    }
+
+  } else {
+
+    this.utilisateur = null;
+  }
+}
+
+  // ============================
+  // VÉRIFIER CONNEXION
+  // ============================
+
+  estConnecte(): boolean {
+    return !!this.getToken() && !!this.utilisateur;
+  }
+
+  // ============================
+  // DÉCONNEXION
+  // ============================
 
   logout(): void {
 
-    this.utilisateurActuel = null;
+    localStorage.removeItem('sunuagri_token');
+    localStorage.removeItem('sunuagri_utilisateur');
 
-    localStorage.removeItem('utilisateur');
-  }
+    this.utilisateur = null;
 
-  estConnecte(): boolean {
-    return this.utilisateurActuel !== null;
-  }
-
-  utilisateurCourant(): Utilisateur | null {
-    return this.utilisateurActuel;
+    console.log('Utilisateur déconnecté');
   }
 }

@@ -1,147 +1,436 @@
 <ion-content class="parcelles-content" [fullscreen]="true">
 
+  <!-- =========================
+       HEADER
+       ========================= -->
   <div class="parcelles-header">
     <div class="header-left">
-    <button class="back-button" routerLink="/accueil">
+      <button class="back-button" routerLink="/accueil" type="button">
         <ion-icon name="arrow-back-outline"></ion-icon>
-    </button>
-    <div class="header-title">
+      </button>
+      <div class="header-title">
         <span class="header-label">SUNUAGRI</span>
         <h1>Mes parcelles</h1>
+      </div>
     </div>
-    </div>
+
     <div class="header-icon">
       <ion-icon name="leaf-outline"></ion-icon>
     </div>
   </div>
-
+  <!-- =========================
+       INTRODUCTION
+       ========================= -->
   <section class="parcelles-intro">
-    <span class="section-label">GESTION DES TERRES</span>
+    <span class="section-label"> GESTION DES TERRES</span>
     <h2>Suis tes parcelles <span>en un coup d'œil</span></h2>
-    <p>Retrouve la superficie, la localisation et les cultures en cours de chacune de tes parcelles.</p>
+    <p> Retrouve la superficie, la localisation et les informationsde chacune de tes parcelles.</p>
   </section>
-
+  <!-- =========================
+       MESSAGE D'ERREUR
+       ========================= -->
+  <div
+    class="error-message" *ngIf="erreur">
+    <ion-icon name="alert-circle-outline"></ion-icon>
+    <span>{{ erreur }}</span>
+  </div>
+  <!-- =========================
+       STATISTIQUES
+       ========================= -->
   <div class="stats-row">
     <div class="stat-card">
-      <span class="stat-value">{{ totalParcelles }}</span>
-      <span class="stat-label">Parcelles</span>
+      <div class="stat-icon">
+        <ion-icon name="grid-outline"></ion-icon>
+      </div>
+      <div class="stat-content">
+        <span class="stat-value"> {{ totalParcelles }} </span>
+        <span class="stat-label"> Parcelles </span>
+      </div>
     </div>
     <div class="stat-card">
-      <span class="stat-value">{{ totalSuperficie }}</span>
-      <span class="stat-label">Hectares au total</span>
+      <div class="stat-icon">
+        <ion-icon name="resize-outline"></ion-icon>
+      </div>
+      <div class="stat-content">
+        <span class="stat-value"> {{ totalSuperficie }} </span>
+        <span class="stat-label"> Hectares au total </span>
+      </div>
     </div>
   </div>
-
+  <!-- =========================
+       BOUTON AJOUTER
+       ========================= -->
+  <div class="add-parcelle-container">
+    <button
+      class="add-parcelle-button"
+      type="button"
+      (click)="ouvrirAjout()">
+      <ion-icon name="add-circle-outline"></ion-icon>
+      <span> Ajouter une parcelle </span>
+    </button>
+  </div>
+  <!-- =========================
+       CHARGEMENT
+       ========================= -->
   <section class="parcelles-list">
-
     <ng-container *ngIf="chargement">
-      <div class="parcelle-card skeleton" *ngFor="let i of [1,2,3]"></div>
+      <div class="parcelle-card skeleton" *ngFor="let i of [1, 2, 3]"></div>
     </ng-container>
+    <!-- =========================
+         LISTE DES PARCELLES
+         ========================= -->
+    <div
+      class="parcelle-card"
+      *ngFor="let parcelle of parcelles">
 
-    <div class="parcelle-card" *ngFor="let parcelle of parcelles" (click)="ouvrirCarnet(parcelle)">
+      <!-- Partie supérieure -->
       <div class="parcelle-top">
         <div class="parcelle-icon">
           <ion-icon name="leaf-outline"></ion-icon>
         </div>
         <div class="parcelle-titre">
-          <h3>{{ parcelle.nom }}</h3>
-          <p><ion-icon name="location-outline"></ion-icon> {{ parcelle.localisation }}</p>
+          <h3> {{ parcelle.nom }} </h3>
+          <p> <ion-icon name="location-outline"></ion-icon> {{ parcelle.localisation }}</p>
         </div>
         <div class="parcelle-superficie">
-          <strong>{{ parcelle.superficie }}</strong>
+          <strong> {{ parcelle.superficie }}</strong>
           <span>ha</span>
         </div>
       </div>
-
-      <div class="parcelle-culture">
-        <ion-icon name="calendar-outline"></ion-icon>
-        <span>{{ culturesActuelles(parcelle.id) }}</span>
+      <!-- Notes -->
+      <div
+        class="parcelle-notes"
+        *ngIf="parcelle.notes">
+        <ion-icon name="information-circle-outline"></ion-icon>
+        <span> {{ parcelle.notes }} </span>
       </div>
-
-      <p class="parcelle-notes" *ngIf="parcelle.notes">{{ parcelle.notes }}</p>
-
+      <!-- Footer -->
       <div class="parcelle-footer">
-        <div class="parcelle-carnet">
-          <ion-icon name="book-outline"></ion-icon>
-          <span>{{ nombreEntreesCarnet(parcelle.id) }} entrée(s) au carnet</span>
+
+        <div class="parcelle-localisation">
+
+          <ion-icon name="location-outline"></ion-icon>
+
+          <span>
+            {{ parcelle.localisation }}
+          </span>
+
         </div>
-        <ion-icon name="chevron-forward-outline" class="parcelle-chevron"></ion-icon>
+
+
+        <div class="parcelle-actions">
+
+          <!-- Modifier -->
+          <button
+            type="button"
+            class="action-button edit"
+            (click)="ouvrirModification(parcelle)"
+            title="Modifier">
+
+            <ion-icon name="create-outline"></ion-icon>
+
+          </button>
+
+
+          <!-- Supprimer -->
+          <button
+            type="button"
+            class="action-button delete"
+            (click)="supprimerParcelle(parcelle)"
+            title="Supprimer">
+
+            <ion-icon name="trash-outline"></ion-icon>
+
+          </button>
+
+        </div>
+
       </div>
+
     </div>
 
-    <p class="empty-state" *ngIf="!chargement && !parcelles.length">
-      Aucune parcelle enregistrée pour l'instant.
-    </p>
+
+    <!-- =========================
+         AUCUNE PARCELLE
+         ========================= -->
+    <div
+      class="empty-state"
+      *ngIf="!chargement && !parcelles.length">
+
+      <div class="empty-icon">
+
+        <ion-icon name="leaf-outline"></ion-icon>
+
+      </div>
+
+      <h3>
+        Aucune parcelle
+      </h3>
+
+      <p>
+        Tu n'as pas encore enregistré de parcelle.
+        Commence par ajouter ta première parcelle.
+      </p>
+
+      <!-- =========================
+     BOUTON AJOUTER
+     ========================= -->
+    <div class="add-parcelle-container">
+      <button
+        type="button"
+        class="add-parcelle-button"
+        (click)="ouvrirAjout()">
+
+        <span class="add-icon">
+          <ion-icon name="add-outline"></ion-icon>
+        </span>
+
+        <span class="add-text">
+          Ajouter une parcelle
+        </span>
+
+      </button>
+    </div>
+    </div>
 
   </section>
-  <ion-modal [isOpen]="modalOuvert" (didDismiss)="fermerModal()">
-  <ng-template>
-    <ion-header class="ion-no-border">
-      <ion-toolbar class="modal-toolbar">
-        <ion-title>{{ parcelleSelectionnee?.nom }}</ion-title>
-        <ion-buttons slot="end">
-          <ion-button (click)="fermerModal()">
-            <ion-icon name="close-circle-outline" slot="icon-only"></ion-icon>
-          </ion-button>
-        </ion-buttons>
-      </ion-toolbar>
-    </ion-header>
 
-    <ion-content class="ion-padding modal-content">
 
-      <div class="carnet-form">
-  <label>{{ entreeEnEdition ? 'Modifier l\'entree' : 'Nouvelle entree' }}</label>
+  <!-- =====================================================
+       MODAL AJOUT / MODIFICATION PARCELLE
+       ===================================================== -->
 
-  <select [(ngModel)]="nouveauType">
-    <option value="OBSERVATION">Observation</option>
-    <option value="ARROSAGE">Arrosage</option>
-    <option value="TRAITEMENT">Traitement</option>
-    <option value="RECOLTE">Récolte</option>
-    <option value="AUTRE">Autre</option>
-  </select>
+  <ion-modal
+    [isOpen]="modalOuvert"
+    (didDismiss)="fermerModal()">
 
-  <textarea
-    [(ngModel)]="nouvelleDescription"
-    placeholder="Decris ce que tu as observe ou fait..."
-    rows="3">
-  </textarea>
+    <ng-template>
 
-  <div class="form-actions">
-    <button class="ajouter-btn" (click)="validerEntree()" [disabled]="!nouvelleDescription.trim()">
-      <ion-icon [name]="entreeEnEdition ? 'checkmark-circle-outline' : 'add-circle-outline'"></ion-icon>
-      {{ entreeEnEdition ? 'Enregistrer' : 'Ajouter au carnet' }}
-    </button>
+      <ion-header class="ion-no-border">
 
-    <button class="annuler-btn" *ngIf="entreeEnEdition" (click)="annulerEdition()">
-      Annuler
-    </button>
-  </div>
-</div>
+        <ion-toolbar class="modal-toolbar">
 
-      <div class="carnet-list">
-        <div class="carnet-item" *ngFor="let e of entreesCarnet">
-  <div class="carnet-item-top">
-    <div class="carnet-type" [attr.data-type]="e.type">{{ e.type }}</div>
-    <div class="carnet-actions">
-      <button (click)="modifierEntree(e)">
-        <ion-icon name="create-outline"></ion-icon>
-      </button>
-      <button (click)="supprimerEntree(e)">
-        <ion-icon name="trash-outline"></ion-icon>
-      </button>
-    </div>
-  </div>
-  <p class="carnet-desc">{{ e.description }}</p>
-  <p class="carnet-date">{{ e.date }}</p>
-</div>
+          <ion-title>
+            {{ modeEdition ? 'Modifier la parcelle' : 'Nouvelle parcelle' }}
+          </ion-title>
 
-        <p class="empty-state" *ngIf="!entreesCarnet.length">
-          Aucune entrée pour cette parcelle pour l'instant.
-        </p>
-      </div>
+          <ion-buttons slot="end">
 
-    </ion-content>
-  </ng-template>
-</ion-modal>
+            <ion-button
+              (click)="fermerModal()">
+
+              <ion-icon
+                name="close-outline"
+                slot="icon-only">
+              </ion-icon>
+
+            </ion-button>
+
+          </ion-buttons>
+
+        </ion-toolbar>
+
+      </ion-header>
+
+
+      <ion-content class="ion-padding modal-content">
+
+
+        <!-- Introduction modal -->
+        <div class="modal-intro">
+
+          <div class="modal-icon">
+
+            <ion-icon name="leaf-outline"></ion-icon>
+
+          </div>
+
+          <div>
+
+            <h2>
+              {{ modeEdition
+                ? 'Modifier ta parcelle'
+                : 'Ajouter une parcelle' }}
+            </h2>
+
+            <p>
+              Renseigne les informations de ta parcelle.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <!-- =========================
+             FORMULAIRE
+             ========================= -->
+        <form
+          class="parcelle-form"
+          (ngSubmit)="enregistrerParcelle()">
+
+
+          <!-- Nom -->
+          <div class="form-group">
+
+            <label for="nom">
+              Nom de la parcelle
+              <span>*</span>
+            </label>
+
+            <div class="input-container">
+
+              <ion-icon name="pricetag-outline"></ion-icon>
+
+              <input
+                id="nom"
+                type="text"
+                name="nom"
+                [(ngModel)]="nom"
+                placeholder="Ex : Parcelle Nord"
+                required />
+
+            </div>
+
+          </div>
+
+
+          <!-- Superficie -->
+          <div class="form-group">
+
+            <label for="superficie">
+              Superficie
+              <span>*</span>
+            </label>
+
+            <div class="input-container">
+
+              <ion-icon name="resize-outline"></ion-icon>
+
+              <input
+                id="superficie"
+                type="number"
+                name="superficie"
+                [(ngModel)]="superficie"
+                placeholder="Ex : 2.5"
+                min="0.01"
+                step="0.01"
+                required />
+
+              <span class="input-unit">
+                ha
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <!-- Localisation -->
+          <div class="form-group">
+
+            <label for="localisation">
+              Localisation
+              <span>*</span>
+            </label>
+
+            <div class="input-container">
+
+              <ion-icon name="location-outline"></ion-icon>
+
+              <input
+                id="localisation"
+                type="text"
+                name="localisation"
+                [(ngModel)]="localisation"
+                placeholder="Ex : Bambey, Diourbel"
+                required />
+
+            </div>
+
+          </div>
+
+
+          <!-- Notes -->
+          <div class="form-group">
+
+            <label for="notes">
+              Notes
+            </label>
+
+            <div class="textarea-container">
+
+              <ion-icon name="document-text-outline"></ion-icon>
+
+              <textarea
+                id="notes"
+                name="notes"
+                [(ngModel)]="notes"
+                rows="4"
+                placeholder="Ajoute des informations supplémentaires sur cette parcelle...">
+              </textarea>
+
+            </div>
+
+          </div>
+
+
+          <!-- Informations -->
+          <div class="form-info">
+
+            <ion-icon name="information-circle-outline"></ion-icon>
+
+            <p>
+              Les champs marqués d'un
+              <strong>*</strong>
+              sont obligatoires.
+            </p>
+
+          </div>
+
+
+          <!-- =========================
+               ACTIONS
+               ========================= -->
+          <div class="form-actions">
+
+            <button
+              type="button"
+              class="cancel-button"
+              (click)="fermerModal()">
+
+              Annuler
+
+            </button>
+
+
+            <button
+              type="submit"
+              class="save-button"
+              [disabled]="chargement">
+
+              <ion-icon
+                [name]="modeEdition
+                  ? 'checkmark-circle-outline'
+                  : 'add-circle-outline'">
+              </ion-icon>
+
+              <span>
+                {{ modeEdition
+                  ? 'Enregistrer'
+                  : 'Ajouter la parcelle' }}
+              </span>
+
+            </button>
+
+          </div>
+
+        </form>
+
+      </ion-content>
+
+    </ng-template>
+
+  </ion-modal>
 
 </ion-content>

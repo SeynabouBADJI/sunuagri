@@ -1,53 +1,52 @@
 import { Injectable } from '@angular/core';
-import { Observable, of, delay } from 'rxjs';
-import { MockDataService } from './mock-data.service';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 import { Parcelle } from '../models/parcelle.model';
-import { Plantation } from '../models/plantation.model';
-import { EntreeCarnet, TypeEntree } from '../models/entree-carnet.model';
-import { REGIONS_SENEGAL, RegionSenegal } from '../data/senegal-reference';
 
-
-@Injectable({ providedIn: 'root' })
+@Injectable({
+  providedIn: 'root'
+})
 export class ParcelleService {
-  constructor(private mock: MockDataService) {}
 
-  getParcelles(): Observable<Parcelle[]> {
-    return of(this.mock.parcelles).pipe(delay(300));
+  private apiUrl = `${environment.apiUrl}/parcelles`;
+
+  constructor(private http: HttpClient) {}
+
+  // Récupérer toutes les parcelles d'un utilisateur
+  getParcellesParUtilisateur(utilisateurId: number): Observable<Parcelle[]> {
+    return this.http.get<Parcelle[]>(
+      `${this.apiUrl}/utilisateur/${utilisateurId}`
+    );
   }
 
-  getParcelle(id: number): Observable<Parcelle | undefined> {
-    return of(this.mock.parcelles.find(p => p.id === id)).pipe(delay(200));
+  // Récupérer une parcelle
+  getParcelle(id: number): Observable<Parcelle> {
+    return this.http.get<Parcelle>(
+      `${this.apiUrl}/${id}`
+    );
   }
 
-  getEntreesCarnet(parcelleId: number): Observable<EntreeCarnet[]> {
-    return of(this.mock.entreesCarnet.filter(e => e.parcelleId === parcelleId)).pipe(delay(200));
+  // Ajouter une parcelle
+  ajouterParcelle(parcelle: Parcelle): Observable<Parcelle> {
+    return this.http.post<Parcelle>(
+      this.apiUrl,
+      parcelle
+    );
   }
 
-  getPlantations(parcelleId: number): Observable<Plantation[]> {
-    return of(this.mock.plantations.filter(p => p.parcelleId === parcelleId)).pipe(delay(200));
+  // Modifier une parcelle
+  modifierParcelle(id: number, parcelle: Parcelle): Observable<Parcelle> {
+    return this.http.put<Parcelle>(
+      `${this.apiUrl}/${id}`,
+      parcelle
+    );
   }
 
-  ajouterEntreeCarnet(entree: Omit<EntreeCarnet, 'id'>): Observable<EntreeCarnet> {
-    const nouvelle: EntreeCarnet = { ...entree, id: this.mock.entreesCarnet.length + 1 };
-    this.mock.entreesCarnet.push(nouvelle);
-    return of(nouvelle).pipe(delay(300));
-  }
-
-  modifierEntreeCarnet(id: number, type: TypeEntree, description: string): Observable<EntreeCarnet> {
-    const entree = this.mock.entreesCarnet.find(e => e.id === id);
-    if (entree) {
-      entree.type = type;
-      entree.description = description;
-    }
-    return of(entree!).pipe(delay(300));
-  }
-
-  supprimerEntreeCarnet(id: number): Observable<void> {
-    this.mock.entreesCarnet = this.mock.entreesCarnet.filter(e => e.id !== id);
-    return of(undefined).pipe(delay(300));
-  }
-
-  getRegions(): RegionSenegal[] {
-    return REGIONS_SENEGAL;
+  // Supprimer une parcelle
+  supprimerParcelle(id: number): Observable<void> {
+    return this.http.delete<void>(
+      `${this.apiUrl}/${id}`
+    );
   }
 }

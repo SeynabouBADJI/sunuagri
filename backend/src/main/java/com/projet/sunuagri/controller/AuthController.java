@@ -1,10 +1,72 @@
+// package com.projet.sunuagri.controller;
+
+// import com.projet.sunuagri.dto.AuthResponseDTO;
+// import com.projet.sunuagri.dto.LoginDTO;
+// import com.projet.sunuagri.dto.UtilisateurCreateDTO;
+// import com.projet.sunuagri.dto.UtilisateurDTO;
+// import com.projet.sunuagri.entity.Utilisateur;
+// import com.projet.sunuagri.repository.UtilisateurRepository;
+// import com.projet.sunuagri.security.JwtService;
+// import com.projet.sunuagri.service.UtilisateurService;
+// import com.projet.sunuagri.dto.AuthResponseDTO;
+
+// import jakarta.validation.Valid;
+
+// import org.springframework.http.HttpStatus;
+// import org.springframework.http.ResponseEntity;
+// import org.springframework.web.bind.annotation.*;
+
+// @RestController
+// @RequestMapping("/api/auth")
+// @CrossOrigin(origins = "*")
+// public class AuthController {
+
+//     private final UtilisateurService utilisateurService;
+//     private final UtilisateurRepository utilisateurRepository;
+//     private final JwtService jwtService;
+
+//     public AuthController(
+//             UtilisateurService utilisateurService,
+//             UtilisateurRepository utilisateurRepository,
+//             JwtService jwtService) {
+
+//         this.utilisateurService = utilisateurService;
+//         this.utilisateurRepository = utilisateurRepository;
+//         this.jwtService = jwtService;
+//     }
+
+//     @PostMapping("/login")
+//     public ResponseEntity<AuthResponseDTO> login(
+//             @Valid @RequestBody LoginDTO dto) {
+
+//         return ResponseEntity.ok(
+//                 utilisateurService.authentifier(dto)
+//         );
+//     }
+
+//     @PostMapping("/register")
+//     public ResponseEntity<UtilisateurDTO> register(
+//             @Valid @RequestBody UtilisateurCreateDTO dto) {
+
+//         UtilisateurDTO cree =
+//                 utilisateurService.creerUtilisateur(dto);
+
+//         return ResponseEntity
+//                 .status(HttpStatus.CREATED)
+//                 .body(cree);
+//     }
+// }
+
 package com.projet.sunuagri.controller;
 
+import com.projet.sunuagri.dto.AuthResponseDTO;
 import com.projet.sunuagri.dto.LoginDTO;
 import com.projet.sunuagri.dto.UtilisateurCreateDTO;
-import com.projet.sunuagri.dto.UtilisateurDTO;
 import com.projet.sunuagri.service.UtilisateurService;
+import com.projet.sunuagri.dto.UtilisateurDTO;
+
 import jakarta.validation.Valid;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,13 +83,22 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<UtilisateurDTO> login(@Valid @RequestBody LoginDTO dto) {
-        return ResponseEntity.ok(utilisateurService.authentifier(dto));
+    public ResponseEntity<AuthResponseDTO> login(
+            @Valid @RequestBody LoginDTO dto) {
+
+        return ResponseEntity.ok(
+                utilisateurService.authentifier(dto)
+        );
     }
 
     @PostMapping("/register")
-    public ResponseEntity<UtilisateurDTO> register(@Valid @RequestBody UtilisateurCreateDTO dto) {
+    public ResponseEntity<UtilisateurDTO> register(
+            @Valid @RequestBody UtilisateurCreateDTO dto) {
+
         UtilisateurDTO cree = utilisateurService.creerUtilisateur(dto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(cree);
+
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(cree);
     }
 }

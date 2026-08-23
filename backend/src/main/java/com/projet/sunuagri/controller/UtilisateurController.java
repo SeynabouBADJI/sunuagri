@@ -27,7 +27,7 @@ public class UtilisateurController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UtilisateurDTO> getParId(@PathVariable Long id) {
+    public ResponseEntity<UtilisateurDTO> getUtilisateurParId(@PathVariable Long id) {
         return ResponseEntity.ok(utilisateurService.getUtilisateurParId(id));
     }
 

@@ -5,33 +5,65 @@
   <!-- ============================= -->
   <header class="accueil-header">
 
-    <div class="brand">
-      <div class="brand-mark">
-        <ion-icon name="leaf-outline"></ion-icon>
-      </div>
-
-      <span class="brand-title">SunuAgri</span>
+  <div class="brand">
+    <div class="brand-mark">
+      <ion-icon name="leaf-outline"></ion-icon>
     </div>
 
-    <div class="header-actions">
+    <span class="brand-title">SunuAgri</span>
+  </div>
 
-      <ion-button
-        fill="clear"
-        class="login-link"
-        routerLink="/login">
-        Se connecter
-      </ion-button>
 
-      <ion-button
-        class="header-register"
-        routerLink="/register">
-        Créer un compte
-      </ion-button>
+  <!-- UTILISATEUR NON CONNECTÉ -->
+  <div class="header-actions" *ngIf="!auth.estConnecte()">
 
+    <ion-button
+      fill="clear"
+      class="login-link"
+      routerLink="/login">
+      Se connecter
+    </ion-button>
+
+    <ion-button
+      class="header-register"
+      routerLink="/register">
+      Créer un compte
+    </ion-button>
+
+  </div>
+
+
+  <!-- UTILISATEUR CONNECTÉ -->
+  <div class="user-header" *ngIf="auth.estConnecte()">
+
+    <div class="user-avatar">
+      <ion-icon name="person-outline"></ion-icon>
     </div>
 
-  </header>
+    <div class="user-info">
+      <span class="user-label">Bienvenue</span>
 
+      <span class="user-name">
+        {{ auth.utilisateurCourant()?.prenom }}
+        {{ auth.utilisateurCourant()?.nom }}
+      </span>
+    </div>
+
+    <ion-button
+      fill="clear"
+      class="logout-button"
+      (click)="seDeconnecter()">
+
+      <ion-icon
+        slot="icon-only"
+        name="log-out-outline">
+      </ion-icon>
+
+    </ion-button>
+
+  </div>
+
+</header>
 
   <!-- ============================= -->
   <!-- HERO SECTION -->

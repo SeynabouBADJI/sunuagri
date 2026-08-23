@@ -2,36 +2,56 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
+
 import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, FormsModule, IonicModule, RouterLink],
+  imports: [ CommonModule, FormsModule, IonicModule ],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
+
   email = '';
   motDePasse = '';
-  chargement = false;
+
   erreur = '';
+  chargement = false;
 
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(
+    private auth: AuthService,
+    private router: Router
+  ) {}
 
-  seConnecter() {
+  seConnecter(): void {
+
     this.erreur = '';
+
+    if (!this.email.trim() || !this.motDePasse.trim()) {
+
+      this.erreur =
+        'Veuillez renseigner votre email et votre mot de passe.';
+
+      return;
+    }
+
     this.chargement = true;
     this.auth.login(this.email, this.motDePasse).subscribe({
-      next: () => {
-        this.chargement = false;
-        this.router.navigateByUrl('/tabs/diagnostic');
+      next: (response) => {
+
+        console.log('Connexion réussie :', response);
+        console.log('Utilisateur connecté :', response.utilisateur);
+
+        this.router.navigate(['/tabs/parcelles']);
       },
-      error: () => {
-        this.chargement = false;
+
+      error: (err) => {
+        console.error('Erreur connexion :', err);
         this.erreur = 'Email ou mot de passe incorrect.';
-      },
+      }
     });
   }
 }
