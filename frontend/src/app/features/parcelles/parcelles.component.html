@@ -1,23 +1,61 @@
 <ion-content class="parcelles-content" [fullscreen]="true">
 
-  <!-- =========================
-       HEADER
-       ========================= -->
-  <div class="parcelles-header">
-    <div class="header-left">
-      <button class="back-button" routerLink="/accueil" type="button">
-        <ion-icon name="arrow-back-outline"></ion-icon>
-      </button>
-      <div class="header-title">
-        <span class="header-label">SUNUAGRI</span>
-        <h1>Mes parcelles</h1>
-      </div>
+<!-- =========================
+     HEADER
+     ========================= -->
+
+<div class="parcelles-header">
+
+  <!-- Retour vers l'accueil -->
+  <div class="header-left">
+
+    <button
+      class="home-button"
+      routerLink="/accueil"
+      type="button">
+
+      <ion-icon name="home-outline"></ion-icon>
+
+      <span>Accueil</span>
+
+    </button>
+
+
+    <div class="header-divider"></div>
+
+
+    <div class="header-title">
+
+      <span class="header-label">
+        SUNUAGRI
+      </span>
+
+      <h1>
+        Mes parcelles
+      </h1>
+
     </div>
 
-    <div class="header-icon">
+  </div>
+
+
+  <!-- Identité de la page -->
+  <div class="header-page-icon">
+
+    <div class="page-icon-circle">
       <ion-icon name="leaf-outline"></ion-icon>
     </div>
+
+    <div class="page-icon-text">
+      <span>GESTION</span>
+      <strong>DES TERRES</strong>
+    </div>
+
   </div>
+
+</div>
+
+
   <!-- =========================
        INTRODUCTION
        ========================= -->
@@ -172,25 +210,6 @@
         Commence par ajouter ta première parcelle.
       </p>
 
-      <!-- =========================
-     BOUTON AJOUTER
-     ========================= -->
-    <div class="add-parcelle-container">
-      <button
-        type="button"
-        class="add-parcelle-button"
-        (click)="ouvrirAjout()">
-
-        <span class="add-icon">
-          <ion-icon name="add-outline"></ion-icon>
-        </span>
-
-        <span class="add-text">
-          Ajouter une parcelle
-        </span>
-
-      </button>
-    </div>
     </div>
 
   </section>

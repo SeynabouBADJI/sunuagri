@@ -19,12 +19,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 20px;
 
   padding: 12px 6%;
-  padding-top: max(12px, env(safe-area-inset-top));
 
-  background: white;
+  background: #ffffff;
   border-bottom: 1px solid var(--sa-border);
 
   position: relative;
@@ -33,13 +31,14 @@
 
 
 /* =========================
-   LOGO / MARQUE
+   LOGO
    ========================= */
 
 .brand {
   display: flex;
   align-items: center;
   gap: 10px;
+
   flex-shrink: 0;
 }
 
@@ -47,46 +46,64 @@
   width: 42px;
   height: 42px;
 
-  border-radius: 14px;
-
-  background: var(--sa-green-light);
-
   display: flex;
   align-items: center;
   justify-content: center;
 
-  ion-icon {
-    font-size: 22px;
-    color: var(--sa-green-dark);
-  }
+  border-radius: 14px;
+
+  background: var(--sa-green-light);
+}
+
+.brand-mark ion-icon {
+  font-size: 22px;
+  color: var(--sa-green-dark);
 }
 
 .brand-title {
   font-size: 20px;
   font-weight: 700;
+
   color: var(--sa-green-dark);
+
   font-family: var(--sa-font-display);
 }
 
 
 /* =========================
-   UTILISATEUR NON CONNECTÉ
+   PARTIE DROITE
+   ========================= */
+
+.header-actions,
+.user-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  margin-left: auto;
+
+  flex-shrink: 0;
+}
+
+
+/* =========================
+   NON CONNECTÉ
    ========================= */
 
 .header-actions {
-  display: flex;
-  align-items: center;
-  gap: 6px;
+  gap: 10px;
 }
 
 .login-link {
   --color: var(--sa-green-dark);
 
+  font-size: 13px;
   font-weight: 600;
+
   text-transform: none;
 
-  --padding-start: 12px;
-  --padding-end: 12px;
+  --padding-start: 14px;
+  --padding-end: 14px;
 }
 
 .header-register {
@@ -95,73 +112,63 @@
   --background-activated: var(--sa-green-dark);
 
   --color: white;
+
   --border-radius: 10px;
 
-  font-weight: 600;
-  text-transform: none;
-
   height: 42px;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  text-transform: none;
 }
 
 
 /* =========================
-   UTILISATEUR CONNECTÉ
+   CONNECTÉ
    ========================= */
 
 .user-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-
-  padding: 5px 8px 5px 5px;
-
-  background: var(--sa-green-light);
-  border: 1px solid var(--sa-border);
-
-  border-radius: 14px;
+  gap: 12px;
 }
 
 
 /* Avatar */
 
 .user-avatar {
-  width: 38px;
-  height: 38px;
-
-  flex-shrink: 0;
-
-  border-radius: 11px;
-
-  background: var(--sa-green);
+  width: 40px;
+  height: 40px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  ion-icon {
-    font-size: 20px;
-    color: white;
-  }
+  border-radius: 50%;
+
+  background: var(--sa-green-light);
+
+  border: 1px solid rgba(47, 114, 88, 0.15);
+}
+
+.user-avatar ion-icon {
+  font-size: 20px;
+  color: var(--sa-green-dark);
 }
 
 
-/* Informations utilisateur */
+/* Informations */
 
 .user-info {
   display: flex;
   flex-direction: column;
 
   min-width: 0;
-  line-height: 1.2;
 }
 
 .user-label {
   font-size: 10px;
-  font-weight: 500;
 
   color: var(--sa-text-muted);
-
-  margin-bottom: 2px;
 }
 
 .user-name {
@@ -171,153 +178,124 @@
   color: var(--sa-green-dark);
 
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-
-/* Bouton déconnexion */
-
-.logout-button {
-  --color: var(--sa-green-dark);
-
-  width: 34px;
-  height: 34px;
-
-  margin: 0;
-
-  --padding-start: 0;
-  --padding-end: 0;
-
-  ion-icon {
-    font-size: 19px;
-  }
 }
 
 
 /* =========================
-   RESPONSIVE MOBILE
+   BOUTON DÉCONNEXION
+   ========================= */
+
+.logout-button {
+  --color: var(--sa-green-dark);
+
+  --border-color: var(--sa-green-dark);
+  --border-width: 1px;
+  --border-style: solid;
+
+  --background: transparent;
+  --background-hover: var(--sa-green-light);
+  --background-activated: var(--sa-green-light);
+
+  --border-radius: 10px;
+
+  height: 40px;
+
+  margin-left: 5px;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  text-transform: none;
+}
+
+.logout-button ion-icon {
+  font-size: 18px;
+}
+
+
+/* =========================
+   MOBILE
    ========================= */
 
 @media (max-width: 600px) {
 
   .accueil-header {
-    padding-left: 20px;
-    padding-right: 20px;
-    gap: 10px;
+    padding-left: 18px;
+    padding-right: 18px;
   }
 
   .brand-title {
     font-size: 18px;
   }
 
-  .header-actions {
-    gap: 2px;
+  .brand-mark {
+    width: 38px;
+    height: 38px;
   }
 
   .login-link {
-    font-size: 12px;
+    display: none;
   }
 
   .header-register {
-    font-size: 12px;
     height: 38px;
+
+    font-size: 11px;
+  }
+
+  .user-info {
+    display: none;
   }
 
   .user-header {
     gap: 7px;
-    padding-right: 5px;
-  }
-
-  .user-avatar {
-    width: 34px;
-    height: 34px;
-
-    ion-icon {
-      font-size: 18px;
-    }
-  }
-
-  .user-name {
-    max-width: 100px;
-    font-size: 12px;
-  }
-
-  .user-label {
-    font-size: 9px;
   }
 
   .logout-button {
-    width: 30px;
-    height: 30px;
+    height: 38px;
+
+    font-size: 11px;
+
+    margin-left: 0;
   }
-}
-/* Logo */
 
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.brand-mark {
-  width: 42px;
-  height: 42px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border-radius: 13px;
-
-  background: var(--sa-green-light);
-  border: 1px solid rgba(47, 107, 79, 0.12);
-
-  ion-icon {
-    font-size: 23px;
-    color: var(--sa-green-dark);
+  .user-avatar {
+    width: 36px;
+    height: 36px;
   }
 }
 
-.brand-title {
-  font-family: var(--sa-font-display);
-  font-size: 22px;
-  font-weight: 800;
-  color: var(--sa-green-dark);
-  letter-spacing: -0.03em;
+/* =========================================================
+   TRÈS PETITS ÉCRANS
+   ========================================================= */
+
+@media (max-width: 380px) {
+
+  .accueil-header {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .user-info {
+    display: none;
+  }
+
+  .user-header {
+    gap: 5px;
+  }
+
+  .logout-button {
+    width: 36px;
+    height: 36px;
+
+    min-width: 36px;
+    min-height: 36px;
+  }
+
+  .logout-button ion-icon {
+    font-size: 19px;
+  }
 }
-
-
-/* Boutons header */
-
-.header-actions {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.login-link {
-  --color: var(--sa-green-dark);
-
-  font-weight: 600;
-  font-size: 13px;
-  text-transform: none;
-}
-
-.header-register {
-  --background: var(--sa-green);
-  --background-activated: var(--sa-green-dark);
-  --border-radius: 10px;
-  --box-shadow: none;
-
-  height: 42px;
-
-  font-size: 13px;
-  font-weight: 600;
-  text-transform: none;
-}
-
-
 /* =========================================================
    HERO
    ========================================================= */
@@ -1654,3 +1632,4 @@
   }
 
 }
+

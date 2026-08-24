@@ -45,7 +45,7 @@ export class LoginComponent {
         console.log('Connexion réussie :', response);
         console.log('Utilisateur connecté :', response.utilisateur);
 
-        this.router.navigate(['/tabs/parcelles']);
+        this.router.navigate(['/accueil']);
       },
 
       error: (err) => {
