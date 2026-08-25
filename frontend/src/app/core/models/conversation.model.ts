@@ -1,13 +1,13 @@
 export interface Message {
-  id: number;
+  id?: number;
   contenu: string;
-  dateEnvoi: string;
+  dateEnvoi?: string;
   type: 'UTILISATEUR' | 'ASSISTANT';
-  conversationId: number;
+  conversationId?: number;
 }
 
 export interface ConversationIA {
-  id: number;
-  dateCreation: string;
-  utilisateurId: number;
+  id?: number;
+  dateCreation?: string;
+  utilisateurId?: number;
 }

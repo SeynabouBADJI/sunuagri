@@ -29,26 +29,59 @@ export class AssistantComponent implements OnInit, AfterViewChecked {
   constructor(private assistantService: AssistantService) {}
 
   ngOnInit() {
-    this.assistantService.getMessages().subscribe(m => (this.messages = m));
-  }
+
+  this.assistantService
+    .getMessages()
+    .subscribe(m => {
+      this.messages = m;
+    });
+
+}
 
   ngAfterViewChecked() {
     this.scrollBas();
   }
 
   envoyer(texte?: string) {
-    const contenu = (texte ?? this.saisie).trim();
-    if (!contenu) return;
-    this.saisie = '';
-    this.enTrainDecrire = true;
 
-    this.assistantService.envoyerMessage(contenu).subscribe(() => {
-      this.assistantService.getMessages().subscribe(m => {
-        this.messages = m;
-        this.enTrainDecrire = false;
-      });
-    });
+  const contenu = (texte ?? this.saisie).trim();
+
+  if (!contenu) {
+    return;
   }
+
+  this.saisie = '';
+  this.enTrainDecrire = true;
+
+  this.assistantService
+    .envoyerMessage(contenu)
+    .subscribe({
+
+      next: () => {
+        this.enTrainDecrire = false;
+      },
+
+      error: (err) => {
+
+        console.error(
+          'Erreur assistant :',
+          err
+        );
+
+        this.enTrainDecrire = false;
+
+        this.messages = [
+          ...this.messages,
+          {
+            type: 'ASSISTANT',
+            contenu:
+              'Désolé, je rencontre actuellement un problème pour répondre. Vérifie que le serveur SunuAgri et Ollama sont bien démarrés.'
+          }
+        ];
+      }
+
+    });
+}
 
   private scrollBas() {
     const el = this.scrollArea?.nativeElement;

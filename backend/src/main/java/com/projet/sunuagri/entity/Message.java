@@ -1,18 +1,17 @@
 package com.projet.sunuagri.entity;
 
-import com.projet.sunuagri.entity.TypeMessage;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "messages")
-@Data
+@Table(name = "messages_ia")
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Message {
 
     @Id
@@ -22,14 +21,13 @@ public class Message {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String contenu;
 
-    @Column(nullable = false)
+    @Column(name = "date_envoi", nullable = false)
     private LocalDateTime dateEnvoi;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private TypeMessage type;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "conversation_id", nullable = false)
-    private ConversationIA conversation;
+    @Column(name = "conversation_id", nullable = false)
+    private Long conversationId;
 }

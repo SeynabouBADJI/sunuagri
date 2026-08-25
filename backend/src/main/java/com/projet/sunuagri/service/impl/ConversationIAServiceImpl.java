@@ -3,7 +3,6 @@ package com.projet.sunuagri.service.impl;
 import com.projet.sunuagri.dto.ConversationIACreateDTO;
 import com.projet.sunuagri.dto.ConversationIADTO;
 import com.projet.sunuagri.entity.ConversationIA;
-import com.projet.sunuagri.entity.Utilisateur;
 import com.projet.sunuagri.repository.ConversationIARepository;
 import com.projet.sunuagri.repository.UtilisateurRepository;
 import com.projet.sunuagri.service.ConversationIAService;
@@ -25,22 +24,23 @@ public class ConversationIAServiceImpl
     public ConversationIADTO creer(
             ConversationIACreateDTO dto) {
 
-        Utilisateur utilisateur =
-                utilisateurRepository.findById(
-                        dto.getUtilisateurId()
-                ).orElseThrow(() ->
+        // Vérifier que l'utilisateur existe
+        utilisateurRepository.findById(dto.getUtilisateurId())
+                .orElseThrow(() ->
                         new RuntimeException(
                                 "Utilisateur introuvable"
                         ));
 
-        ConversationIA conversation =
-                new ConversationIA();
+        ConversationIA conversation = new ConversationIA();
 
         conversation.setDateCreation(
                 LocalDateTime.now()
         );
 
-        conversation.setUtilisateur(utilisateur);
+        // On stocke directement l'id de l'utilisateur
+        conversation.setUtilisateurId(
+                dto.getUtilisateurId()
+        );
 
         return convertirEnDTO(
                 conversationRepository.save(conversation)
@@ -74,8 +74,12 @@ public class ConversationIAServiceImpl
             Long utilisateurId) {
 
         return conversationRepository
-                .findByUtilisateurId(utilisateurId)
+                .findAll()
                 .stream()
+                .filter(c ->
+                        c.getUtilisateurId()
+                                .equals(utilisateurId)
+                )
                 .map(this::convertirEnDTO)
                 .toList();
     }
@@ -98,7 +102,7 @@ public class ConversationIAServiceImpl
         return new ConversationIADTO(
                 conversation.getId(),
                 conversation.getDateCreation(),
-                conversation.getUtilisateur().getId()
+                conversation.getUtilisateurId()
         );
     }
 }

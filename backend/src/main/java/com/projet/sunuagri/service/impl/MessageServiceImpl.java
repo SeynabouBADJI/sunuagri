@@ -2,7 +2,6 @@ package com.projet.sunuagri.service.impl;
 
 import com.projet.sunuagri.dto.MessageCreateDTO;
 import com.projet.sunuagri.dto.MessageDTO;
-import com.projet.sunuagri.entity.ConversationIA;
 import com.projet.sunuagri.entity.Message;
 import com.projet.sunuagri.repository.ConversationIARepository;
 import com.projet.sunuagri.repository.MessageRepository;
@@ -18,16 +17,14 @@ import java.util.List;
 public class MessageServiceImpl implements MessageService {
 
     private final MessageRepository messageRepository;
-
     private final ConversationIARepository conversationRepository;
 
     @Override
     public MessageDTO creer(MessageCreateDTO dto) {
 
-        ConversationIA conversation =
-                conversationRepository.findById(
-                        dto.getConversationId()
-                ).orElseThrow(() ->
+        // Vérifier que la conversation existe
+        conversationRepository.findById(dto.getConversationId())
+                .orElseThrow(() ->
                         new RuntimeException(
                                 "Conversation introuvable"
                         ));
@@ -37,7 +34,11 @@ public class MessageServiceImpl implements MessageService {
         message.setContenu(dto.getContenu());
         message.setDateEnvoi(LocalDateTime.now());
         message.setType(dto.getType());
-        message.setConversation(conversation);
+
+        // On stocke directement l'id de la conversation
+        message.setConversationId(
+                dto.getConversationId()
+        );
 
         return convertirEnDTO(
                 messageRepository.save(message)
@@ -98,7 +99,7 @@ public class MessageServiceImpl implements MessageService {
                 message.getContenu(),
                 message.getDateEnvoi(),
                 message.getType(),
-                message.getConversation().getId()
+                message.getConversationId()
         );
     }
 }
