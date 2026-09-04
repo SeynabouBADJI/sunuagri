@@ -1,6 +1,5 @@
 package com.projet.sunuagri.dto;
 
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,18 +10,21 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CalendrierCulturalCreateDTO {
 
-    @NotBlank(message = "La région est obligatoire")
-    private String region;
+    @NotNull(message = "La plante est obligatoire")
+    private Long planteId;
 
-    @NotBlank(message = "La saison est obligatoire")
-    private String saison;
+    @NotNull(message = "La zone agricole est obligatoire")
+    private String zoneAgricole;
+
+    private String dureeCycle;
 
     private String periodeSemis;
 
-    private String periodeFloraison;
-
     private String periodeRecolte;
 
-    @NotNull(message = "La plante est obligatoire")
-    private Long planteId;
+    private String conditions;
+
+    private String risquesClimatiques;
+
+    private String mesuresAdaptation;
 }

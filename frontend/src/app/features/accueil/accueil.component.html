@@ -114,63 +114,160 @@
   <!-- ============================= -->
   <section class="hero-section">
 
-    <img
-      src="photos/accueil-hero.jpeg"
-      alt="Agriculture au Sénégal"
-      class="hero-image"
-    />
+  <img
+    src="photos/accueil-hero.jpeg"
+    alt="Agriculture au Sénégal"
+    class="hero-image"
+  />
 
-    <div class="hero-overlay"></div>
+  <div class="hero-overlay"></div>
 
-    <div class="hero-content">
+  <!-- CONTENU PRINCIPAL -->
+  <div class="hero-content">
 
-      <span class="hero-badge">
-        <ion-icon name="leaf-outline"></ion-icon>
-        Agriculture intelligente
+    <span class="hero-badge">
+      <ion-icon name="leaf-outline"></ion-icon>
+      Agriculture intelligente au Sénégal
+    </span>
+
+    <h1>
+      Cultivez mieux,
+      <strong>décidez plus intelligemment.</strong>
+    </h1>
+
+    <p>
+      SunuAgri accompagne les agriculteurs sénégalais dans
+      la gestion de leurs parcelles, le suivi des cultures
+      et la prise de décisions grâce à l’intelligence artificielle.
+    </p>
+
+    <div class="hero-action">
+      <ion-button
+        class="hero-primary"
+        routerLink="/register">
+
+        Découvrir SunuAgri
+
+        <ion-icon
+          slot="end"
+          name="arrow-forward-outline">
+        </ion-icon>
+
+      </ion-button>
+    </div>
+
+    <div class="hero-info">
+
+      <span>
+        <ion-icon name="checkmark-circle-outline"></ion-icon>
+        Pensé pour l'agriculture sénégalaise
       </span>
 
-      <h1>
-        L'agriculture sénégalaise,
-        <strong>accompagnée par l'intelligence artificielle.</strong>
-      </h1>
+      <span>
+        <ion-icon name="sparkles-outline"></ion-icon>
+        Intelligence artificielle agricole
+      </span>
 
-      <p>
-        Gérez vos parcelles, suivez vos cultures,
-        identifiez les maladies et obtenez des conseils
-        adaptés à votre exploitation.
-      </p>
+    </div>
 
-      <div class="hero-buttons">
+  </div>
 
-        <ion-button
-          class="hero-primary"
-          routerLink="/register">
 
-          Commencer gratuitement
+  <!-- MÉTÉO RÉELLE -->
+  <div class="hero-weather">
 
-          <ion-icon
-            slot="end"
-            name="arrow-forward-outline">
-          </ion-icon>
+    <div class="weather-top">
 
-        </ion-button>
+      <div class="weather-icon">
+        <ion-icon
+          [name]="weatherIcon">
+        </ion-icon>
+      </div>
 
-        <ion-button
-          fill="outline"
-          class="hero-secondary"
-          routerLink="/login">
+      <div>
+        <span class="weather-label">
+          MÉTÉO ACTUELLE
+        </span>
 
-          Se connecter
-
-        </ion-button>
-
+        <strong>
+          {{ temperature }}°C
+        </strong>
       </div>
 
     </div>
 
-  </section>
+
+    <div class="weather-location">
+      <ion-icon name="location-outline"></ion-icon>
+      Dakar, Sénégal
+    </div>
 
 
+    <div class="weather-details">
+
+      <div>
+        <ion-icon name="water-outline"></ion-icon>
+
+        <span>
+          Humidité
+          <strong>{{ humidity }}%</strong>
+        </span>
+      </div>
+
+
+      <div>
+        <ion-icon name="rainy-outline"></ion-icon>
+
+        <span>
+          Pluie
+          <strong>{{ precipitation }} mm</strong>
+        </span>
+      </div>
+
+    </div>
+
+
+    <div class="weather-message">
+      <ion-icon name="leaf-outline"></ion-icon>
+
+      <span>
+        {{ weatherMessage }}
+      </span>
+    </div>
+
+  </div>
+
+
+  <!-- PETIT INDICATEUR PARCELLE -->
+  <div class="hero-float parcel-float">
+
+    <div class="float-icon">
+      <ion-icon name="analytics-outline"></ion-icon>
+    </div>
+
+    <div>
+      <span>Suivi agricole</span>
+      <strong>Disponible</strong>
+    </div>
+
+  </div>
+
+
+  <!-- PETIT INDICATEUR IA -->
+  <div class="hero-float ai-float">
+
+    <div class="float-icon">
+      <ion-icon name="sparkles-outline"></ion-icon>
+    </div>
+
+    <div>
+      <span>Assistant SunuAgri</span>
+      <strong>IA disponible</strong>
+    </div>
+
+  </div>
+
+</section>
   <!-- ============================= -->
   <!-- FONCTIONNALITÉS -->
   <!-- ============================= -->

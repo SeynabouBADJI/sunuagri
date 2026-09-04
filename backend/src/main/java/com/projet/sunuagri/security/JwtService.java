@@ -18,7 +18,7 @@ public class JwtService {
     private final SecretKey secretKey =
             Keys.hmacShaKeyFor(SECRET.getBytes(StandardCharsets.UTF_8));
 
-    private final long expiration = 1000 * 60 * 60 * 24;
+    private final long expiration = 1000L * 60 * 60 * 24 * 7;
 
     public String genererToken(Utilisateur utilisateur) {
 
@@ -44,16 +44,23 @@ public class JwtService {
 
     public boolean estValide(String token) {
 
-        try {
-            Jwts.parser()
-                    .verifyWith(secretKey)
-                    .build()
-                    .parseSignedClaims(token);
+    try {
 
-            return true;
+        Jwts.parser()
+                .verifyWith(secretKey)
+                .build()
+                .parseSignedClaims(token);
 
-        } catch (Exception e) {
-            return false;
-        }
+        System.out.println("JWT VALIDE");
+
+        return true;
+
+    } catch (Exception e) {
+
+        System.out.println("JWT INVALIDE : " + e.getClass().getName());
+        System.out.println("MESSAGE : " + e.getMessage());
+
+        return false;
     }
+}
 }

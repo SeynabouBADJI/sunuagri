@@ -11,17 +11,21 @@ public class CalendrierCulturalDTO {
 
     private Long id;
 
-    private String region;
+    private Long planteId;
 
-    private String saison;
+    private String nomPlante;
+
+    private String zoneAgricole;
+
+    private String dureeCycle;
 
     private String periodeSemis;
 
-    private String periodeFloraison;
-
     private String periodeRecolte;
 
-    private Long planteId;
+    private String conditions;
 
-    private String planteNom;
+    private String risquesClimatiques;
+
+    private String mesuresAdaptation;
 }

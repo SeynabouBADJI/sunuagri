@@ -7,6 +7,7 @@ import com.projet.sunuagri.entity.Plante;
 import com.projet.sunuagri.repository.CalendrierCulturalRepository;
 import com.projet.sunuagri.repository.PlanteRepository;
 import com.projet.sunuagri.service.CalendrierCulturalService;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -24,27 +25,24 @@ public class CalendrierCulturalServiceImpl
     public CalendrierCulturalDTO creer(
             CalendrierCulturalCreateDTO dto) {
 
-        Plante plante = planteRepository
-                .findById(dto.getPlanteId())
+        Plante plante = planteRepository.findById(dto.getPlanteId())
                 .orElseThrow(() ->
-                        new RuntimeException(
-                                "Plante introuvable"));
+                        new RuntimeException("Plante introuvable"));
 
-        CalendrierCultural calendrier =
-                new CalendrierCultural();
+        CalendrierCultural calendrier = new CalendrierCultural();
 
-        calendrier.setRegion(dto.getRegion());
-        calendrier.setSaison(dto.getSaison());
-        calendrier.setPeriodeSemis(
-                dto.getPeriodeSemis());
-        calendrier.setPeriodeFloraison(
-                dto.getPeriodeFloraison());
-        calendrier.setPeriodeRecolte(
-                dto.getPeriodeRecolte());
         calendrier.setPlante(plante);
+        calendrier.setZoneAgricole(dto.getZoneAgricole());
+        calendrier.setDureeCycle(dto.getDureeCycle());
+        calendrier.setPeriodeSemis(dto.getPeriodeSemis());
+        calendrier.setPeriodeRecolte(dto.getPeriodeRecolte());
+        calendrier.setConditions(dto.getConditions());
+        calendrier.setRisquesClimatiques(dto.getRisquesClimatiques());
+        calendrier.setMesuresAdaptation(dto.getMesuresAdaptation());
 
         return convertirEnDTO(
-                calendrierRepository.save(calendrier));
+                calendrierRepository.save(calendrier)
+        );
     }
 
     @Override
@@ -54,26 +52,16 @@ public class CalendrierCulturalServiceImpl
                 calendrierRepository.findById(id)
                         .orElseThrow(() ->
                                 new RuntimeException(
-                                        "Calendrier introuvable"));
+                                        "Calendrier introuvable"
+                                ));
 
         return convertirEnDTO(calendrier);
     }
 
     @Override
-    public List<CalendrierCulturalDTO> trouverTous() {
+    public List<CalendrierCulturalDTO> trouverToutes() {
 
         return calendrierRepository.findAll()
-                .stream()
-                .map(this::convertirEnDTO)
-                .toList();
-    }
-
-    @Override
-    public List<CalendrierCulturalDTO> trouverParRegion(
-            String region) {
-
-        return calendrierRepository
-                .findByRegion(region)
                 .stream()
                 .map(this::convertirEnDTO)
                 .toList();
@@ -91,11 +79,11 @@ public class CalendrierCulturalServiceImpl
     }
 
     @Override
-    public List<CalendrierCulturalDTO> trouverParSaison(
-            String saison) {
+    public List<CalendrierCulturalDTO> trouverParZone(
+            String zoneAgricole) {
 
         return calendrierRepository
-                .findBySaison(saison)
+                .findByZoneAgricoleIgnoreCase(zoneAgricole)
                 .stream()
                 .map(this::convertirEnDTO)
                 .toList();
@@ -110,26 +98,28 @@ public class CalendrierCulturalServiceImpl
                 calendrierRepository.findById(id)
                         .orElseThrow(() ->
                                 new RuntimeException(
-                                        "Calendrier introuvable"));
+                                        "Calendrier introuvable"
+                                ));
 
-        Plante plante = planteRepository
-                .findById(dto.getPlanteId())
-                .orElseThrow(() ->
-                        new RuntimeException(
-                                "Plante introuvable"));
+        Plante plante =
+                planteRepository.findById(dto.getPlanteId())
+                        .orElseThrow(() ->
+                                new RuntimeException(
+                                        "Plante introuvable"
+                                ));
 
-        calendrier.setRegion(dto.getRegion());
-        calendrier.setSaison(dto.getSaison());
-        calendrier.setPeriodeSemis(
-                dto.getPeriodeSemis());
-        calendrier.setPeriodeFloraison(
-                dto.getPeriodeFloraison());
-        calendrier.setPeriodeRecolte(
-                dto.getPeriodeRecolte());
         calendrier.setPlante(plante);
+        calendrier.setZoneAgricole(dto.getZoneAgricole());
+        calendrier.setDureeCycle(dto.getDureeCycle());
+        calendrier.setPeriodeSemis(dto.getPeriodeSemis());
+        calendrier.setPeriodeRecolte(dto.getPeriodeRecolte());
+        calendrier.setConditions(dto.getConditions());
+        calendrier.setRisquesClimatiques(dto.getRisquesClimatiques());
+        calendrier.setMesuresAdaptation(dto.getMesuresAdaptation());
 
         return convertirEnDTO(
-                calendrierRepository.save(calendrier));
+                calendrierRepository.save(calendrier)
+        );
     }
 
     @Override
@@ -137,7 +127,8 @@ public class CalendrierCulturalServiceImpl
 
         if (!calendrierRepository.existsById(id)) {
             throw new RuntimeException(
-                    "Calendrier introuvable");
+                    "Calendrier introuvable"
+            );
         }
 
         calendrierRepository.deleteById(id);
@@ -148,13 +139,15 @@ public class CalendrierCulturalServiceImpl
 
         return new CalendrierCulturalDTO(
                 calendrier.getId(),
-                calendrier.getRegion(),
-                calendrier.getSaison(),
-                calendrier.getPeriodeSemis(),
-                calendrier.getPeriodeFloraison(),
-                calendrier.getPeriodeRecolte(),
                 calendrier.getPlante().getId(),
-                calendrier.getPlante().getNomCommun()
+                calendrier.getPlante().getNomCommun(),
+                calendrier.getZoneAgricole(),
+                calendrier.getDureeCycle(),
+                calendrier.getPeriodeSemis(),
+                calendrier.getPeriodeRecolte(),
+                calendrier.getConditions(),
+                calendrier.getRisquesClimatiques(),
+                calendrier.getMesuresAdaptation()
         );
     }
 }

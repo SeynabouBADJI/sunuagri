@@ -8,9 +8,9 @@ import java.util.List;
 public interface CalendrierCulturalRepository
         extends JpaRepository<CalendrierCultural, Long> {
 
-    List<CalendrierCultural> findByRegion(String region);
-
     List<CalendrierCultural> findByPlanteId(Long planteId);
 
-    List<CalendrierCultural> findBySaison(String saison);
+    List<CalendrierCultural> findByZoneAgricoleIgnoreCase(
+            String zoneAgricole
+    );
 }

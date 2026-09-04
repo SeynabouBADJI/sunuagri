@@ -7,25 +7,20 @@ import java.util.List;
 
 public interface CalendrierCulturalService {
 
-    CalendrierCulturalDTO creer(
-            CalendrierCulturalCreateDTO dto);
+    CalendrierCulturalDTO creer(CalendrierCulturalCreateDTO dto);
 
     CalendrierCulturalDTO trouverParId(Long id);
 
-    List<CalendrierCulturalDTO> trouverTous();
+    List<CalendrierCulturalDTO> trouverToutes();
 
-    List<CalendrierCulturalDTO> trouverParRegion(
-            String region);
+    List<CalendrierCulturalDTO> trouverParPlante(Long planteId);
 
-    List<CalendrierCulturalDTO> trouverParPlante(
-            Long planteId);
-
-    List<CalendrierCulturalDTO> trouverParSaison(
-            String saison);
+    List<CalendrierCulturalDTO> trouverParZone(String zoneAgricole);
 
     CalendrierCulturalDTO modifier(
             Long id,
-            CalendrierCulturalCreateDTO dto);
+            CalendrierCulturalCreateDTO dto
+    );
 
     void supprimer(Long id);
 }
