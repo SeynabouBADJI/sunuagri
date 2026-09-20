@@ -1,10 +1,12 @@
 export interface CalendrierCultural {
   id: number;
-  region: string;
-  saison: string;
-  periodeSemis: string;
-  periodeFloraison: string;
-  periodeRecolte: string;
   planteId: number;
-  planteNom?: string;
+  nomPlante: string;
+  zoneAgricole: string;
+  dureeCycle: string;
+  periodeSemis: string;
+  periodeRecolte: string;
+  conditions: string;
+  risquesClimatiques: string;
+  mesuresAdaptation: string;
 }

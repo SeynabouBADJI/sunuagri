@@ -46,7 +46,14 @@ import {
   thunderstormOutline,
 
   // Icône intelligence artificielle
-  sparklesOutline
+  sparklesOutline,
+
+  gridOutline,
+  resizeOutline,
+  homeOutline,
+  navigateOutline,
+  medkitOutline,
+
 
 } from 'ionicons/icons';
 
@@ -59,15 +66,6 @@ import {
   trashOutline
 } from 'ionicons/icons';
 
-
-// ======================================================
-// ENREGISTREMENT DES ICÔNES
-// ======================================================
-// Enregistrement explicite des icônes utilisées dans
-// l'application.
-// Cela évite de dépendre d'un CDN pour les charger,
-// ce qui est utile notamment pour le mode hors connexion.
-// ======================================================
 
 addIcons({
 
@@ -192,28 +190,17 @@ addIcons({
   'snow-outline':
     snowOutline,
 
-  'thunderstorm-outline':
-    thunderstormOutline,
+  'thunderstorm-outline':thunderstormOutline,
+  'sparkles-outline':sparklesOutline,
 
-
-  // ------------------------------
-  // Intelligence artificielle
-  // ------------------------------
-
-  'sparkles-outline':
-    sparklesOutline,
-
-
-  // ------------------------------
-  // Autres icônes
-  // ------------------------------
-
-  'create-outline':
-    createOutline,
-
-  'trash-outline':
-    trashOutline
-
+  'create-outline': createOutline,
+  'trash-outline':trashOutline,
+  'grid-outline': gridOutline,
+  'resize-outline': resizeOutline,
+  'home-outline': homeOutline,
+  'navigate-outline': navigateOutline,
+  'medkit-outline': medkitOutline,
+  
 });
 
 

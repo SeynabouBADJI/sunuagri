@@ -1,19 +1,71 @@
 <ion-content class="assistant-content" [fullscreen]="true">
 
-  <div class="assistant-header">
-    <div class="header-left">
-    <button class="back-button" routerLink="/accueil">
-        <ion-icon name="arrow-back-outline"></ion-icon>
+  <!-- =========================
+     HEADER ASSISTANT IA
+     ========================= -->
+
+<div class="assistant-header">
+
+  <!-- Partie gauche -->
+  <div class="header-left">
+
+    <!-- Retour vers l'accueil -->
+    <button
+      class="home-button"
+      routerLink="/accueil"
+      type="button">
+
+      <ion-icon name="home-outline"></ion-icon>
+
+      <span>Accueil</span>
+
     </button>
+
+
+    <!-- Séparateur -->
+    <div class="header-divider"></div>
+
+
+    <!-- Titre -->
     <div class="header-title">
-        <span class="header-label">SUNUAGRI</span>
-        <h1>Assistant IA</h1>
+
+      <span class="header-label">
+        SUNUAGRI
+      </span>
+
+      <h1>
+        Assistant IA
+      </h1>
+
     </div>
-    </div>
-    <div class="header-icon">
-      <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
-    </div>
+
   </div>
+
+
+  <!-- Partie droite -->
+  <div class="header-page-icon">
+
+    <div class="page-icon-circle">
+
+      <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
+
+    </div>
+
+    <div class="page-icon-text">
+
+      <span>
+        ASSISTANT
+      </span>
+
+      <strong>
+        INTELLIGENT
+      </strong>
+
+    </div>
+
+  </div>
+
+</div>
 
   <div class="messages" #scrollArea>
 

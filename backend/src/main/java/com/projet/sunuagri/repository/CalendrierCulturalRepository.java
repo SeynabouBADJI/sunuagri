@@ -13,4 +13,5 @@ public interface CalendrierCulturalRepository
     List<CalendrierCultural> findByZoneAgricoleIgnoreCase(
             String zoneAgricole
     );
+
 }

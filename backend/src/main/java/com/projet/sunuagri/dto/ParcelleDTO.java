@@ -9,17 +9,32 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ParcelleDTO {
+
     private Long id;
+
     private String nom;
+
     private Double superficie;
+
     private String localisation;
+
     private String notes;
+
+    private Double latitude;
+
+    private Double longitude;
+
     private Long utilisateurId;
 
     public static ParcelleDTO fromEntity(Parcelle p) {
         return new ParcelleDTO(
-            p.getId(), p.getNom(), p.getSuperficie(),
-            p.getLocalisation(), p.getNotes(),
+            p.getId(),
+            p.getNom(),
+            p.getSuperficie(),
+            p.getLocalisation(),
+            p.getNotes(),
+            p.getLatitude(),
+            p.getLongitude(),
             p.getUtilisateur().getId()
         );
     }

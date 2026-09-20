@@ -1,77 +1,365 @@
 <ion-content class="calendrier-content" [fullscreen]="true">
 
+  <!-- =========================================================
+       HEADER CALENDRIER
+       ========================================================= -->
+
   <div class="calendrier-header">
+
     <div class="header-left">
-        <button class="back-button" routerLink="/accueil">
-            <ion-icon name="arrow-back-outline"></ion-icon>
-        </button>
-        <div class="header-title">
-            <span class="header-label">SUNUAGRI</span>
-            <h1>Calendrier cultural</h1>
-        </div>
+
+      <button
+        class="home-button"
+        routerLink="/accueil"
+        type="button">
+
+        <ion-icon name="home-outline"></ion-icon>
+        <span>Accueil</span>
+
+      </button>
+
+      <div class="header-divider"></div>
+
+      <div class="header-title">
+
+        <span class="header-label">
+          SUNUAGRI
+        </span>
+
+        <h1>
+          Calendrier cultural
+        </h1>
+
+      </div>
+
     </div>
-    <div class="header-icon">
-      <ion-icon name="calendar-outline"></ion-icon>
+
+    <!-- PARTIE DROITE -->
+
+    <div class="header-page-icon">
+
+      <div class="page-icon-circle">
+        <ion-icon name="calendar-outline"></ion-icon>
+      </div>
+
+      <div class="page-icon-text">
+        <span>CALENDRIER</span>
+        <strong>CULTURAL</strong>
+      </div>
+
     </div>
+
   </div>
 
+
+  <!-- =========================================================
+       INTRODUCTION
+       ========================================================= -->
+
   <section class="calendrier-intro">
-    <span class="section-label">PLANIFICATION</span>
-    <h2>Sème et récolte <span>au bon moment</span></h2>
-    <p>Consulte les périodes clés de chaque culture, adaptées à ta zone agro-écologique.</p>
-  </section>
 
-  <section class="calendrier-list">
+    <span class="section-label">
+      PLANIFICATION
+    </span>
 
-    <ng-container *ngIf="chargement">
-      <div class="calendrier-card skeleton" *ngFor="let i of [1,2,3]"></div>
-    </ng-container>
+    <h2>
+      Sème et récolte
+      <span>au bon moment</span>
+    </h2>
 
-    <div class="calendrier-card" *ngFor="let c of calendriers">
-      <div class="calendrier-top">
-        <div class="calendrier-icon">
-          <ion-icon name="leaf-outline"></ion-icon>
-        </div>
-        <div class="calendrier-titre">
-          <h3>{{ c.planteNom }}</h3>
-          <p><ion-icon name="location-outline"></ion-icon> {{ c.region }}</p>
-        </div>
-        <span class="calendrier-saison">{{ c.saison }}</span>
-      </div>
-
-      <div class="timeline">
-        <div class="etape">
-          <div class="etape-point semis"></div>
-          <div class="etape-ligne"></div>
-          <div class="etape-texte">
-            <span class="etape-label">Semis</span>
-            <p>{{ c.periodeSemis }}</p>
-          </div>
-        </div>
-
-        <div class="etape">
-          <div class="etape-point floraison"></div>
-          <div class="etape-ligne"></div>
-          <div class="etape-texte">
-            <span class="etape-label">Floraison</span>
-            <p>{{ c.periodeFloraison }}</p>
-          </div>
-        </div>
-
-        <div class="etape etape-last">
-          <div class="etape-point recolte"></div>
-          <div class="etape-texte">
-            <span class="etape-label">Récolte</span>
-            <p>{{ c.periodeRecolte }}</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <p class="empty-state" *ngIf="!chargement && !calendriers.length">
-      Aucun calendrier disponible pour l'instant.
+    <p>
+      Consulte les périodes clés de chaque culture,
+      adaptées à ta zone agro-écologique.
     </p>
 
   </section>
+
+
+  <!-- =========================================================
+     FILTRES
+     ========================================================= -->
+
+<section
+  class="calendrier-filtres"
+  *ngIf="!chargement && !erreur && calendriers.length">
+
+  <!-- ZONES -->
+  <div class="filtre-groupe">
+
+    <span class="filtre-label">
+      <ion-icon name="location-outline"></ion-icon>
+      Zone agricole
+    </span>
+
+    <div class="filtre-chips">
+
+      <button
+        type="button"
+        class="chip"
+        [class.active]="zoneSelectionnee === null"
+        (click)="reinitialiserFiltres()">
+
+        Toutes
+
+      </button>
+
+      <button
+        type="button"
+        class="chip"
+        *ngFor="let z of zonesDisponibles"
+        [class.active]="zoneSelectionnee === z"
+        (click)="selectionnerZone(z)">
+
+        {{ z }}
+
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- CULTURES -->
+  <div class="filtre-groupe" *ngIf="zoneSelectionnee">
+
+    <span class="filtre-label">
+      <ion-icon name="leaf-outline"></ion-icon>
+      Culture
+    </span>
+
+    <div class="filtre-chips">
+
+      <button
+        type="button"
+        class="chip"
+        [class.active]="cultureSelectionnee === null"
+        (click)="cultureSelectionnee = null">
+
+        Toutes
+
+      </button>
+
+      <button
+        type="button"
+        class="chip"
+        *ngFor="let c of culturesDisponibles"
+        [class.active]="cultureSelectionnee === c"
+        (click)="selectionnerCulture(c)">
+
+        {{ c }}
+
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+  <!-- =========================================================
+     LISTE DES CALENDRIERS FILTRÉS
+     ========================================================= -->
+
+<section class="calendrier-list">
+
+  <!-- CHARGEMENT -->
+  <ng-container *ngIf="chargement">
+    <div class="calendrier-card skeleton" *ngFor="let i of [1, 2, 3]" aria-hidden="true"></div>
+  </ng-container>
+
+
+  <!-- ERREUR -->
+  <div class="error-state" *ngIf="!chargement && erreur">
+    <ion-icon name="alert-circle-outline"></ion-icon>
+    <p>{{ erreur }}</p>
+    <ion-button fill="outline" (click)="chargerCalendriers()">Réessayer</ion-button>
+  </div>
+
+
+  <!-- EN-TÊTE DE LISTE -->
+  <div
+    class="list-header"
+    *ngIf="!chargement && !erreur && calendriersFiltres.length">
+
+    <span class="list-count">
+      {{ calendriersFiltres.length }}
+      culture{{ calendriersFiltres.length > 1 ? 's' : '' }}
+
+      <ng-container *ngIf="filtreActif">
+        <span class="list-count-filter">· filtré{{ calendriersFiltres.length > 1 ? 's' : '' }}</span>
+      </ng-container>
+    </span>
+
+    <div class="list-actions">
+
+      <button
+        type="button"
+        class="toggle-all reset"
+        *ngIf="filtreActif"
+        (click)="reinitialiserFiltres()">
+
+        <ion-icon name="close-outline"></ion-icon>
+        Réinitialiser
+
+      </button>
+
+      <button
+        type="button"
+        class="toggle-all"
+        (click)="toutBasculer()">
+
+        {{ indexOuvert === null ? 'Tout déplier' : 'Tout replier' }}
+
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- CALENDRIERS (BOUCLE FILTRÉE) -->
+  <div
+    class="calendrier-card"
+    *ngFor="let c of calendriersFiltres; let i = index"
+    [class.is-open]="indexOuvert === i">
+
+    <button
+      type="button"
+      class="calendrier-top"
+      (click)="toggleCard(i)"
+      [attr.aria-expanded]="indexOuvert === i"
+      [attr.aria-controls]="'card-content-' + i">
+
+      <div class="calendrier-icon">
+        <ion-icon name="leaf-outline"></ion-icon>
+      </div>
+
+      <div class="calendrier-info">
+        <h3>{{ c.nomPlante }}</h3>
+
+        <div class="calendrier-meta">
+          <span class="meta-item">
+            <ion-icon name="location-outline"></ion-icon>
+            {{ c.zoneAgricole }}
+          </span>
+
+          <span class="meta-dot">•</span>
+
+          <span class="meta-item">
+            <ion-icon name="time-outline"></ion-icon>
+            {{ c.dureeCycle }}
+          </span>
+        </div>
+      </div>
+
+      <ion-icon class="chevron" name="chevron-down-outline"></ion-icon>
+
+    </button>
+
+
+    <div
+      class="calendrier-body"
+      [id]="'card-content-' + i"
+      [class.open]="indexOuvert === i">
+
+      <div class="calendrier-body-inner">
+
+        <!-- TIMELINE -->
+        <div class="timeline">
+
+          <div class="etape">
+            <div class="etape-point semis"></div>
+            <div class="etape-ligne"></div>
+            <div class="etape-texte">
+              <span class="etape-label">Semis</span>
+              <p>{{ c.periodeSemis }}</p>
+            </div>
+          </div>
+
+          <div class="etape etape-last">
+            <div class="etape-point recolte"></div>
+            <div class="etape-texte">
+              <span class="etape-label">Récolte</span>
+              <p>{{ c.periodeRecolte }}</p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- DÉTAILS -->
+        <div class="calendrier-details">
+
+          <div class="detail-item">
+            <div class="detail-icon">
+              <ion-icon name="earth-outline"></ion-icon>
+            </div>
+            <div>
+              <span>Conditions</span>
+              <p>{{ c.conditions }}</p>
+            </div>
+          </div>
+
+          <div class="detail-item">
+            <div class="detail-icon">
+              <ion-icon name="warning-outline"></ion-icon>
+            </div>
+            <div>
+              <span>Risques climatiques</span>
+              <p>{{ c.risquesClimatiques }}</p>
+            </div>
+          </div>
+
+          <div class="detail-item">
+            <div class="detail-icon">
+              <ion-icon name="bulb-outline"></ion-icon>
+            </div>
+            <div>
+              <span>Mesures d'adaptation</span>
+              <p>{{ c.mesuresAdaptation }}</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- AUCUN RÉSULTAT (filtres actifs) -->
+  <div
+    class="no-result"
+    *ngIf="!chargement && !erreur && filtreActif && !calendriersFiltres.length">
+
+    <ion-icon name="search-outline"></ion-icon>
+
+    <p>
+      Aucune culture ne correspond à ta sélection.
+    </p>
+
+    <button
+      type="button"
+      class="toggle-all reset"
+      (click)="reinitialiserFiltres()">
+
+      Réinitialiser les filtres
+
+    </button>
+
+  </div>
+
+
+  <!-- AUCUNE DONNÉE (aucun calendrier du tout) -->
+  <p
+    class="empty-state"
+    *ngIf="!chargement && !erreur && !calendriers.length">
+
+    Aucun calendrier disponible pour l'instant.
+
+  </p>
+
+</section>
 
 </ion-content>

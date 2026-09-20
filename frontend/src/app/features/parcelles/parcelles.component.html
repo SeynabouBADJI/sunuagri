@@ -369,6 +369,40 @@
 
           </div>
 
+          <!-- Position GPS -->
+<div class="form-group">
+
+  <label>
+    Position de la parcelle
+  </label>
+
+  <button
+    type="button"
+    class="gps-button"
+    (click)="obtenirPosition()">
+
+    <ion-icon name="navigate-outline"></ion-icon>
+
+    <span>
+      Utiliser ma position actuelle
+    </span>
+
+  </button>
+
+  <div
+    class="gps-status"
+    *ngIf="latitude !== null && longitude !== null">
+
+    <ion-icon name="checkmark-circle-outline"></ion-icon>
+
+    <span>
+      Position GPS enregistrée
+    </span>
+
+  </div>
+
+</div>  
+
 
           <!-- Notes -->
           <div class="form-group">

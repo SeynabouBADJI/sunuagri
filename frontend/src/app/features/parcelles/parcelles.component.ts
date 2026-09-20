@@ -50,6 +50,8 @@ export class ParcellesComponent implements OnInit {
   superficie: number | null = null;
   localisation = '';
   notes = '';
+  latitude: number | null = null;
+  longitude: number | null = null;
 
   // ============================================================
   // CARNET
@@ -197,6 +199,8 @@ export class ParcellesComponent implements OnInit {
     this.superficie = null;
     this.localisation = '';
     this.notes = '';
+    this.latitude = null;
+    this.longitude = null;
 
     this.erreur = '';
 
@@ -217,6 +221,8 @@ export class ParcellesComponent implements OnInit {
     this.superficie = parcelle.superficie;
     this.localisation = parcelle.localisation;
     this.notes = parcelle.notes ?? '';
+    this.latitude = parcelle.latitude ?? null;
+    this.longitude = parcelle.longitude ?? null;
 
     this.erreur = '';
 
@@ -230,6 +236,77 @@ export class ParcellesComponent implements OnInit {
   fermerModal(): void {
     this.modalOuvert = false;
   }
+
+
+  // ============================================================
+  // Obtenir Position
+  // ============================================================
+  obtenirPosition(): void {
+
+  if (!navigator.geolocation) {
+
+    this.erreur =
+      'La géolocalisation n’est pas disponible sur cet appareil.';
+
+    return;
+  }
+
+  this.erreur = '';
+
+  navigator.geolocation.getCurrentPosition(
+
+    (position) => {
+
+      this.latitude =
+        position.coords.latitude;
+
+      this.longitude =
+        position.coords.longitude;
+
+      console.log(
+        '📍 Position GPS récupérée :',
+        this.latitude,
+        this.longitude
+      );
+    },
+
+    (error) => {
+
+      console.error(
+        'Erreur géolocalisation :',
+        error
+      );
+
+      switch (error.code) {
+
+        case error.PERMISSION_DENIED:
+          this.erreur =
+            'La permission de localisation a été refusée.';
+          break;
+
+        case error.POSITION_UNAVAILABLE:
+          this.erreur =
+            'La position actuelle est indisponible.';
+          break;
+
+        case error.TIMEOUT:
+          this.erreur =
+            'La récupération de la position a pris trop de temps.';
+          break;
+
+        default:
+          this.erreur =
+            'Impossible de récupérer votre position.';
+      }
+    },
+
+    {
+      enableHighAccuracy: true,
+      timeout: 10000,
+      maximumAge: 0
+    }
+  );
+}
 
   // ============================================================
   // ENREGISTRER UNE PARCELLE
@@ -263,24 +340,30 @@ export class ParcellesComponent implements OnInit {
 
     const parcelle: Parcelle = {
 
-      id:
-        this.parcelleSelectionnee?.id ?? 0,
+  id:
+    this.parcelleSelectionnee?.id ?? 0,
 
-      nom:
-        this.nom.trim(),
+  nom:
+    this.nom.trim(),
 
-      superficie:
-        this.superficie,
+  superficie:
+    this.superficie,
 
-      localisation:
-        this.localisation.trim(),
+  localisation:
+    this.localisation.trim(),
 
-      notes:
-        this.notes.trim(),
+  notes:
+    this.notes.trim(),
 
-      utilisateurId:
-        utilisateur.id
-    };
+  latitude:
+    this.latitude ?? undefined,
+
+  longitude:
+    this.longitude ?? undefined,
+
+  utilisateurId:
+    utilisateur.id
+};
 
     this.chargement = true;
 

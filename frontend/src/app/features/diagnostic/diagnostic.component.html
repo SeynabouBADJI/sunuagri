@@ -1,26 +1,68 @@
 <ion-content class="diagnostic-content" [fullscreen]="true">
+<!-- =========================
+     HEADER DIAGNOSTIC
+     ========================= -->
 
-  <div class="diagnostic-header">
+<div class="diagnostic-header">
 
+  <!-- Partie gauche -->
   <div class="header-left">
-<div class="header-left">
-  <button class="back-button" routerLink="/accueil">
-    <ion-icon name="arrow-back-outline"></ion-icon>
-  </button>
-  <div class="header-title">
-    <span class="header-label">SUNUAGRI</span>
-    <h1>Diagnostic</h1>
+
+    <!-- Retour vers l'accueil -->
+    <button
+      class="home-button"
+      routerLink="/accueil"
+      type="button">
+
+      <ion-icon name="home-outline"></ion-icon>
+
+      <span>Accueil</span>
+
+    </button>
+
+
+    <!-- Séparation -->
+    <div class="header-divider"></div>
+
+
+    <!-- Titre -->
+    <div class="header-title">
+
+      <span class="header-label">
+        SUNUAGRI
+      </span>
+
+      <h1>
+        Diagnostic agricole
+      </h1>
+
+    </div>
+
   </div>
+
+
+  <!-- Identité de la page -->
+  <div class="header-page-icon">
+
+    <div class="page-icon-circle">
+
+      <ion-icon name="medkit-outline"></ion-icon>
+
+    </div>
+
+    <div class="page-icon-text">
+
+      <span>DIAGNOSTIC</span>
+
+      <strong>
+        DES CULTURES
+      </strong>
+
+    </div>
+
+  </div>
+
 </div>
-
-  </div>
-
-  <div class="header-icon">
-    <ion-icon name="scan-outline"></ion-icon>
-  </div>
-
-</div>
-
   <!-- ========================================= -->
   <!-- INTRODUCTION -->
   <!-- ========================================= -->
