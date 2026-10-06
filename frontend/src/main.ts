@@ -207,6 +207,9 @@ addIcons({
 // ======================================================
 // DÉMARRAGE DE L'APPLICATION
 // ======================================================
+console.log('✅ addIcons exécuté, nombre icônes enregistrées:', Object.keys({
+  'camera-outline': 1, 'leaf-outline': 1, // juste pour l'exemple
+}).length);
 
 bootstrapApplication(
   AppComponent,

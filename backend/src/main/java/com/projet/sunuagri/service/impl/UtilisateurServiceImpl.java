@@ -8,6 +8,7 @@ import com.projet.sunuagri.entity.Utilisateur;
 import com.projet.sunuagri.repository.UtilisateurRepository;
 import com.projet.sunuagri.security.JwtService;
 import com.projet.sunuagri.service.UtilisateurService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import org.springframework.stereotype.Service;
 
@@ -19,14 +20,17 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 
     private final UtilisateurRepository utilisateurRepository;
     private final JwtService jwtService;
+    private final PasswordEncoder passwordEncoder;
 
     public UtilisateurServiceImpl(
-            UtilisateurRepository utilisateurRepository,
-            JwtService jwtService) {
+        UtilisateurRepository utilisateurRepository,
+        JwtService jwtService,
+        PasswordEncoder passwordEncoder) {
 
-        this.utilisateurRepository = utilisateurRepository;
-        this.jwtService = jwtService;
-    }
+    this.utilisateurRepository = utilisateurRepository;
+    this.jwtService = jwtService;
+    this.passwordEncoder = passwordEncoder;
+}
 
     @Override
     public List<UtilisateurDTO> getTousLesUtilisateurs() {
@@ -63,7 +67,8 @@ public UtilisateurDTO creerUtilisateur(UtilisateurCreateDTO dto) {
     utilisateur.setPrenom(dto.getPrenom());
     utilisateur.setEmail(dto.getEmail());
     utilisateur.setTelephone(dto.getTelephone());
-    utilisateur.setMotDePasse(dto.getMotDePasse());
+    utilisateur.setMotDePasse(
+        passwordEncoder.encode(dto.getMotDePasse()));
     utilisateur.setLocalisation(dto.getLocalisation());
     utilisateur.setRole(Utilisateur.Role.AGRICULTEUR);
 
@@ -119,8 +124,9 @@ public UtilisateurDTO creerUtilisateur(UtilisateurCreateDTO dto) {
                                 )
                         );
 
-        if (!utilisateur.getMotDePasse()
-                .equals(dto.getMotDePasse())) {
+        if (!passwordEncoder.matches(
+        dto.getMotDePasse(),
+        utilisateur.getMotDePasse())) {
 
             throw new RuntimeException(
                     "Email ou mot de passe incorrect"

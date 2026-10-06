@@ -14,7 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/conversations")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://localhost:8100")
+@CrossOrigin(origins = "*")
 public class ConversationIAController {
 
     private final ConversationIAService conversationService;

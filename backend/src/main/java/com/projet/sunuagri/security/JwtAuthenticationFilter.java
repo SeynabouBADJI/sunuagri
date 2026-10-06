@@ -124,8 +124,20 @@ try {
             SecurityContextHolder
                     .getContext()
                     .setAuthentication(authentication);
+                    System.out.println(
+                        "AUTHORITIES : " +
+                        SecurityContextHolder.getContext()
+                            .getAuthentication()
+                            .getAuthorities()
+                    );
 
             System.out.println("AUTHENTIFICATION OK");
+            System.out.println(
+    "AUTHORITIES : " +
+    SecurityContextHolder.getContext()
+        .getAuthentication()
+        .getAuthorities()
+);
 
         } else {
 

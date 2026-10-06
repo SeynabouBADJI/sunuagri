@@ -1,442 +1,347 @@
 <ion-content class="accueil-content" [fullscreen]="true">
 
-<!-- ============================= -->
-<!-- HEADER / NAVBAR -->
-<!-- ============================= -->
+  <!-- ============================= -->
+  <!-- HEADER / NAVBAR -->
+  <!-- ============================= -->
 
-<header class="accueil-header">
+  <header class="accueil-header">
 
-  <!-- ========================= -->
-  <!-- LOGO -->
-  <!-- ========================= -->
-
-  <div class="brand">
-
-    <div class="brand-mark">
-      <ion-icon name="leaf-outline"></ion-icon>
+    <!-- LOGO -->
+    <div class="brand">
+      <div class="brand-mark">
+        <ion-icon name="leaf-outline"></ion-icon>
+      </div>
+      <span class="brand-title">SunuAgri</span>
     </div>
 
-    <span class="brand-title">
-      SunuAgri
-    </span>
 
-  </div>
+    <!-- UTILISATEUR NON CONNECTÉ -->
+    <div class="header-actions" *ngIf="!auth.estConnecte()">
 
+      <ion-button fill="clear" class="login-link" routerLink="/login">
+        Se connecter
+      </ion-button>
 
-  <!-- ========================= -->
-  <!-- UTILISATEUR NON CONNECTÉ -->
-  <!-- ========================= -->
-
-  <div
-    class="header-actions"
-    *ngIf="!auth.estConnecte()">
-
-    <!-- Se connecter -->
-    <ion-button
-      fill="clear"
-      class="login-link"
-      routerLink="/login">
-
-      Se connecter
-
-    </ion-button>
-
-
-    <!-- Créer un compte -->
-    <ion-button
-      class="header-register"
-      routerLink="/register">
-
-      Créer un compte
-
-    </ion-button>
-
-  </div>
-
-
-  <!-- ========================= -->
-  <!-- UTILISATEUR CONNECTÉ -->
-  <!-- ========================= -->
-
-  <div
-    class="user-header"
-    *ngIf="auth.estConnecte()">
-
-    <!-- Avatar -->
-    <div class="user-avatar">
-
-      <ion-icon
-        name="person-outline">
-      </ion-icon>
+      <ion-button class="header-register" routerLink="/register">
+        Créer un compte
+      </ion-button>
 
     </div>
 
 
-    <!-- Bienvenue + nom -->
-    <div class="user-info">
+    <!-- UTILISATEUR CONNECTÉ -->
+    <div class="user-header" *ngIf="auth.estConnecte()">
 
-      <span class="user-label">
-        Bienvenue
-      </span>
+      <div class="user-avatar">
+        <ion-icon name="person-outline"></ion-icon>
+      </div>
 
-      <span class="user-name">
+      <div class="user-info">
+        <span class="user-label">Bienvenue</span>
+        <span class="user-name">
+          {{ utilisateur?.prenom }}
+          {{ utilisateur?.nom }}
+        </span>
+      </div>
 
-        {{ utilisateur?.prenom }}
-        {{ utilisateur?.nom }}
-
-      </span>
+      <ion-button fill="outline" class="logout-button" (click)="seDeconnecter()">
+        <ion-icon slot="start" name="log-out-outline"></ion-icon>
+        Se déconnecter
+      </ion-button>
 
     </div>
 
-
-    <!-- Déconnexion -->
-    <ion-button
-      fill="outline"
-      class="logout-button"
-      (click)="seDeconnecter()">
-
-      <ion-icon
-        slot="start"
-        name="log-out-outline">
-      </ion-icon>
-
-      Se déconnecter
-
-    </ion-button>
-
-  </div>
-
-</header>
+  </header>
 
 
   <!-- ============================= -->
   <!-- HERO SECTION -->
   <!-- ============================= -->
+
   <section class="hero-section">
 
-  <img
-    src="photos/accueil-hero.jpeg"
-    alt="Agriculture au Sénégal"
-    class="hero-image"
-  />
+    <img
+      src="photos/accueil-hero.jpeg"
+      alt="Agriculture au Sénégal"
+      class="hero-image"
+    />
 
-  <div class="hero-overlay"></div>
+    <div class="hero-overlay"></div>
 
-  <!-- CONTENU PRINCIPAL -->
-  <div class="hero-content">
 
-    <span class="hero-badge">
-      <ion-icon name="leaf-outline"></ion-icon>
-      Agriculture intelligente au Sénégal
-    </span>
+    <!-- CONTENU PRINCIPAL -->
+    <div class="hero-content">
 
-    <h1>
-      Cultivez mieux,
-      <strong>décidez plus intelligemment.</strong>
-    </h1>
-
-    <p>
-      SunuAgri accompagne les agriculteurs sénégalais dans
-      la gestion de leurs parcelles, le suivi des cultures
-      et la prise de décisions grâce à l’intelligence artificielle.
-    </p>
-
-    <div class="hero-action">
-      <ion-button
-        class="hero-primary"
-        routerLink="/register">
-
-        Découvrir SunuAgri
-
-        <ion-icon
-          slot="end"
-          name="arrow-forward-outline">
-        </ion-icon>
-
-      </ion-button>
-    </div>
-
-    <div class="hero-info">
-
-      <span>
-        <ion-icon name="checkmark-circle-outline"></ion-icon>
-        Pensé pour l'agriculture sénégalaise
+      <span class="hero-badge">
+        <ion-icon name="leaf-outline"></ion-icon>
+        Agriculture intelligente au Sénégal
       </span>
 
-      <span>
+      <h1>
+        Cultivez mieux,
+        <strong>décidez plus intelligemment.</strong>
+      </h1>
+
+      <p>
+        SunuAgri accompagne les agriculteurs sénégalais dans
+        la gestion de leurs parcelles, le suivi des cultures
+        et la prise de décisions grâce à l’intelligence artificielle.
+      </p>
+
+      <div class="hero-action">
+        <ion-button class="hero-primary" routerLink="/register">
+          Découvrir SunuAgri
+          <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
+        </ion-button>
+      </div>
+
+      <div class="hero-info">
+        <span>
+          <ion-icon name="checkmark-circle-outline"></ion-icon>
+          Pensé pour l'agriculture sénégalaise
+        </span>
+        <span>
+          <ion-icon name="sparkles-outline"></ion-icon>
+          Intelligence artificielle agricole
+        </span>
+      </div>
+
+    </div>
+
+
+    <!-- ============================= -->
+    <!-- MÉTÉO RÉELLE -->
+    <!-- ============================= -->
+
+    <div class="hero-weather">
+
+      <!-- CHARGEMENT -->
+      <div class="weather-loading" *ngIf="weatherLoading">
+        <ion-spinner name="crescent"></ion-spinner>
+        <span>Chargement de la météo...</span>
+      </div>
+
+
+      <!-- ERREUR -->
+      <div class="weather-error" *ngIf="!weatherLoading && weatherError">
+
+        <div class="weather-error-icon">
+          <ion-icon name="cloud-offline-outline"></ion-icon>
+        </div>
+
+        <strong>Météo indisponible</strong>
+
+        <p>{{ weatherMessage }}</p>
+
+        <button type="button" class="weather-retry" (click)="chargerMeteo()">
+          <ion-icon name="refresh-outline"></ion-icon>
+          Réessayer
+        </button>
+
+      </div>
+
+
+      <!-- MÉTÉO OK -->
+      <ng-container *ngIf="!weatherLoading && !weatherError">
+
+        <div class="weather-top">
+
+          <div class="weather-icon">
+            <ion-icon [name]="weatherIcon"></ion-icon>
+          </div>
+
+          <div>
+            <span class="weather-label">MÉTÉO ACTUELLE</span>
+            <strong>{{ temperature }}°C</strong>
+          </div>
+
+        </div>
+
+
+        <div class="weather-location">
+          <ion-icon name="location-outline"></ion-icon>
+          {{ positionLabel }}
+        </div>
+
+
+        <div class="weather-details">
+
+          <div>
+            <ion-icon name="water-outline"></ion-icon>
+            <span>
+              Humidité
+              <strong>{{ humidity }}%</strong>
+            </span>
+          </div>
+
+          <div>
+            <ion-icon name="rainy-outline"></ion-icon>
+            <span>
+              Pluie
+              <strong>{{ precipitation }} mm</strong>
+            </span>
+          </div>
+
+        </div>
+
+
+        <div class="weather-message">
+          <ion-icon name="leaf-outline"></ion-icon>
+          <span>{{ weatherMessage }}</span>
+        </div>
+
+      </ng-container>
+
+    </div>
+
+
+    <!-- PETIT INDICATEUR PARCELLE -->
+    <div class="hero-float parcel-float">
+      <div class="float-icon">
+        <ion-icon name="analytics-outline"></ion-icon>
+      </div>
+      <div>
+        <span>Suivi agricole</span>
+        <strong>Disponible</strong>
+      </div>
+    </div>
+
+
+    <!-- PETIT INDICATEUR IA -->
+    <div class="hero-float ai-float">
+      <div class="float-icon">
         <ion-icon name="sparkles-outline"></ion-icon>
-        Intelligence artificielle agricole
-      </span>
-
-    </div>
-
-  </div>
-
-
-  <!-- MÉTÉO RÉELLE -->
-  <div class="hero-weather">
-
-    <div class="weather-top">
-
-      <div class="weather-icon">
-        <ion-icon
-          [name]="weatherIcon">
-        </ion-icon>
       </div>
-
       <div>
-        <span class="weather-label">
-          MÉTÉO ACTUELLE
-        </span>
-
-        <strong>
-          {{ temperature }}°C
-        </strong>
+        <span>Assistant SunuAgri</span>
+        <strong>IA disponible</strong>
       </div>
-
     </div>
 
-
-    <div class="weather-location">
-      <ion-icon name="location-outline"></ion-icon>
-      Dakar, Sénégal
-    </div>
+  </section>
 
 
-    <div class="weather-details">
-
-      <div>
-        <ion-icon name="water-outline"></ion-icon>
-
-        <span>
-          Humidité
-          <strong>{{ humidity }}%</strong>
-        </span>
-      </div>
-
-
-      <div>
-        <ion-icon name="rainy-outline"></ion-icon>
-
-        <span>
-          Pluie
-          <strong>{{ precipitation }} mm</strong>
-        </span>
-      </div>
-
-    </div>
-
-
-    <div class="weather-message">
-      <ion-icon name="leaf-outline"></ion-icon>
-
-      <span>
-        {{ weatherMessage }}
-      </span>
-    </div>
-
-  </div>
-
-
-  <!-- PETIT INDICATEUR PARCELLE -->
-  <div class="hero-float parcel-float">
-
-    <div class="float-icon">
-      <ion-icon name="analytics-outline"></ion-icon>
-    </div>
-
-    <div>
-      <span>Suivi agricole</span>
-      <strong>Disponible</strong>
-    </div>
-
-  </div>
-
-
-  <!-- PETIT INDICATEUR IA -->
-  <div class="hero-float ai-float">
-
-    <div class="float-icon">
-      <ion-icon name="sparkles-outline"></ion-icon>
-    </div>
-
-    <div>
-      <span>Assistant SunuAgri</span>
-      <strong>IA disponible</strong>
-    </div>
-
-  </div>
-
-</section>
   <!-- ============================= -->
   <!-- FONCTIONNALITÉS -->
   <!-- ============================= -->
+
   <section class="features-section">
 
     <div class="section-heading">
-
-      <span class="section-label">
-        SUNUAGRI
-      </span>
-
+      <span class="section-label">SUNUAGRI</span>
       <h2>
         Tout ce qu'il faut pour
         <span>mieux cultiver</span>
       </h2>
-
       <p>
         Des outils simples et intelligents pour
         vous accompagner au quotidien.
       </p>
-
     </div>
 
 
     <div class="features-grid">
 
-
-      <!-- ============================= -->
       <!-- DIAGNOSTIC IA -->
-      <!-- ============================= -->
       <article class="feature-card">
-
         <div class="feature-icon">
           <ion-icon name="camera-outline"></ion-icon>
         </div>
-
         <h3>Diagnostic IA</h3>
-
         <p>
           Photographiez une feuille et obtenez
           une identification des maladies assistée
           par intelligence artificielle.
         </p>
-
         <a routerLink="/tabs/diagnostic">
           Découvrir
           <ion-icon name="arrow-forward-outline"></ion-icon>
         </a>
-
       </article>
 
 
-      <!-- ============================= -->
       <!-- PARCELLES -->
-      <!-- ============================= -->
       <article class="feature-card">
-
         <div class="feature-icon">
           <ion-icon name="leaf-outline"></ion-icon>
         </div>
-
         <h3>Mes parcelles</h3>
-
         <p>
           Enregistrez vos parcelles et suivez
           facilement vos cultures et vos activités.
         </p>
-
         <a routerLink="/tabs/parcelles">
           Découvrir
           <ion-icon name="arrow-forward-outline"></ion-icon>
         </a>
-
       </article>
 
 
-      <!-- ============================= -->
       <!-- ASSISTANT IA -->
-      <!-- ============================= -->
       <article class="feature-card">
-
         <div class="feature-icon">
           <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
         </div>
-
         <h3>Assistant IA</h3>
-
         <p>
           Posez vos questions et recevez des
           conseils agricoles personnalisés.
         </p>
-
         <a routerLink="/tabs/assistant">
           Découvrir
           <ion-icon name="arrow-forward-outline"></ion-icon>
         </a>
-
       </article>
 
 
-      <!-- ============================= -->
       <!-- CALENDRIER -->
-      <!-- ============================= -->
       <article class="feature-card">
-
         <div class="feature-icon">
           <ion-icon name="calendar-outline"></ion-icon>
         </div>
-
         <h3>Calendrier cultural</h3>
-
         <p>
           Consultez les périodes importantes
           pour vos cultures et vos travaux agricoles.
         </p>
-
         <a routerLink="/tabs/calendrier">
           Découvrir
           <ion-icon name="arrow-forward-outline"></ion-icon>
         </a>
-
       </article>
 
 
-      <!-- ============================= -->
       <!-- ALERTES -->
-      <!-- ============================= -->
       <article class="feature-card">
-
         <div class="feature-icon">
           <ion-icon name="notifications-outline"></ion-icon>
         </div>
-
         <h3>Alertes agricoles</h3>
-
         <p>
           Recevez des notifications importantes
           concernant vos parcelles et vos cultures.
         </p>
-
         <a routerLink="/tabs/alertes">
           Découvrir
           <ion-icon name="arrow-forward-outline"></ion-icon>
         </a>
-
       </article>
 
 
-      <!-- ============================= -->
       <!-- CARNET DE TERRAIN -->
-      <!-- ============================= -->
       <article class="feature-card">
-
         <div class="feature-icon">
           <ion-icon name="book-outline"></ion-icon>
         </div>
-
         <h3>Carnet de terrain</h3>
-
         <p>
           Gardez un historique de vos activités,
           observations et diagnostics.
         </p>
-
         <a routerLink="/tabs/carnet">
           Découvrir
           <ion-icon name="arrow-forward-outline"></ion-icon>
         </a>
-
       </article>
 
     </div>
@@ -447,95 +352,60 @@
   <!-- ============================= -->
   <!-- COMMENT ÇA MARCHE -->
   <!-- ============================= -->
+
   <section class="how-section">
 
     <div class="section-heading">
-
-      <span class="section-label">
-        SIMPLE ET RAPIDE
-      </span>
-
-      <h2>
-        Comment ça marche ?
-      </h2>
-
+      <span class="section-label">SIMPLE ET RAPIDE</span>
+      <h2>Comment ça marche ?</h2>
       <p>
         SunuAgri vous accompagne à chaque étape
         de votre activité agricole.
       </p>
-
     </div>
 
 
     <div class="steps">
 
-
       <!-- ÉTAPE 1 -->
       <div class="step">
-
-        <div class="step-number">
-          01
-        </div>
-
+        <div class="step-number">01</div>
         <div class="step-icon">
           <ion-icon name="person-add-outline"></ion-icon>
         </div>
-
-        <h3>
-          Créez votre compte
-        </h3>
-
+        <h3>Créez votre compte</h3>
         <p>
           Inscrivez-vous et renseignez les
           informations de votre exploitation.
         </p>
-
       </div>
 
 
       <!-- ÉTAPE 2 -->
       <div class="step">
-
-        <div class="step-number">
-          02
-        </div>
-
+        <div class="step-number">02</div>
         <div class="step-icon">
           <ion-icon name="camera-outline"></ion-icon>
         </div>
-
-        <h3>
-          Analysez vos cultures
-        </h3>
-
+        <h3>Analysez vos cultures</h3>
         <p>
           Prenez une photo, consultez vos parcelles
           ou utilisez les outils de SunuAgri.
         </p>
-
       </div>
 
 
       <!-- ÉTAPE 3 -->
       <div class="step">
-
-        <div class="step-number">
-          03
-        </div>
-
+        <div class="step-number">03</div>
         <div class="step-icon">
           <ion-icon name="bulb-outline"></ion-icon>
         </div>
-
-        <h3>
-          Prenez de meilleures décisions
-        </h3>
-
+        <h3>Prenez de meilleures décisions</h3>
         <p>
           Recevez des informations et des
           recommandations adaptées à vos besoins.
         </p>
-
       </div>
 
     </div>
@@ -546,23 +416,20 @@
   <!-- ============================= -->
   <!-- SECTION DIAGNOSTIC -->
   <!-- ============================= -->
+
   <section class="diagnostic-section">
 
     <div class="diagnostic-image">
-
       <img
         src="photos/accueil-hero.jpeg"
         alt="Diagnostic des maladies des plantes"
       />
-
     </div>
 
 
     <div class="diagnostic-content">
 
-      <span class="section-label">
-        INTELLIGENCE ARTIFICIELLE
-      </span>
+      <span class="section-label">INTELLIGENCE ARTIFICIELLE</span>
 
       <h2>
         Une maladie sur votre plante ?
@@ -581,51 +448,26 @@
       <div class="diagnostic-points">
 
         <div class="diagnostic-point">
-
           <ion-icon name="camera-outline"></ion-icon>
-
-          <span>
-            Prenez une photo de votre plante
-          </span>
-
+          <span>Prenez une photo de votre plante</span>
         </div>
 
-
         <div class="diagnostic-point">
-
           <ion-icon name="analytics-outline"></ion-icon>
-
-          <span>
-            Analyse automatique par IA
-          </span>
-
+          <span>Analyse automatique par IA</span>
         </div>
 
-
         <div class="diagnostic-point">
-
           <ion-icon name="shield-checkmark-outline"></ion-icon>
-
-          <span>
-            Résultat avec niveau de confiance
-          </span>
-
+          <span>Résultat avec niveau de confiance</span>
         </div>
 
       </div>
 
 
-      <ion-button
-        class="diagnostic-button"
-        routerLink="/tabs/diagnostic">
-
+      <ion-button class="diagnostic-button" routerLink="/tabs/diagnostic">
         Essayer le diagnostic
-
-        <ion-icon
-          slot="end"
-          name="arrow-forward-outline">
-        </ion-icon>
-
+        <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
       </ion-button>
 
     </div>
@@ -636,13 +478,12 @@
   <!-- ============================= -->
   <!-- ASSISTANT IA -->
   <!-- ============================= -->
+
   <section class="assistant-section">
 
     <div class="assistant-content">
 
-      <span class="section-label">
-        VOTRE ASSISTANT AGRICOLE
-      </span>
+      <span class="section-label">VOTRE ASSISTANT AGRICOLE</span>
 
       <h2>
         Besoin d'un conseil ?
@@ -660,44 +501,25 @@
 
         <div class="question">
           <ion-icon name="help-circle-outline"></ion-icon>
-
-          <span>
-            Comment traiter cette maladie ?
-          </span>
+          <span>Comment traiter cette maladie ?</span>
         </div>
-
 
         <div class="question">
           <ion-icon name="help-circle-outline"></ion-icon>
-
-          <span>
-            Quand dois-je semer le maïs ?
-          </span>
+          <span>Quand dois-je semer le maïs ?</span>
         </div>
-
 
         <div class="question">
           <ion-icon name="help-circle-outline"></ion-icon>
-
-          <span>
-            Comment améliorer ma culture ?
-          </span>
+          <span>Comment améliorer ma culture ?</span>
         </div>
 
       </div>
 
 
-      <ion-button
-        class="assistant-button"
-        routerLink="/tabs/assistant">
-
+      <ion-button class="assistant-button" routerLink="/tabs/assistant">
         Parler à l'assistant
-
-        <ion-icon
-          slot="end"
-          name="chatbubble-ellipses-outline">
-        </ion-icon>
-
+        <ion-icon slot="end" name="chatbubble-ellipses-outline"></ion-icon>
       </ion-button>
 
     </div>
@@ -708,23 +530,14 @@
       <div class="assistant-card">
 
         <div class="assistant-card-header">
-
           <div class="assistant-avatar">
             <ion-icon name="leaf-outline"></ion-icon>
           </div>
-
           <div>
-            <strong>
-              Assistant SunuAgri
-            </strong>
-
-            <small>
-              En ligne
-            </small>
+            <strong>Assistant SunuAgri</strong>
+            <small>En ligne</small>
           </div>
-
         </div>
-
 
         <div class="chat-message bot">
           Bonjour 👋<br>
@@ -732,12 +545,10 @@
           avec votre exploitation ?
         </div>
 
-
         <div class="chat-message user">
           Mes feuilles de tomate
           présentent des taches.
         </div>
-
 
         <div class="chat-message bot">
           Je peux vous aider à identifier
@@ -755,6 +566,7 @@
   <!-- ============================= -->
   <!-- CTA FINAL -->
   <!-- ============================= -->
+
   <section class="final-cta">
 
     <div class="final-cta-content">
@@ -763,9 +575,7 @@
         <ion-icon name="leaf-outline"></ion-icon>
       </div>
 
-      <span class="section-label">
-        SUNUAGRI
-      </span>
+      <span class="section-label">SUNUAGRI</span>
 
       <h2>
         Cultivons mieux,
@@ -780,26 +590,13 @@
 
       <div class="final-actions">
 
-        <ion-button
-          class="cta-final-button"
-          routerLink="/register">
-
+        <ion-button class="cta-final-button" routerLink="/register">
           Créer mon compte
-
-          <ion-icon
-            slot="end"
-            name="arrow-forward-outline">
-          </ion-icon>
-
+          <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
         </ion-button>
 
-        <ion-button
-          fill="clear"
-          class="final-login"
-          routerLink="/login">
-
+        <ion-button fill="clear" class="final-login" routerLink="/login">
           J'ai déjà un compte
-
         </ion-button>
 
       </div>
@@ -812,6 +609,7 @@
   <!-- ============================= -->
   <!-- FOOTER -->
   <!-- ============================= -->
+
   <footer class="accueil-footer">
 
     <div class="footer-brand">
@@ -821,46 +619,26 @@
       </div>
 
       <div>
-
         <h3>SunuAgri</h3>
-
         <p>
           L'agriculture sénégalaise,
           accompagnée par l'intelligence artificielle.
         </p>
-
       </div>
 
     </div>
 
 
     <div class="footer-links">
-
-      <a routerLink="/login">
-        Se connecter
-      </a>
-
-      <a routerLink="/register">
-        Créer un compte
-      </a>
-
-      <a routerLink="/contact">
-        Contact
-      </a>
-
+      <a routerLink="/login">Se connecter</a>
+      <a routerLink="/register">Créer un compte</a>
+      <a routerLink="/contact">Contact</a>
     </div>
 
 
     <div class="footer-bottom">
-
-      <span>
-        © 2026 SunuAgri. Tous droits réservés.
-      </span>
-
-      <span>
-        🌱 Agriculture • Technologie • IA
-      </span>
-
+      <span>© 2026 SunuAgri. Tous droits réservés.</span>
+      <span>🌱 Agriculture • Technologie • IA</span>
     </div>
 
   </footer>

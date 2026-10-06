@@ -44,11 +44,17 @@ public class SecurityConfig {
 
                 .requestMatchers(
                     "/api/auth/login",
-                    "/api/auth/register"
+                    "/api/auth/register",
+                            "/api/ai/**" , // ← AJOUTER ICI (pour test uniquement)
+                                               "/api/diagnostics/analyser"
+
                 ).permitAll()
 
+                .requestMatchers("/api/admin/**")
+                .hasRole("ADMINISTRATEUR")
+
                 .anyRequest().authenticated()
-            )
+                            )
 
             .addFilterBefore(
                 jwtAuthenticationFilter,

@@ -8,16 +8,33 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import com.projet.sunuagri.dto.DiagnosticAnalyseResponseDTO;   // ← AJOUT
+import org.springframework.http.MediaType;                    // ← AJOUT
+import org.springframework.web.multipart.MultipartFile;      // ← AJOUT
+
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/diagnostics")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://localhost:8100")
+@CrossOrigin(origins = "*")
 public class DiagnosticController {
 
     private final DiagnosticService diagnosticService;
+
+    @PostMapping(value = "/analyser", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<DiagnosticAnalyseResponseDTO> analyser(
+            @RequestParam("file") MultipartFile file,
+            @RequestParam("utilisateurId") Long utilisateurId) {
+
+        DiagnosticAnalyseResponseDTO result =
+                diagnosticService.analyser(file, utilisateurId);
+
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(result);
+    }
 
     @PostMapping
     public ResponseEntity<DiagnosticDTO> creer(

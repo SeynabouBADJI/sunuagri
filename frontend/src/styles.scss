@@ -1,4 +1,7 @@
-/* You can add global styles to this file, and also import other style files */
+/* =========================================================
+   SUNUAGRI — STYLES GLOBAUX
+   ========================================================= */
+
 /* Ionic core + structure */
 @import "@ionic/angular/css/core.css";
 @import "@ionic/angular/css/normalize.css";
@@ -11,6 +14,11 @@
 @import "@ionic/angular/css/float-elements.css";
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/flex-utils.css";
+
+
+/* =========================================================
+   VARIABLES
+   ========================================================= */
 
 :root {
   --sa-green: #2F6B4F;
@@ -44,15 +52,58 @@
   --ion-text-color: var(--sa-text);
 }
 
+
+/* =========================================================
+   BASE
+   ========================================================= */
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+app-root {
+  display: block;
+  height: 100%;
+}
+
 ion-content {
   --color: var(--sa-text);
 }
 
-html, body {
+
+/* =========================================================
+   STRUCTURE IONIC — conserver le fonctionnement natif
+   ========================================================= */
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+app-root {
+  display: block;
+  width: 100%;
   height: 100%;
 }
 
-app-root, ion-app {
-  display: block;
+ion-app {
+  width: 100%;
   height: 100%;
+}
+
+ion-content {
+  --color: var(--sa-text);
+} 
+/* =========================================================
+   FIX : page active visible (sans toucher aux pages cachées)
+   ========================================================= */
+
+ion-router-outlet > .ion-page:not(.ion-page-hidden) {
+  opacity: 1 !important;
+  visibility: visible !important;
 }

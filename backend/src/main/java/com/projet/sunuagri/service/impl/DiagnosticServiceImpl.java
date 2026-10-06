@@ -13,6 +13,10 @@ import com.projet.sunuagri.repository.UtilisateurRepository;
 import com.projet.sunuagri.service.DiagnosticService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import com.projet.sunuagri.dto.DiagnosticAnalyseResponseDTO;   // ← AJOUT
+import org.springframework.web.multipart.MultipartFile;        // ← AJOUT
+
+import com.projet.sunuagri.service.AiService;                  // ← AJOUT
 
 import java.time.LocalDate;
 import java.util.List;
@@ -25,6 +29,8 @@ public class DiagnosticServiceImpl implements DiagnosticService {
     private final UtilisateurRepository utilisateurRepository;
     private final PlanteRepository planteRepository;
     private final MaladieRepository maladieRepository;
+    private final AiService aiService;   // ← AJOUT
+
 
     @Override
     public DiagnosticDTO creer(DiagnosticCreateDTO dto) {
@@ -168,6 +174,82 @@ public class DiagnosticServiceImpl implements DiagnosticService {
         }
 
         diagnosticRepository.deleteById(id);
+    }
+
+    @Override
+    public DiagnosticAnalyseResponseDTO analyser(
+            MultipartFile image,
+            Long utilisateurId) {
+
+        // 1. Vérifier l'utilisateur
+        Utilisateur utilisateur = utilisateurRepository
+                .findById(utilisateurId)
+                .orElseThrow(() ->
+                        new RuntimeException("Utilisateur introuvable"));
+
+        // 2. Appeler le service IA (FastAPI)
+        AiPredictionResponseDTO iaResult = aiService.analyserImage(image);
+
+        if (iaResult == null || iaResult.getMaladie() == null) {
+                throw new RuntimeException("Réponse IA invalide");
+        }
+
+        String codeMaladie = iaResult.getMaladie().getCode();
+        String nomFr = iaResult.getMaladie().getNomFr();
+        String culture = iaResult.getMaladie().getCulture();
+        Double confiance = iaResult.getConfiance();
+
+        // 3. Chercher la maladie en BDD (par nom ou code)
+        //    ⚠️ La BDD doit contenir les 12 maladies avec les mêmes noms
+        Maladie maladie = maladieRepository
+                .findByNom(nomFr)
+                .orElse(null);   // null si pas trouvée → on enregistre quand même
+
+        // 4. Chercher la plante correspondante
+        Plante plante = planteRepository
+                .findByNomCommun(culture)
+                .orElse(null);
+
+        // 5. Enregistrer le diagnostic
+        Diagnostic diagnostic = new Diagnostic();
+        diagnostic.setDateDiagnostic(LocalDate.now());
+        diagnostic.setImage(image.getOriginalFilename());
+         diagnostic.setConfiance(confiance != null ? confiance / 100.0 : null);
+        diagnostic.setUtilisateur(utilisateur);
+        diagnostic.setPlante(plante);
+        diagnostic.setMaladie(maladie);
+
+        Diagnostic saved = diagnosticRepository.save(diagnostic);
+
+        // 6. Construire la réponse complète
+        DiagnosticAnalyseResponseDTO response = new DiagnosticAnalyseResponseDTO();
+
+        response.setDiagnosticId(saved.getId());
+        response.setDateDiagnostic(saved.getDateDiagnostic());
+        response.setMaladieCode(codeMaladie);
+        response.setMaladieNom(nomFr);
+        response.setCulture(culture);
+        response.setSaine(iaResult.getMaladie().isSaine());
+        response.setConfiance(confiance);
+
+        if (maladie != null) {
+            response.setMaladieId(maladie.getId());
+            response.setSymptomes(maladie.getSymptomes());
+            response.setTraitement(maladie.getTraitement());
+        }
+        if (iaResult.getTop3() != null) {
+            List<DiagnosticAnalyseResponseDTO.Top3Item> top3 =
+                    iaResult.getTop3().stream()
+                            .map(t -> new DiagnosticAnalyseResponseDTO.Top3Item(
+                                    t.getCode(),
+                                    t.getNomFr(),
+                                    t.getConfiance()
+                            ))
+                            .collect(Collectors.toList());
+            response.setTop3(top3);
+        }
+
+        return response;
     }
 
     private DiagnosticDTO convertirEnDTO(

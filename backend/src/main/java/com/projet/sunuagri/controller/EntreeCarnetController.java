@@ -14,7 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/entrees-carnet")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://localhost:8100")
+@CrossOrigin(origins = "*")
 public class EntreeCarnetController {
 
     private final EntreeCarnetService entreeCarnetService;

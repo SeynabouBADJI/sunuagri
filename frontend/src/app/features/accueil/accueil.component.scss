@@ -448,6 +448,129 @@
 
 
 /* =========================================================
+   MÉTÉO — CHARGEMENT
+   ========================================================= */
+
+.weather-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 12px;
+
+  min-height: 170px;
+
+  text-align: center;
+}
+
+.weather-loading ion-spinner {
+  --color: #a8d86e;
+
+  width: 28px;
+  height: 28px;
+}
+
+.weather-loading span {
+  font-size: 11.5px;
+  line-height: 1.4;
+
+  color: rgba(255, 255, 255, 0.72);
+}
+
+
+/* =========================================================
+   MÉTÉO — ERREUR
+   ========================================================= */
+
+.weather-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  min-height: 170px;
+
+  text-align: center;
+}
+
+.weather-error-icon {
+  width: 44px;
+  height: 44px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 13px;
+
+  background: rgba(255, 180, 80, 0.15);
+
+  border: 1px solid rgba(255, 180, 80, 0.25);
+
+  margin-bottom: 4px;
+}
+
+.weather-error-icon ion-icon {
+  font-size: 22px;
+
+  color: #ffb450;
+}
+
+.weather-error strong {
+  font-size: 13px;
+  font-weight: 700;
+
+  color: white;
+}
+
+.weather-error p {
+  margin: 0;
+  max-width: 200px;
+
+  font-size: 11px;
+  line-height: 1.45;
+
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.weather-error .weather-retry {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+
+  margin-top: 8px;
+  padding: 7px 13px;
+
+  border: 1px solid rgba(168, 216, 110, 0.35);
+  border-radius: 999px;
+
+  background: rgba(168, 216, 110, 0.15);
+
+  color: #d5eeaa;
+
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.weather-error .weather-retry:hover {
+  background: rgba(168, 216, 110, 0.25);
+  border-color: rgba(168, 216, 110, 0.5);
+}
+
+.weather-error .weather-retry ion-icon {
+  font-size: 13px;
+}
+
+
+/* =========================================================
    MÉTÉO - HAUT
    ========================================================= */
 
@@ -648,15 +771,9 @@
   white-space: nowrap;
 }
 
-
-/* Suivi agricole */
-
 .parcel-float {
   right: 24%;
 }
-
-
-/* Assistant IA */
 
 .ai-float {
   right: 8%;
@@ -954,9 +1071,6 @@
   padding: 10px 25px;
 }
 
-
-/* Numéro */
-
 .step-number {
   position: absolute;
 
@@ -976,9 +1090,6 @@
 
   z-index: 0;
 }
-
-
-/* Icône */
 
 .step-icon {
   position: relative;
@@ -1053,9 +1164,6 @@
   align-items: center;
 }
 
-
-/* Image */
-
 .diagnostic-image {
   height: 480px;
 
@@ -1075,9 +1183,6 @@
 
   object-fit: cover;
 }
-
-
-/* Texte */
 
 .diagnostic-content .section-label {
   margin-bottom: 12px;
@@ -1112,9 +1217,6 @@
 
   line-height: 1.7;
 }
-
-
-/* Points */
 
 .diagnostic-points {
   display: flex;
@@ -1157,9 +1259,6 @@
   color: var(--sa-green-dark);
 }
 
-
-/* Bouton */
-
 .diagnostic-button {
   --background: var(--sa-green);
 
@@ -1198,9 +1297,6 @@
   overflow: hidden;
 }
 
-
-/* Texte */
-
 .assistant-content {
   max-width: 560px;
 }
@@ -1238,9 +1334,6 @@
 
   line-height: 1.7;
 }
-
-
-/* Questions */
 
 .assistant-examples {
   display: flex;
@@ -1284,9 +1377,6 @@
   flex-shrink: 0;
 }
 
-
-/* Bouton */
-
 .assistant-button {
   --background: white;
 
@@ -1300,9 +1390,6 @@
 
   text-transform: none;
 }
-
-
-/* Visualisation */
 
 .assistant-visual {
   display: flex;
@@ -1328,9 +1415,6 @@
 
   transform: rotate(1deg);
 }
-
-
-/* Header chat */
 
 .assistant-card-header {
   display: flex;
@@ -1384,9 +1468,6 @@
 
   font-size: 11px;
 }
-
-
-/* Messages */
 
 .chat-message {
   width: fit-content;
@@ -1493,9 +1574,6 @@
   line-height: 1.6;
 }
 
-
-/* Actions */
-
 .final-actions {
   display: flex;
 
@@ -1546,9 +1624,6 @@
   color: white;
 }
 
-
-/* Marque */
-
 .footer-brand {
   width: min(1150px, 100%);
 
@@ -1591,9 +1666,6 @@
   line-height: 1.5;
 }
 
-
-/* Liens */
-
 .footer-links {
   width: min(1150px, 100%);
 
@@ -1622,9 +1694,6 @@
   color: white;
 }
 
-
-/* Copyright */
-
 .footer-bottom {
   width: min(1150px, 100%);
 
@@ -1647,13 +1716,10 @@
 
 
 /* =========================================================
-   TABLETTE LARGE
-   1100px
+   TABLETTE LARGE — 1100px
    ========================================================= */
 
 @media (max-width: 1100px) {
-
-  /* Hero */
 
   .hero-section {
     padding-left: 6%;
@@ -1667,7 +1733,6 @@
 
   .hero-weather {
     right: 5%;
-
     width: 260px;
   }
 
@@ -1679,13 +1744,9 @@
     right: 5%;
   }
 
-  /* Diagnostic */
-
   .diagnostic-section {
     gap: 40px;
   }
-
-  /* Assistant */
 
   .assistant-section {
     gap: 45px;
@@ -1697,16 +1758,12 @@
 
 
 /* =========================================================
-   TABLETTE
-   900px
+   TABLETTE — 900px
    ========================================================= */
 
 @media (max-width: 900px) {
 
-  /* =========================
-     HERO
-     ========================= */
-
+  /* HERO */
   .hero-section {
     min-height: 780px;
 
@@ -1727,7 +1784,6 @@
 
   .hero-content {
     width: 100%;
-
     max-width: 650px;
   }
 
@@ -1737,15 +1793,10 @@
 
   .hero-content p {
     max-width: 600px;
-
     font-size: 16px;
   }
 
-
-  /* =========================
-     MÉTÉO
-     ========================= */
-
+  /* MÉTÉO */
   .hero-weather {
     top: auto;
 
@@ -1757,11 +1808,7 @@
     transform: none;
   }
 
-
-  /* =========================
-     PETITES CARTES
-     ========================= */
-
+  /* PETITES CARTES */
   .hero-float {
     bottom: 55px;
   }
@@ -1775,23 +1822,14 @@
     right: 6%;
   }
 
-
-  /* =========================
-     FEATURES
-     ========================= */
-
+  /* FEATURES */
   .features-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 
-
-  /* =========================
-     DIAGNOSTIC
-     ========================= */
-
+  /* DIAGNOSTIC */
   .diagnostic-section {
     grid-template-columns: 1fr;
-
     gap: 40px;
   }
 
@@ -1799,16 +1837,10 @@
     height: 380px;
   }
 
-
-  /* =========================
-     ASSISTANT
-     ========================= */
-
+  /* ASSISTANT */
   .assistant-section {
     grid-template-columns: 1fr;
-
     gap: 45px;
-
     padding: 75px 6%;
   }
 
@@ -1823,19 +1855,14 @@
 
 
 /* =========================================================
-   MOBILE
-   600px
+   MOBILE — 600px
    ========================================================= */
 
 @media (max-width: 600px) {
 
-  /* =======================================================
-     HEADER
-     ======================================================= */
-
+  /* HEADER */
   .accueil-header {
     min-height: 64px;
-
     padding: 10px 18px;
   }
 
@@ -1850,7 +1877,6 @@
   .brand-mark {
     width: 38px;
     height: 38px;
-
     border-radius: 11px;
   }
 
@@ -1864,7 +1890,6 @@
 
   .header-register {
     height: 38px;
-
     font-size: 11px;
   }
 
@@ -1883,22 +1908,15 @@
 
   .logout-button {
     height: 38px;
-
     margin-left: 0;
-
     font-size: 11px;
   }
 
 
-  /* =======================================================
-     HERO
-     ======================================================= */
-
+  /* HERO */
   .hero-section {
     min-height: 900px;
-
     padding: 50px 20px 215px;
-
     align-items: flex-start;
   }
 
@@ -1914,17 +1932,13 @@
 
   .hero-content {
     width: 100%;
-
     max-width: none;
   }
 
   .hero-badge {
     max-width: 100%;
-
     padding: 7px 11px;
-
     margin-bottom: 18px;
-
     font-size: 11px;
   }
 
@@ -1934,15 +1948,12 @@
 
   .hero-content h1 {
     margin-bottom: 18px;
-
     font-size: 36px;
-
     line-height: 1.08;
   }
 
   .hero-content p {
     font-size: 14px;
-
     line-height: 1.6;
   }
 
@@ -1952,40 +1963,32 @@
 
   .hero-primary {
     height: 48px;
-
     font-size: 11px;
   }
 
   .hero-info {
     gap: 10px;
-
     margin-top: 20px;
-
     font-size: 11px;
   }
 
 
-  /* =======================================================
-     MÉTÉO MOBILE
-     ======================================================= */
-
+  /* MÉTÉO MOBILE */
   .hero-weather {
     top: auto;
-
     right: 20px;
     left: 20px;
-
     bottom: 140px;
-
     width: auto;
-
     min-height: auto;
-
     padding: 16px;
-
     border-radius: 15px;
-
     transform: none;
+  }
+
+  .weather-loading,
+  .weather-error {
+    min-height: 150px;
   }
 
   .weather-top {
@@ -2011,57 +2014,43 @@
 
   .weather-location {
     margin-top: 13px;
-
     font-size: 11px;
   }
 
   .weather-details {
     margin-top: 13px;
-
     padding-top: 12px;
   }
 
   .weather-message {
     margin-top: 12px;
-
     padding-top: 10px;
-
     font-size: 9px;
   }
 
 
-  /* =======================================================
-     PETITES CARTES MOBILE
-     ======================================================= */
-
+  /* PETITES CARTES MOBILE */
   .hero-float {
     bottom: 55px;
-
     min-height: 52px;
-
     padding: 6px 10px 6px 6px;
-
     border-radius: 12px;
-
     gap: 7px;
   }
 
   .parcel-float {
     left: 20px;
-
     right: auto;
   }
 
   .ai-float {
     right: 20px;
-
     left: auto;
   }
 
   .float-icon {
     width: 34px;
     height: 34px;
-
     border-radius: 9px;
   }
 
@@ -2078,10 +2067,7 @@
   }
 
 
-  /* =======================================================
-     SECTIONS
-     ======================================================= */
-
+  /* SECTIONS */
   .features-section,
   .how-section {
     padding: 65px 18px;
@@ -2096,13 +2082,9 @@
   }
 
 
-  /* =======================================================
-     FEATURES
-     ======================================================= */
-
+  /* FEATURES */
   .features-grid {
     grid-template-columns: 1fr;
-
     gap: 13px;
   }
 
@@ -2115,13 +2097,9 @@
   }
 
 
-  /* =======================================================
-     ÉTAPES
-     ======================================================= */
-
+  /* ÉTAPES */
   .steps {
     grid-template-columns: 1fr;
-
     gap: 35px;
   }
 
@@ -2134,19 +2112,14 @@
   }
 
 
-  /* =======================================================
-     DIAGNOSTIC
-     ======================================================= */
-
+  /* DIAGNOSTIC */
   .diagnostic-section {
     width: 88%;
-
     margin: 65px auto;
   }
 
   .diagnostic-image {
     height: 300px;
-
     border-radius: 20px;
   }
 
@@ -2155,10 +2128,7 @@
   }
 
 
-  /* =======================================================
-     ASSISTANT
-     ======================================================= */
-
+  /* ASSISTANT */
   .assistant-section {
     padding: 65px 18px;
   }
@@ -2169,19 +2139,13 @@
 
   .assistant-card {
     width: 100%;
-
     transform: none;
-
     padding: 17px;
-
     border-radius: 19px;
   }
 
 
-  /* =======================================================
-     CTA
-     ======================================================= */
-
+  /* CTA */
   .final-cta {
     padding: 70px 18px;
   }
@@ -2200,13 +2164,9 @@
   }
 
 
-  /* =======================================================
-     FOOTER
-     ======================================================= */
-
+  /* FOOTER */
   .accueil-footer {
     padding-left: 18px;
-
     padding-right: 18px;
   }
 
@@ -2216,26 +2176,21 @@
 
   .footer-links {
     justify-content: flex-start;
-
     gap: 15px;
   }
 
   .footer-bottom {
     flex-direction: column;
-
     gap: 7px;
   }
 }
 
 
 /* =========================================================
-   TRÈS PETITS ÉCRANS
-   380px
+   TRÈS PETITS ÉCRANS — 380px
    ========================================================= */
 
 @media (max-width: 380px) {
-
-  /* Header */
 
   .accueil-header {
     padding-left: 12px;
@@ -2249,16 +2204,11 @@
   .header-register {
     padding-left: 8px;
     padding-right: 8px;
-
     font-size: 10px;
   }
 
-
-  /* Hero */
-
   .hero-section {
     min-height: 900px;
-
     padding-left: 16px;
     padding-right: 16px;
   }
@@ -2275,20 +2225,12 @@
     font-size: 10px;
   }
 
-
-  /* Météo */
-
   .hero-weather {
     right: 16px;
     left: 16px;
-
     bottom: 140px;
-
     padding: 14px;
   }
-
-
-  /* Petites cartes */
 
   .hero-float {
     bottom: 55px;
