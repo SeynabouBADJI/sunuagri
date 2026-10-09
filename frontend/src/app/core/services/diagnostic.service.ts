@@ -1,33 +1,56 @@
 import { Injectable } from '@angular/core';
-import { Observable, of, delay } from 'rxjs';
-import { MockDataService } from './mock-data.service';
-import { Diagnostic } from '../models/diagnostic.model';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { DiagnosticAnalyseResponse } from '../models/diagnostic-analyse.model';
 
 @Injectable({ providedIn: 'root' })
 export class DiagnosticService {
-  constructor(private mock: MockDataService) {}
 
-  getHistorique(): Observable<Diagnostic[]> {
-    return of(this.mock.diagnostics).pipe(delay(300));
+  private apiUrl = 'http://localhost:8080/api';   // ⚠️ Voir note ci-dessous
+  // Sur émulateur Android : 10.0.2.2 = localhost du PC
+  // Sur téléphone physique : mets l'IP de ton PC (ex: 192.168.1.15)
+
+  constructor(private http: HttpClient) {}
+
+  /**
+   * Envoie une image au backend pour analyse IA.
+   */
+  analyserImage(
+    imageDataUrl: string,
+    utilisateurId: number
+  ): Observable<DiagnosticAnalyseResponse> {
+
+    const blob = this.dataUrlToBlob(imageDataUrl);
+    const formData = new FormData();
+    formData.append('file', blob, 'photo.jpg');
+    formData.append('utilisateurId', utilisateurId.toString());
+
+    return this.http.post<DiagnosticAnalyseResponse>(
+      `${this.apiUrl}/diagnostics/analyser`,
+      formData
+    );
   }
 
-  analyserImage(imageDataUrl: string, planteId: number): Observable<Diagnostic> {
-    const maladie = this.mock.maladies[Math.floor(Math.random() * this.mock.maladies.length)];
-    const plante = this.mock.plantes.find(p => p.id === planteId);
+  /**
+   * Récupère l'historique des diagnostics d'un utilisateur.
+   */
+  getHistoriqueUtilisateur(utilisateurId: number): Observable<any[]> {
+    return this.http.get<any[]>(
+      `${this.apiUrl}/diagnostics/utilisateur/${utilisateurId}`
+    );
+  }
 
-    const resultat: Diagnostic = {
-      id: this.mock.diagnostics.length + 1,
-      dateDiagnostic: new Date().toISOString(),
-      image: imageDataUrl,
-      confiance: Math.round((0.7 + Math.random() * 0.29) * 100) / 100,
-      utilisateurId: this.mock.utilisateurCourant.id,
-      planteId,
-      maladieId: maladie.id,
-      maladieNom: maladie.nom,
-      planteNom: plante?.nomCommun,
-    };
-
-    this.mock.diagnostics.unshift(resultat);
-    return of(resultat).pipe(delay(1500));
+  /**
+   * Convertit un dataUrl (base64) en Blob.
+   */
+  private dataUrlToBlob(dataUrl: string): Blob {
+    const [header, base64] = dataUrl.split(',');
+    const mime = header.match(/:(.*?);/)?.[1] || 'image/jpeg';
+    const binary = atob(base64);
+    const array = new Uint8Array(binary.length);
+    for (let i = 0; i < binary.length; i++) {
+      array[i] = binary.charCodeAt(i);
+    }
+    return new Blob([array], { type: mime });
   }
 }

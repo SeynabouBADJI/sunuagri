@@ -2,35 +2,39 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
-import { DiagnosticService } from '../../core/services/diagnostic.service';
-import { MockDataService } from '../../core/services/mock-data.service';
-import { Diagnostic } from '../../core/models/diagnostic.model';
-import { Maladie } from '../../core/models/maladie.model';
 import { RouterLink } from '@angular/router';
+
+import { DiagnosticService } from '../../core/services/diagnostic.service';
+import { AuthService } from '../../core/services/auth.service';
+import { DiagnosticAnalyseResponse } from '../../core/models/diagnostic-analyse.model';
 
 @Component({
   selector: 'app-diagnostic',
   standalone: true,
-  imports: [CommonModule, IonicModule,RouterLink],
+  imports: [CommonModule, IonicModule, RouterLink],
   templateUrl: './diagnostic.component.html',
   styleUrls: ['./diagnostic.component.scss'],
 })
 export class DiagnosticComponent implements OnInit {
+
   selectedImage: string | null = null;
   selectedFileName = '';
   isAnalyzing = false;
-  diagnosticResult: Diagnostic | null = null;
-  recentDiagnostics: Diagnostic[] = [];
+  diagnosticResult: DiagnosticAnalyseResponse | null = null;
+  recentDiagnostics: DiagnosticAnalyseResponse[] = [];
+  erreur = '';
 
-  private planteParDefautId: number;
-
-  constructor(private diagnosticService: DiagnosticService, private mock: MockDataService) {
-    this.planteParDefautId = this.mock.plantes[0].id;
-  }
+  constructor(
+    private diagnosticService: DiagnosticService,
+    private auth: AuthService
+  ) {}
 
   ngOnInit() {
-    this.diagnosticService.getHistorique().subscribe(h => (this.recentDiagnostics = h.slice(0, 3)));
+    // TODO : charger l'historique depuis le backend
+    this.recentDiagnostics = [];
   }
+
+  // ==================== CAMERA ====================
 
   async takePhoto() {
     await this.ouvrirCamera(CameraSource.Camera);
@@ -42,12 +46,17 @@ export class DiagnosticComponent implements OnInit {
 
   private async ouvrirCamera(source: CameraSource) {
     try {
-      const photo = await Camera.getPhoto({ quality: 80, resultType: CameraResultType.DataUrl, source });
+      const photo = await Camera.getPhoto({
+        quality: 80,
+        resultType: CameraResultType.DataUrl,
+        source
+      });
       this.selectedImage = photo.dataUrl ?? null;
       this.selectedFileName = `photo-${Date.now()}.jpg`;
       this.diagnosticResult = null;
+      this.erreur = '';
     } catch (e) {
-      console.warn('Camera indisponible, utilisation d\'une image de demonstration', e);
+      console.warn('Camera indisponible', e);
       this.selectedImage = 'assets/mock/feuille-demo.jpg';
       this.selectedFileName = 'feuille-demo.jpg';
       this.diagnosticResult = null;
@@ -58,15 +67,32 @@ export class DiagnosticComponent implements OnInit {
     this.selectedImage = null;
     this.selectedFileName = '';
     this.diagnosticResult = null;
+    this.erreur = '';
   }
+
+  // ==================== ANALYSE ====================
 
   analyzeImage() {
     if (!this.selectedImage) return;
+
+    const utilisateur = this.auth.utilisateurCourant();
+    const utilisateurId = utilisateur?.id ?? 1;
+
     this.isAnalyzing = true;
-    this.diagnosticService.analyserImage(this.selectedImage, this.planteParDefautId).subscribe(res => {
-      this.diagnosticResult = res;
-      this.isAnalyzing = false;
-      this.recentDiagnostics = [res, ...this.recentDiagnostics].slice(0, 3);
+    this.erreur = '';
+    this.diagnosticResult = null;
+
+    this.diagnosticService.analyserImage(this.selectedImage, utilisateurId).subscribe({
+      next: (res) => {
+        this.diagnosticResult = res;
+        this.isAnalyzing = false;
+        this.recentDiagnostics = [res, ...this.recentDiagnostics].slice(0, 3);
+      },
+      error: (err) => {
+        console.error('Erreur analyse IA', err);
+        this.isAnalyzing = false;
+        this.erreur = 'Impossible d\'analyser l\'image. Vérifiez votre connexion au serveur.';
+      }
     });
   }
 
@@ -74,10 +100,6 @@ export class DiagnosticComponent implements OnInit {
     this.selectedImage = null;
     this.selectedFileName = '';
     this.diagnosticResult = null;
-  }
-
-  getMaladie(maladieId: number | null): Maladie | undefined {
-    if (maladieId === null) return undefined;
-    return this.mock.maladies.find(m => m.id === maladieId);
+    this.erreur = '';
   }
 }

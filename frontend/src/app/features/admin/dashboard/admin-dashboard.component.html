@@ -1,0 +1,335 @@
+<div class="admin-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <div class="logo">
+      <div class="logo-icon">🌱</div>
+      <div>
+        <h2>SunuAgri</h2>
+        <span>Administration</span>
+      </div>
+    </div>
+
+    <nav class="menu">
+
+      <a class="menu-item active">
+        <span>📊</span>
+        <span>Tableau de bord</span>
+      </a>
+
+      <a
+  class="menu-item"
+  routerLink="/admin/agriculteurs"
+  routerLinkActive="active"
+>
+  <span>👨‍🌾</span>
+  <span>Agriculteurs</span>
+</a>
+      <a class="menu-item">
+        <span>🌱</span>
+        <span>Plantes</span>
+      </a>
+
+      <a class="menu-item">
+        <span>📅</span>
+        <span>Calendriers culturaux</span>
+      </a>
+
+      <a class="menu-item">
+        <span>📍</span>
+        <span>Parcelles</span>
+      </a>
+
+      <a class="menu-item">
+        <span>⚠️</span>
+        <span>Alertes</span>
+      </a>
+
+    </nav>
+
+    <div class="sidebar-bottom">
+
+      <a class="menu-item">
+        <span>⚙️</span>
+        <span>Paramètres</span>
+      </a>
+
+      <button class="logout-btn" (click)="deconnexion()">
+        <span>↪</span>
+        <span>Déconnexion</span>
+      </button>
+
+    </div>
+
+  </aside>
+
+
+  <!-- CONTENU PRINCIPAL -->
+  <main class="main-content">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+
+      <div>
+        <h1>Tableau de bord</h1>
+        <p>Vue globale de la plateforme SunuAgri</p>
+      </div>
+
+      <div class="admin-profile">
+
+        <div class="notification">
+          🔔
+          <span class="notification-dot"></span>
+        </div>
+
+        <div class="avatar">
+          A
+        </div>
+
+        <div class="admin-info">
+          <strong>Admin SunuAgri</strong>
+          <span>Administrateur</span>
+        </div>
+
+      </div>
+
+    </header>
+
+
+    <!-- CONTENU -->
+    <section class="dashboard">
+
+      <!-- BIENVENUE -->
+      <div class="welcome">
+
+        <div>
+          <h2>Bienvenue dans l'espace administrateur 👋</h2>
+          <p>
+            Gérez les utilisateurs, les données agricoles et les ressources
+            de la plateforme.
+          </p>
+        </div>
+
+        <div class="welcome-icon">
+          🌾
+        </div>
+
+      </div>
+
+
+      <!-- STATISTIQUES -->
+      <div class="section-title">
+        <div>
+          <h2>Statistiques générales</h2>
+          <p>État actuel de la plateforme</p>
+        </div>
+      </div>
+
+
+      
+        <div class="stats-grid">
+
+        <div class="stat-card">
+            <div class="stat-icon users">👥</div>
+            <div class="stat-content">
+            <span>Total utilisateurs</span>
+            <strong>
+                {{ chargement ? '...' : (statistiques?.totalUtilisateurs ?? 0) }}
+            </strong>
+            <small>Comptes enregistrés</small>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon farmers">👨‍🌾</div>
+            <div class="stat-content">
+            <span>Agriculteurs</span>
+            <strong>
+                {{ chargement ? '...' : (statistiques?.totalAgriculteurs ?? 0) }}
+            </strong>
+            <small>Producteurs inscrits</small>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon plants">🌱</div>
+            <div class="stat-content">
+            <span>Plantes</span>
+            <strong>
+                {{ chargement ? '...' : (statistiques?.totalPlantes ?? 0) }}
+            </strong>
+            <small>Plantes référencées</small>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon calendar">📅</div>
+            <div class="stat-content">
+            <span>Calendriers</span>
+            <strong>
+                {{ chargement ? '...' : (statistiques?.totalCalendriers ?? 0) }}
+            </strong>
+            <small>Calendriers culturaux</small>
+            </div>
+        </div>
+
+        </div>
+
+        <div *ngIf="erreur" class="error-message">
+        {{ erreur }}
+        <button type="button" (click)="chargerStatistiques()">
+            Réessayer
+        </button>
+        </div>
+
+        <!-- PLANTES -->
+        <div class="stat-card">
+
+          <div class="stat-icon plants">
+            🌱
+          </div>
+
+          <div class="stat-content">
+            <span>Plantes</span>
+            <strong>9</strong>
+            <small>Plantes référencées</small>
+          </div>
+
+        </div>
+
+
+        <!-- CALENDRIERS -->
+        <div class="stat-card">
+
+          <div class="stat-icon calendar">
+            📅
+          </div>
+
+          <div class="stat-content">
+            <span>Calendriers</span>
+            <strong>14</strong>
+            <small>Calendriers culturaux</small>
+          </div>
+
+        </div>
+
+    
+
+
+      <!-- DEUX COLONNES -->
+      <div class="dashboard-grid">
+
+
+        <!-- ACTIVITÉ -->
+        <div class="panel">
+
+          <div class="panel-header">
+
+            <div>
+              <h3>Activité de la plateforme</h3>
+              <p>Vue générale des utilisateurs</p>
+            </div>
+
+            <select>
+              <option>Cette année</option>
+              <option>Cette semaine</option>
+              <option>Ce mois</option>
+            </select>
+
+          </div>
+
+          <div class="chart-placeholder">
+
+            <div class="chart-bars">
+
+              <div class="bar" style="height: 45%">
+                <span>Jan</span>
+              </div>
+
+              <div class="bar" style="height: 60%">
+                <span>Fév</span>
+              </div>
+
+              <div class="bar" style="height: 40%">
+                <span>Mar</span>
+              </div>
+
+              <div class="bar" style="height: 75%">
+                <span>Avr</span>
+              </div>
+
+              <div class="bar" style="height: 65%">
+                <span>Mai</span>
+              </div>
+
+              <div class="bar" style="height: 85%">
+                <span>Juin</span>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- INFORMATIONS -->
+        <div class="panel">
+
+          <div class="panel-header">
+            <div>
+              <h3>Résumé</h3>
+              <p>Informations importantes</p>
+            </div>
+          </div>
+
+
+          <div class="summary-item">
+            <div class="summary-icon">👨‍🌾</div>
+
+            <div>
+              <strong>23 agriculteurs</strong>
+              <span>utilisent actuellement SunuAgri</span>
+            </div>
+          </div>
+
+
+          <div class="summary-item">
+            <div class="summary-icon">🌱</div>
+
+            <div>
+              <strong>9 plantes</strong>
+              <span>sont disponibles dans la base</span>
+            </div>
+          </div>
+
+
+          <div class="summary-item">
+            <div class="summary-icon">📅</div>
+
+            <div>
+              <strong>14 calendriers</strong>
+              <span>sont disponibles</span>
+            </div>
+          </div>
+
+
+          <div class="summary-item">
+            <div class="summary-icon">🤖</div>
+
+            <div>
+              <strong>Assistant IA</strong>
+              <span>service disponible</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+</div>

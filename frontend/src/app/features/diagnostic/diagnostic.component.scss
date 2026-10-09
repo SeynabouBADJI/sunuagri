@@ -13,73 +13,42 @@
    ========================================================= */
 
 .diagnostic-header {
-
   width: 100%;
-
   min-height: 82px;
-
   padding: 14px 6%;
 
   display: flex;
-
   align-items: center;
-
   justify-content: space-between;
 
   background: #ffffff;
-
   border-bottom: 1px solid var(--sa-border);
-
   box-sizing: border-box;
 }
 
-
-/* =========================================================
-   PARTIE GAUCHE
-   ========================================================= */
-
 .header-left {
-
   display: flex;
-
   align-items: center;
-
   gap: 16px;
-
   min-width: 0;
 }
 
-
-/* =========================================================
-   BOUTON ACCUEIL
-   ========================================================= */
-
 .home-button {
-
   height: 42px;
-
   display: inline-flex;
-
   align-items: center;
-
   justify-content: center;
-
   gap: 8px;
-
   padding: 0 14px;
 
   border: 1px solid rgba(47, 107, 79, 0.18);
-
   border-radius: 11px;
 
   background: var(--sa-green-light);
-
   color: var(--sa-green-dark);
 
   font-family: inherit;
-
   font-size: 12px;
-
   font-weight: 700;
 
   cursor: pointer;
@@ -90,349 +59,137 @@
     border-color 0.2s ease;
 }
 
-
 .home-button ion-icon {
-
   font-size: 18px;
-
   color: var(--sa-green-dark);
 }
 
-
 .home-button:hover {
-
   background: rgba(47, 107, 79, 0.16);
-
   border-color: rgba(47, 107, 79, 0.3);
-
   transform: translateY(-1px);
 }
 
-
 .home-button:active {
-
   transform: translateY(0);
 }
 
-
-/* =========================================================
-   SÉPARATEUR
-   ========================================================= */
-
 .header-divider {
-
   width: 1px;
-
   height: 38px;
-
   background: var(--sa-border);
 }
 
-
-/* =========================================================
-   TITRE
-   ========================================================= */
-
 .header-title {
-
   display: flex;
-
   flex-direction: column;
-
   justify-content: center;
 }
 
-
 .header-label {
-
   margin-bottom: 3px;
-
   color: var(--sa-green-dark);
-
   font-size: 9px;
-
   font-weight: 800;
-
   letter-spacing: 0.14em;
 }
 
-
 .header-title h1 {
-
   margin: 0;
-
   color: var(--sa-green-dark);
-
   font-family: var(--sa-font-display);
-
   font-size: 24px;
-
   line-height: 1.1;
-
   font-weight: 700;
-
   letter-spacing: -0.025em;
 }
 
-
-/* =========================================================
-   PARTIE DROITE
-   ========================================================= */
-
 .header-page-icon {
-
   display: flex;
-
   align-items: center;
-
   gap: 10px;
-
   padding: 7px 11px 7px 7px;
-
   border: 1px solid var(--sa-border);
-
   border-radius: 14px;
-
   background: #fafcf9;
 }
 
-
-/* =========================================================
-   CERCLE DE L'ICÔNE
-   ========================================================= */
-
 .page-icon-circle {
-
   width: 38px;
-
   height: 38px;
-
   display: flex;
-
   align-items: center;
-
   justify-content: center;
-
   flex-shrink: 0;
-
   border-radius: 11px;
-
   background: var(--sa-green-light);
 }
 
-
 .page-icon-circle ion-icon {
-
   font-size: 21px;
-
   color: var(--sa-green-dark);
 }
 
-
-/* =========================================================
-   TEXTE À DROITE
-   ========================================================= */
-
 .page-icon-text {
-
   display: flex;
-
   flex-direction: column;
-
   line-height: 1.15;
 }
 
-
 .page-icon-text span {
-
   font-size: 8px;
-
   font-weight: 700;
-
   letter-spacing: 0.12em;
-
   color: var(--sa-text-muted);
 }
 
-
 .page-icon-text strong {
-
   margin-top: 3px;
-
   font-size: 10px;
-
   font-weight: 800;
-
   letter-spacing: 0.04em;
-
   color: var(--sa-green-dark);
 }
 
 
-/* =========================================================
-   MOBILE
-   ========================================================= */
-
-@media (max-width: 600px) {
-
-  .diagnostic-header {
-
-    min-height: 70px;
-
-    padding: 10px 18px;
-  }
-
-
-  .header-left {
-
-    gap: 10px;
-  }
-
-
-  .home-button {
-
-    width: 42px;
-
-    height: 42px;
-
-    padding: 0;
-
-    border-radius: 11px;
-  }
-
-
-  .home-button span {
-
-    display: none;
-  }
-
-
-  .header-divider {
-
-    height: 32px;
-  }
-
-
-  .header-title h1 {
-
-    font-size: 19px;
-  }
-
-
-  .header-label {
-
-    font-size: 8px;
-  }
-
-
-  .header-page-icon {
-
-    padding: 5px;
-  }
-
-
-  .page-icon-circle {
-
-    width: 36px;
-
-    height: 36px;
-  }
-
-
-  .page-icon-text {
-
-    display: none;
-  }
-
-}
-
-
-/* =========================================================
-   PETITS ÉCRANS
-   ========================================================= */
-
-@media (max-width: 480px) {
-
-  .diagnostic-header {
-
-    padding: 10px 14px;
-  }
-
-
-  .header-title h1 {
-
-    font-size: 18px;
-  }
-
-
-  .header-divider {
-
-    display: none;
-  }
-
-
-  .page-icon-circle {
-
-    width: 36px;
-
-    height: 36px;
-  }
-
-}
 /* =========================================================
    INTRO
    ========================================================= */
 
 .diagnostic-intro {
   width: min(850px, 88%);
-
   margin: 55px auto 30px;
-
   text-align: center;
 }
 
 .section-label {
   display: inline-block;
-
   margin-bottom: 10px;
-
   color: var(--sa-green);
-
   font-size: 10px;
   font-weight: 800;
-
   letter-spacing: 0.12em;
 }
 
 .diagnostic-intro h2 {
   margin: 0 0 14px;
-
   font-family: var(--sa-font-display);
-
   font-size: clamp(29px, 5vw, 45px);
-
   line-height: 1.12;
-
   letter-spacing: -0.04em;
-
   color: var(--sa-text);
 }
 
 .diagnostic-intro h2 span {
   display: block;
-
   color: var(--sa-green);
 }
 
 .diagnostic-intro p {
   max-width: 620px;
-
   margin: auto;
-
   color: var(--sa-text-muted);
-
   font-size: 14px;
-
   line-height: 1.65;
 }
 
@@ -443,19 +200,12 @@
 
 .diagnostic-card {
   width: min(800px, 88%);
-
   margin: 0 auto 35px;
-
   padding: 30px;
-
   background: white;
-
   border: 1px solid var(--sa-border);
-
   border-radius: 24px;
-
-  box-shadow:
-    0 18px 45px -28px rgba(35, 41, 31, 0.28);
+  box-shadow: 0 18px 45px -28px rgba(35, 41, 31, 0.28);
 }
 
 
@@ -465,56 +215,40 @@
 
 .upload-zone {
   padding: 35px 20px;
-
   text-align: center;
-
   border: 2px dashed rgba(47, 107, 79, 0.22);
-
   border-radius: 18px;
-
   background: #fbfdfb;
 }
 
 .upload-icon {
   width: 70px;
   height: 70px;
-
   margin: 0 auto 18px;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   border-radius: 22px;
-
   background: var(--sa-green-light);
 
   ion-icon {
     font-size: 32px;
-
     color: var(--sa-green-dark);
   }
 }
 
 .upload-zone h3 {
   margin: 0 0 8px;
-
   font-family: var(--sa-font-display);
-
   font-size: 20px;
-
   color: var(--sa-text);
 }
 
 .upload-zone p {
   max-width: 480px;
-
   margin: 0 auto 25px;
-
   color: var(--sa-text-muted);
-
   font-size: 13px;
-
   line-height: 1.6;
 }
 
@@ -526,9 +260,7 @@
 .upload-actions {
   display: flex;
   justify-content: center;
-
   gap: 10px;
-
   flex-wrap: wrap;
 }
 
@@ -536,11 +268,8 @@
   --background: var(--sa-green);
   --background-activated: var(--sa-green-dark);
   --border-radius: 11px;
-
   height: 48px;
-
   font-weight: 700;
-
   text-transform: none;
 }
 
@@ -548,11 +277,8 @@
   --border-color: var(--sa-green);
   --color: var(--sa-green-dark);
   --border-radius: 11px;
-
   height: 48px;
-
   font-weight: 600;
-
   text-transform: none;
 }
 
@@ -565,55 +291,68 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   margin-bottom: 15px;
 }
 
 .image-header span {
   display: block;
-
   margin-bottom: 4px;
-
   color: var(--sa-text-muted);
-
   font-size: 9px;
   font-weight: 800;
-
   letter-spacing: 0.1em;
 }
 
 .image-header strong {
   color: var(--sa-text);
-
   font-size: 13px;
 }
 
 .remove-button {
   --color: #b64c4c;
-
   margin: 0;
 }
 
 .plant-image-wrapper {
   width: 100%;
   height: 350px;
-
   overflow: hidden;
-
   margin-bottom: 18px;
-
   border-radius: 17px;
-
   background: #eef3ee;
 }
 
 .plant-image {
   width: 100%;
   height: 100%;
-
   display: block;
-
   object-fit: cover;
+}
+
+
+/* =========================================================
+   ERREUR RÉSEAU
+   ========================================================= */
+
+.error-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 12px 14px;
+  margin-bottom: 15px;
+
+  background: #fff0f0;
+  border: 1px solid #f4c8c8;
+  border-radius: 10px;
+
+  color: #b64c4c;
+  font-size: 13px;
+
+  ion-icon {
+    font-size: 18px;
+    flex-shrink: 0;
+  }
 }
 
 
@@ -625,11 +364,8 @@
   --background: var(--sa-green);
   --background-activated: var(--sa-green-dark);
   --border-radius: 12px;
-
   height: 52px;
-
   font-weight: 700;
-
   text-transform: none;
 }
 
@@ -640,54 +376,39 @@
 
 .analysis-loading {
   width: min(800px, 88%);
-
   margin: 0 auto 35px;
-
   padding: 25px;
-
   text-align: center;
-
   background: white;
-
   border: 1px solid var(--sa-border);
-
   border-radius: 20px;
 }
 
 .loading-icon {
   width: 55px;
   height: 55px;
-
   margin: 0 auto 14px;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   border-radius: 16px;
-
   background: var(--sa-green-light);
 
   ion-icon {
     font-size: 27px;
-
     color: var(--sa-green-dark);
   }
 }
 
 .analysis-loading h3 {
   margin: 0 0 7px;
-
   font-family: var(--sa-font-display);
-
   font-size: 17px;
 }
 
 .analysis-loading p {
   margin: 0 auto 18px;
-
   color: var(--sa-text-muted);
-
   font-size: 12.5px;
 }
 
@@ -703,7 +424,6 @@
 
 .result-section {
   width: min(800px, 88%);
-
   margin: 0 auto 60px;
 }
 
@@ -711,33 +431,26 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-
   margin-bottom: 18px;
 }
 
 .result-header h2 {
   margin: 0;
-
   font-family: var(--sa-font-display);
-
   font-size: 25px;
 }
 
 .success-icon {
   width: 42px;
   height: 42px;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   border-radius: 50%;
-
   background: var(--sa-green);
 
   ion-icon {
     font-size: 23px;
-
     color: white;
   }
 }
@@ -750,32 +463,26 @@
 .result-main-card {
   display: flex;
   align-items: center;
-
   gap: 18px;
-
   padding: 22px;
-
   margin-bottom: 14px;
-
   background: var(--sa-green-dark);
-
   border-radius: 19px;
-
   color: white;
+}
+
+.result-main-card.saine {
+  background: var(--sa-green);
 }
 
 .disease-icon {
   width: 58px;
   height: 58px;
-
   flex-shrink: 0;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   border-radius: 17px;
-
   background: rgba(255, 255, 255, 0.12);
 
   ion-icon {
@@ -785,30 +492,22 @@
 
 .disease-info span {
   display: block;
-
   margin-bottom: 4px;
-
   color: rgba(255, 255, 255, 0.62);
-
   font-size: 9px;
   font-weight: 800;
-
   letter-spacing: 0.1em;
 }
 
 .disease-info h3 {
   margin: 0 0 4px;
-
   font-family: var(--sa-font-display);
-
   font-size: 21px;
 }
 
 .disease-info p {
   margin: 0;
-
   color: rgba(255, 255, 255, 0.72);
-
   font-size: 12px;
 }
 
@@ -819,13 +518,9 @@
 
 .confidence-card {
   padding: 20px;
-
   margin-bottom: 14px;
-
   background: white;
-
   border: 1px solid var(--sa-border);
-
   border-radius: 17px;
 }
 
@@ -833,52 +528,81 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-
   margin-bottom: 14px;
 }
 
 .confidence-header span {
   display: block;
-
   margin-bottom: 3px;
-
   color: var(--sa-text-muted);
-
   font-size: 9px;
   font-weight: 800;
-
   letter-spacing: 0.1em;
 }
 
 .confidence-header strong {
   font-family: var(--sa-font-display);
-
   font-size: 25px;
-
   color: var(--sa-green-dark);
 }
 
 .confidence-header ion-icon {
   font-size: 24px;
-
   color: var(--sa-green);
 }
 
 .confidence-card ion-progress-bar {
   height: 8px;
-
   --background: var(--sa-green-light);
   --progress-background: var(--sa-green);
-
   border-radius: 999px;
 }
 
 .confidence-card p {
   margin: 10px 0 0;
-
   color: var(--sa-text-muted);
-
   font-size: 11px;
+}
+
+
+/* =========================================================
+   TOP 3
+   ========================================================= */
+
+.top3-card {
+  padding: 20px;
+  margin-bottom: 14px;
+  background: white;
+  border: 1px solid var(--sa-border);
+  border-radius: 17px;
+}
+
+.top3-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.top3-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 9px 12px;
+
+  background: var(--sa-bg);
+  border-radius: 10px;
+
+  font-size: 13px;
+}
+
+.top3-nom {
+  color: var(--sa-text);
+}
+
+.top3-conf {
+  color: var(--sa-green-dark);
+  font-weight: 700;
 }
 
 
@@ -889,73 +613,45 @@
 .information-card,
 .recommendation-card {
   padding: 20px;
-
   margin-bottom: 14px;
-
   background: white;
-
   border: 1px solid var(--sa-border);
-
   border-radius: 17px;
 }
 
 .information-title {
   display: flex;
   align-items: center;
-
   gap: 10px;
-
   margin-bottom: 16px;
 }
 
 .information-title h3 {
   margin: 0;
-
   font-family: var(--sa-font-display);
-
   font-size: 16px;
 }
 
 .small-icon {
   width: 34px;
   height: 34px;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   border-radius: 10px;
-
   background: var(--sa-green-light);
 
   ion-icon {
     font-size: 17px;
-
     color: var(--sa-green-dark);
   }
 }
 
-
-/* Symptômes */
-
-.information-card ul {
+.disease-description {
   margin: 0;
-
-  padding-left: 20px;
-}
-
-.information-card li {
-  margin-bottom: 8px;
-
   color: var(--sa-text-muted);
-
   font-size: 13px;
-
-  line-height: 1.5;
-}
-
-.information-card li:last-child {
-  margin-bottom: 0;
+  line-height: 1.6;
 }
 
 
@@ -963,33 +659,19 @@
    RECOMMANDATIONS
    ========================================================= */
 
-.recommendation-list {
-  display: flex;
-  flex-direction: column;
-
-  gap: 12px;
-}
-
 .recommendation {
   display: flex;
   align-items: flex-start;
-
   gap: 9px;
-
   color: var(--sa-text);
-
   font-size: 13px;
-
   line-height: 1.5;
 }
 
 .recommendation ion-icon {
   flex-shrink: 0;
-
   margin-top: 1px;
-
   color: var(--sa-green);
-
   font-size: 18px;
 }
 
@@ -1001,50 +683,33 @@
 .result-warning {
   display: flex;
   align-items: flex-start;
-
   gap: 10px;
-
   padding: 14px;
-
   margin-bottom: 18px;
-
   border-radius: 13px;
-
   background: #fff8e8;
-
   border: 1px solid #f0dfb4;
 
   ion-icon {
     flex-shrink: 0;
-
     font-size: 18px;
-
     color: #a87520;
   }
 }
 
 .result-warning p {
   margin: 0;
-
   color: #765c2d;
-
   font-size: 11.5px;
-
   line-height: 1.5;
 }
-
-
-/* Nouveau diagnostic */
 
 .new-diagnostic-button {
   --border-color: var(--sa-green);
   --color: var(--sa-green-dark);
   --border-radius: 11px;
-
   height: 48px;
-
   font-weight: 600;
-
   text-transform: none;
 }
 
@@ -1055,17 +720,13 @@
 
 .history-section {
   padding: 70px 6%;
-
   background: white;
-
   border-top: 1px solid var(--sa-border);
 }
 
 .section-heading {
   width: min(900px, 100%);
-
   margin: 0 auto 25px;
-
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
@@ -1073,63 +734,46 @@
 
 .section-heading h2 {
   margin: 0;
-
   font-family: var(--sa-font-display);
-
   font-size: 25px;
 }
 
 .see-all-button {
   --color: var(--sa-green-dark);
-
   font-size: 12px;
-
   text-transform: none;
 }
 
 .history-list {
   width: min(900px, 100%);
-
   margin: auto;
-
   display: flex;
   flex-direction: column;
-
   gap: 10px;
 }
 
 .history-card {
   display: flex;
   align-items: center;
-
   gap: 13px;
-
   padding: 14px 16px;
-
   background: var(--sa-bg);
-
   border: 1px solid var(--sa-border);
-
   border-radius: 14px;
 }
 
 .history-icon {
   width: 42px;
   height: 42px;
-
   flex-shrink: 0;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   border-radius: 12px;
-
   background: var(--sa-green-light);
 
   ion-icon {
     color: var(--sa-green-dark);
-
     font-size: 20px;
   }
 }
@@ -1140,19 +784,14 @@
 
 .history-info h3 {
   margin: 0 0 3px;
-
   font-size: 13px;
-
   font-weight: 700;
-
   color: var(--sa-text);
 }
 
 .history-info p {
   margin: 0;
-
   color: var(--sa-text-muted);
-
   font-size: 11px;
 }
 
@@ -1162,16 +801,20 @@
 
 .history-confidence strong {
   display: block;
-
   color: var(--sa-green-dark);
-
   font-size: 13px;
 }
 
 .history-confidence span {
   color: var(--sa-text-muted);
-
   font-size: 9px;
+}
+
+.history-empty {
+  padding: 30px 20px;
+  text-align: center;
+  color: var(--sa-text-muted);
+  font-size: 13px;
 }
 
 
@@ -1181,9 +824,7 @@
 
 .diagnostic-footer {
   padding: 35px 6% 25px;
-
   text-align: center;
-
   background: #17251d;
 }
 
@@ -1191,24 +832,18 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
   gap: 8px;
-
   color: white;
-
   font-family: var(--sa-font-display);
 }
 
 .footer-mark {
   width: 34px;
   height: 34px;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   border-radius: 10px;
-
   background: rgba(255, 255, 255, 0.1);
 
   ion-icon {
@@ -1218,13 +853,9 @@
 
 .diagnostic-footer p {
   margin: 10px auto 0;
-
   max-width: 400px;
-
   color: rgba(255, 255, 255, 0.5);
-
   font-size: 10.5px;
-
   line-height: 1.5;
 }
 
@@ -1234,6 +865,51 @@
    ========================================================= */
 
 @media (max-width: 600px) {
+
+  .diagnostic-header {
+    min-height: 70px;
+    padding: 10px 18px;
+  }
+
+  .header-left {
+    gap: 10px;
+  }
+
+  .home-button {
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    border-radius: 11px;
+  }
+
+  .home-button span {
+    display: none;
+  }
+
+  .header-divider {
+    height: 32px;
+  }
+
+  .header-title h1 {
+    font-size: 19px;
+  }
+
+  .header-label {
+    font-size: 8px;
+  }
+
+  .header-page-icon {
+    padding: 5px;
+  }
+
+  .page-icon-circle {
+    width: 36px;
+    height: 36px;
+  }
+
+  .page-icon-text {
+    display: none;
+  }
 
   .diagnostic-intro {
     margin-top: 40px;
@@ -1245,7 +921,6 @@
 
   .diagnostic-card {
     padding: 16px;
-
     border-radius: 19px;
   }
 
@@ -1255,7 +930,6 @@
 
   .upload-actions {
     flex-direction: column;
-
     align-items: stretch;
   }
 
@@ -1291,8 +965,29 @@
   .history-confidence {
     display: none;
   }
-
 }
+
+
+@media (max-width: 480px) {
+
+  .diagnostic-header {
+    padding: 10px 14px;
+  }
+
+  .header-title h1 {
+    font-size: 18px;
+  }
+
+  .header-divider {
+    display: none;
+  }
+
+  .page-icon-circle {
+    width: 36px;
+    height: 36px;
+  }
+}
+
 
 @media (max-width: 380px) {
 
@@ -1309,5 +1004,4 @@
   .diagnostic-intro {
     width: 92%;
   }
-
 }

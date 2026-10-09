@@ -1,0 +1,14 @@
+0000000000000000000000000000000000000000 04c0748d8a95a17f90f9115d73d0ab10ed0c62b3 Seynabou Badji <s.b42@zig.univ.sn> 1786724583 +0000	commit (initial): first commit
+04c0748d8a95a17f90f9115d73d0ab10ed0c62b3 0000000000000000000000000000000000000000 Seynabou Badji <s.b42@zig.univ.sn> 1786724640 +0000	Branch: renamed refs/heads/master to refs/heads/main
+0000000000000000000000000000000000000000 04c0748d8a95a17f90f9115d73d0ab10ed0c62b3 Seynabou Badji <s.b42@zig.univ.sn> 1786724640 +0000	Branch: renamed refs/heads/master to refs/heads/main
+04c0748d8a95a17f90f9115d73d0ab10ed0c62b3 547cd7db64e310cc3912780374d341d96b2c41fc Seynabou Badji <s.b42@zig.univ.sn> 1786880019 +0000	commit: premier apercu
+547cd7db64e310cc3912780374d341d96b2c41fc 23e115d22f330f3bc9a370ecc85911e469a79975 Seynabou Badji <s.b42@zig.univ.sn> 1786880136 +0000	commit: ajout des fichiers de config
+23e115d22f330f3bc9a370ecc85911e469a79975 976212aa13d815196f911c5ed787133552e5dd4b Seynabou Badji <s.b42@zig.univ.sn> 1787140229 +0000	commit: ajout du backend et modification de quelques fichier du front
+976212aa13d815196f911c5ed787133552e5dd4b c689826b1761b8c9dc0403e49de3b7be9f64ae8f Seynabou Badji <s.b42@zig.univ.sn> 1787140848 +0000	commit: ajout de l'authentification
+c689826b1761b8c9dc0403e49de3b7be9f64ae8f 6c6df18e5f852f582c440d337dafd22e11da5de7 Seynabou Badji <s.b42@zig.univ.sn> 1787226429 +0000	commit: ajout du guards
+6c6df18e5f852f582c440d337dafd22e11da5de7 f24c321282e91d85c27a5993c733b1db1c06a61f Seynabou Badji <s.b42@zig.univ.sn> 1787528591 +0000	commit: amelioration du page parcelle
+f24c321282e91d85c27a5993c733b1db1c06a61f c8c93d207ed53ed35e5688f0a6ea302ab7fe4f50 Seynabou Badji <s.b42@zig.univ.sn> 1787576436 +0000	commit: accueil connexion et deconnexion normal
+c8c93d207ed53ed35e5688f0a6ea302ab7fe4f50 d5c52f20d336603b8ec61b6a3d577758f98e3e75 Seynabou Badji <s.b42@zig.univ.sn> 1787655131 +0000	commit: gestion de l'assistance
+d5c52f20d336603b8ec61b6a3d577758f98e3e75 33ff2f8ddaba67c12086a63b0f8bb7881d5a3965 Seynabou Badji <s.b42@zig.univ.sn> 1788517880 +0000	commit: ajout du meteo
+33ff2f8ddaba67c12086a63b0f8bb7881d5a3965 c0818bc013cf32defcbd6bf988c3b725e1e15b02 Seynabou Badji <s.b42@zig.univ.sn> 1789922452 +0000	commit: ajout
+c0818bc013cf32defcbd6bf988c3b725e1e15b02 2f1cdadc1ae17bea34285260af1f38914e3e7009 Seynabou Badji <s.b42@zig.univ.sn> 1791248976 +0000	commit: integration du model_ia

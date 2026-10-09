@@ -1,0 +1,39 @@
+# ============ PYTHON / IA ============
+model_ia/venv/
+model_ia/__pycache__/
+model_ia/**/__pycache__/
+model_ia/data/raw/
+model_ia/data/processed/
+model_ia/models/*.h5
+model_ia/models/*.tflite
+*.pyc
+
+# ============ ANGULAR / NODE ============
+node_modules/
+dist/
+.angular/
+frontend/node_modules/
+frontend/dist/
+admin/node_modules/
+admin/dist/
+
+# ============ SPRING BOOT ============
+backend/target/
+*.class
+*.jar
+!backend/.mvn/wrapper/*.jar
+
+# ============ IDE ============
+.idea/
+.vscode/
+*.iml
+.DS_Store
+
+# ============ FICHIERS SENSIBLES ============
+.env
+.env.local
+*.log
+application-local.properties
+
+# ============ OS ============
+Thumbs.db

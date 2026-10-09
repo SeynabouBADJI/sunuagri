@@ -1,5 +1,7 @@
 package com.projet.sunuagri.service.impl;
 
+import com.projet.sunuagri.dto.AiPredictionResponseDTO;   // ← AJOUT (1)
+
 import com.projet.sunuagri.dto.DiagnosticCreateDTO;
 import com.projet.sunuagri.dto.DiagnosticDTO;
 import com.projet.sunuagri.entity.Diagnostic;
@@ -20,6 +22,8 @@ import com.projet.sunuagri.service.AiService;                  // ← AJOUT
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;                        // ← AJOUT (2)
+
 
 @Service
 @RequiredArgsConstructor

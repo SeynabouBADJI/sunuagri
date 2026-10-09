@@ -91,7 +91,14 @@ export const routes: Routes = [
   loadComponent: () =>
     import('./features/admin/dashboard/admin-dashboard.component')
       .then(m => m.AdminDashboardComponent)
-},
+  },
+  {
+  path: 'admin/agriculteurs',
+  canActivate: [adminGuard],
+  loadComponent: () =>
+    import('./features/admin/agriculteurs/agriculteurs.component')
+      .then(m => m.AgriculteursComponent)
+  },
 
   {
     path: '**',
