@@ -37,3 +37,7 @@ application-local.properties
 
 # ============ OS ============
 Thumbs.db
+
+# Backup Git
+.git.backup/
+.git.old/

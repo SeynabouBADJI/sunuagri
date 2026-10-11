@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
+import { IonicSharedModule } from '../../shared/ionic-shared.module';
 import { RouterLink } from '@angular/router';
 
 import { CalendrierService } from '../../core/services/calendrier.service';
@@ -11,7 +11,7 @@ import { CalendrierCultural } from '../../core/models/calendrier-cultural.model'
   standalone: true,
   imports: [
     CommonModule,
-    IonicModule,
+    IonicSharedModule,
     RouterLink
   ],
   templateUrl: './calendrier.component.html',

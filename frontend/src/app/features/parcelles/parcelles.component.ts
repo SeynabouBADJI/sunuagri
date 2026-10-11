@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+import { IonicSharedModule } from '../../shared/ionic-shared.module';
 import { RouterLink } from '@angular/router';
 
 import { Parcelle } from '../../core/models/parcelle.model';
@@ -15,7 +15,7 @@ import { EntreeCarnet } from '../../core/models/entree-carnet.model';
   imports: [
     CommonModule,
     FormsModule,
-    IonicModule,
+    IonicSharedModule,
     RouterLink
   ],
   templateUrl: './parcelles.component.html',

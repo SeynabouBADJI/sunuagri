@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import { IonicSharedModule } from '../../shared/ionic-shared.module';
 
 @Component({
   selector: 'app-tabs',
   standalone: true,
-  imports: [IonicModule],
+  imports: [IonicSharedModule],
   templateUrl: './tabs.component.html',
   styleUrls: ['./tabs.component.scss'],
 })

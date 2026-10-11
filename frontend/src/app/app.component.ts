@@ -13,7 +13,7 @@ addIcons(allIcons);
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [IonApp, IonRouterOutlet],   // ← plus de IonicModule
+  imports: [IonApp, IonRouterOutlet],   // ← plus de IonicSharedModule
   template: `
     <ion-app>
       <ion-router-outlet></ion-router-outlet>

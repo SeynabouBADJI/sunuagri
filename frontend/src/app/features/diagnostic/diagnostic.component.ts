@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
+import { IonicSharedModule } from '../../shared/ionic-shared.module';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { RouterLink } from '@angular/router';
 
@@ -11,7 +11,7 @@ import { DiagnosticAnalyseResponse } from '../../core/models/diagnostic-analyse.
 @Component({
   selector: 'app-diagnostic',
   standalone: true,
-  imports: [CommonModule, IonicModule, RouterLink],
+  imports: [CommonModule, IonicSharedModule, RouterLink],
   templateUrl: './diagnostic.component.html',
   styleUrls: ['./diagnostic.component.scss'],
 })

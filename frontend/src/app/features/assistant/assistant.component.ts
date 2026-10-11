@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewChecked } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+import { IonicSharedModule } from '../../shared/ionic-shared.module';
 import { AssistantService } from '../../core/services/assistant.service';
 import { Message } from '../../core/models/conversation.model';
 import { RouterLink } from '@angular/router';
@@ -9,7 +9,7 @@ import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-assistant',
   standalone: true,
-  imports: [CommonModule, FormsModule, IonicModule,RouterLink],
+  imports: [CommonModule, FormsModule, IonicSharedModule,RouterLink],
   templateUrl: './assistant.component.html',
   styleUrls: ['./assistant.component.scss'],
 })

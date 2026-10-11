@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
+import { environment } from '../../../environments/environment';
+
 
 export interface Utilisateur {
   id: number;
@@ -37,7 +39,9 @@ export interface AuthResponse {
 })
 export class AuthService {
 
-  private readonly API_URL = 'http://localhost:8080/api/auth';
+  //private readonly API_URL = 'http://localhost:8080/api/auth';
+  private readonly API_URL = `${environment.apiUrl}/auth`;
+
 
   private utilisateur: Utilisateur | null = null;
 

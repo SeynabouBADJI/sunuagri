@@ -1,0 +1,108 @@
+
+<div class="page-agriculteurs">
+
+  <header class="page-header">
+    <div>
+      <span class="breadcrumb">Administration / Utilisateurs</span>
+      <h1>Gestion des agriculteurs</h1>
+      <p>Consultez les producteurs inscrits sur SunuAgri.</p>
+    </div>
+
+    <button class="refresh-btn"
+            type="button"
+            (click)="chargerAgriculteurs()">
+      ↻ Actualiser
+    </button>
+  </header>
+
+  <section class="summary-card">
+    <div class="summary-icon">👨‍🌾</div>
+    <div>
+      <span>Total des agriculteurs</span>
+      <strong>{{ agriculteurs.length }}</strong>
+      <small>Comptes enregistrés sur la plateforme</small>
+    </div>
+  </section>
+
+  <section class="table-panel">
+
+    <div class="table-heading">
+      <div>
+        <h2>Liste des agriculteurs</h2>
+        <p>Recherchez un producteur par nom, email, téléphone ou localité.</p>
+      </div>
+
+      <input
+        type="search"
+        [(ngModel)]="recherche"
+        placeholder="Rechercher..."
+        aria-label="Rechercher un agriculteur"
+      />
+    </div>
+
+    <div *ngIf="chargement" class="message">
+      Chargement des agriculteurs...
+    </div>
+
+    <div *ngIf="!chargement && erreur" class="error-message">
+      {{ erreur }}
+      <button type="button" (click)="chargerAgriculteurs()">
+        Réessayer
+      </button>
+    </div>
+
+    <div class="table-wrapper"
+         *ngIf="!chargement && !erreur">
+
+      <table>
+        <thead>
+          <tr>
+            <th>Agriculteur</th>
+            <th>Email</th>
+            <th>Téléphone</th>
+            <th>Localisation</th>
+            <th>Rôle</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let a of agriculteursFiltres">
+            <td>
+              <div class="farmer-cell">
+                <div class="avatar">
+                  {{ (a.prenom || a.nom || '?').charAt(0).toUpperCase() }}
+                </div>
+                <div>
+                  <strong>{{ a.prenom }} {{ a.nom }}</strong>
+                  <small>Identifiant : {{ a.id }}</small>
+                </div>
+              </div>
+            </td>
+
+            <td>{{ a.email }}</td>
+            <td>{{ a.telephone || 'Non renseigné' }}</td>
+            <td>{{ a.localisation || 'Non renseignée' }}</td>
+            <td>
+              <span class="role-badge">Agriculteur</span>
+            </td>
+          </tr>
+
+          <tr *ngIf="agriculteursFiltres.length === 0">
+            <td colspan="5" class="empty-state">
+              Aucun agriculteur trouvé.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+
+    <footer class="table-footer"
+            *ngIf="!chargement && !erreur">
+      {{ agriculteursFiltres.length }}
+      résultat(s) affiché(s)
+    </footer>
+
+  </section>
+
+</div>

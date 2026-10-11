@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+import { IonicSharedModule } from '../../../shared/ionic-shared.module';
 import { Router } from '@angular/router';
 
 import { AuthService } from '../../../core/services/auth.service';
@@ -9,7 +9,7 @@ import { AuthService } from '../../../core/services/auth.service';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ CommonModule, FormsModule, IonicModule ],
+  imports: [ CommonModule, FormsModule, IonicSharedModule ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })

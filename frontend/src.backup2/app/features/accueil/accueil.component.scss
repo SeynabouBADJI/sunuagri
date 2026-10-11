@@ -1,0 +1,2259 @@
+/* =========================================================
+   SUNUAGRI - PAGE D'ACCUEIL
+   ========================================================= */
+
+.accueil-content {
+  --background: var(--sa-bg);
+  color: var(--sa-text);
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.accueil-header {
+  width: 100%;
+  min-height: 72px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 12px 6%;
+
+  box-sizing: border-box;
+
+  background: #ffffff;
+  border-bottom: 1px solid var(--sa-border);
+
+  position: relative;
+  z-index: 20;
+}
+
+
+/* =========================================================
+   LOGO
+   ========================================================= */
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  flex-shrink: 0;
+}
+
+.brand-mark {
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 14px;
+
+  background: var(--sa-green-light);
+}
+
+.brand-mark ion-icon {
+  font-size: 22px;
+  color: var(--sa-green-dark);
+}
+
+.brand-title {
+  font-size: 20px;
+  font-weight: 700;
+
+  color: var(--sa-green-dark);
+
+  font-family: var(--sa-font-display);
+}
+
+
+/* =========================================================
+   PARTIE DROITE HEADER
+   ========================================================= */
+
+.header-actions,
+.user-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  margin-left: auto;
+
+  flex-shrink: 0;
+}
+
+
+/* =========================================================
+   NON CONNECTÉ
+   ========================================================= */
+
+.header-actions {
+  gap: 10px;
+}
+
+.login-link {
+  --color: var(--sa-green-dark);
+
+  font-size: 13px;
+  font-weight: 600;
+
+  text-transform: none;
+
+  --padding-start: 14px;
+  --padding-end: 14px;
+}
+
+.header-register {
+  --background: var(--sa-green);
+  --background-hover: var(--sa-green-dark);
+  --background-activated: var(--sa-green-dark);
+
+  --color: white;
+
+  --border-radius: 10px;
+
+  height: 42px;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  text-transform: none;
+}
+
+
+/* =========================================================
+   CONNECTÉ
+   ========================================================= */
+
+.user-header {
+  gap: 12px;
+}
+
+
+/* Avatar */
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: var(--sa-green-light);
+
+  border: 1px solid rgba(47, 114, 88, 0.15);
+}
+
+.user-avatar ion-icon {
+  font-size: 20px;
+  color: var(--sa-green-dark);
+}
+
+
+/* Informations utilisateur */
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+
+  min-width: 0;
+}
+
+.user-label {
+  font-size: 10px;
+  color: var(--sa-text-muted);
+}
+
+.user-name {
+  font-size: 13px;
+  font-weight: 700;
+
+  color: var(--sa-green-dark);
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   BOUTON DÉCONNEXION
+   ========================================================= */
+
+.logout-button {
+  --color: var(--sa-green-dark);
+
+  --border-color: var(--sa-green-dark);
+  --border-width: 1px;
+  --border-style: solid;
+
+  --background: transparent;
+  --background-hover: var(--sa-green-light);
+  --background-activated: var(--sa-green-light);
+
+  --border-radius: 10px;
+
+  height: 40px;
+
+  margin-left: 5px;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  text-transform: none;
+}
+
+.logout-button ion-icon {
+  font-size: 18px;
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.hero-section {
+  position: relative;
+
+  width: 100%;
+  min-height: 650px;
+
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+
+  padding: 80px 8%;
+
+  box-sizing: border-box;
+}
+
+
+/* Image */
+
+.hero-image {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  z-index: 0;
+}
+
+
+/* Overlay */
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+
+  z-index: 1;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.80) 0%,
+      rgba(0, 0, 0, 0.62) 42%,
+      rgba(0, 0, 0, 0.30) 100%
+    );
+}
+
+
+/* =========================================================
+   CONTENU HERO
+   ========================================================= */
+
+.hero-content {
+  position: relative;
+
+  z-index: 3;
+
+  width: 58%;
+  max-width: 700px;
+
+  color: white;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 8px 15px;
+
+  border-radius: 30px;
+
+  background: rgba(255, 255, 255, 0.14);
+
+  border: 1px solid rgba(255, 255, 255, 0.25);
+
+  font-size: 14px;
+
+  margin-bottom: 22px;
+
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.hero-badge ion-icon {
+  font-size: 18px;
+}
+
+.hero-content h1 {
+  margin: 0 0 22px;
+
+  font-size: clamp(40px, 4.2vw, 56px);
+
+  line-height: 1.08;
+
+  font-weight: 700;
+
+  letter-spacing: -0.035em;
+}
+
+.hero-content h1 strong {
+  display: block;
+
+  color: #a8d86e;
+}
+
+.hero-content p {
+  max-width: 620px;
+
+  margin: 0;
+
+  font-size: 18px;
+
+  line-height: 1.7;
+
+  color: rgba(255, 255, 255, 0.90);
+}
+
+
+/* =========================================================
+   BOUTON HERO
+   ========================================================= */
+
+.hero-action {
+  margin-top: 30px;
+}
+
+.hero-primary {
+  --background: #6fa832;
+  --background-hover: #5d9228;
+  --background-activated: #5d9228;
+
+  --border-radius: 10px;
+
+  height: 52px;
+
+  padding: 0 8px;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  text-transform: uppercase;
+}
+
+
+/* =========================================================
+   INFORMATIONS HERO
+   ========================================================= */
+
+.hero-info {
+  display: flex;
+  align-items: center;
+
+  flex-wrap: wrap;
+
+  gap: 22px;
+
+  margin-top: 25px;
+
+  font-size: 13px;
+
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.hero-info span {
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+}
+
+.hero-info ion-icon {
+  color: #a8d86e;
+
+  font-size: 17px;
+
+  flex-shrink: 0;
+}
+
+
+/* =========================================================
+   CARTES FLOTTANTES DU HERO
+   ========================================================= */
+
+.hero-weather,
+.hero-float {
+  position: absolute;
+
+  z-index: 5;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   CARTE MÉTÉO
+   ========================================================= */
+
+.hero-weather {
+  top: 50%;
+  right: 8%;
+
+  transform: translateY(-50%);
+
+  width: 280px;
+  min-height: 210px;
+
+  padding: 20px;
+
+  border-radius: 18px;
+
+  border: 1px solid rgba(255, 255, 255, 0.25);
+
+  background: rgba(35, 45, 25, 0.48);
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  color: white;
+
+  box-shadow:
+    0 15px 40px rgba(0, 0, 0, 0.18);
+}
+
+
+/* =========================================================
+   MÉTÉO — CHARGEMENT
+   ========================================================= */
+
+.weather-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 12px;
+
+  min-height: 170px;
+
+  text-align: center;
+}
+
+.weather-loading ion-spinner {
+  --color: #a8d86e;
+
+  width: 28px;
+  height: 28px;
+}
+
+.weather-loading span {
+  font-size: 11.5px;
+  line-height: 1.4;
+
+  color: rgba(255, 255, 255, 0.72);
+}
+
+
+/* =========================================================
+   MÉTÉO — ERREUR
+   ========================================================= */
+
+.weather-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  min-height: 170px;
+
+  text-align: center;
+}
+
+.weather-error-icon {
+  width: 44px;
+  height: 44px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 13px;
+
+  background: rgba(255, 180, 80, 0.15);
+
+  border: 1px solid rgba(255, 180, 80, 0.25);
+
+  margin-bottom: 4px;
+}
+
+.weather-error-icon ion-icon {
+  font-size: 22px;
+
+  color: #ffb450;
+}
+
+.weather-error strong {
+  font-size: 13px;
+  font-weight: 700;
+
+  color: white;
+}
+
+.weather-error p {
+  margin: 0;
+  max-width: 200px;
+
+  font-size: 11px;
+  line-height: 1.45;
+
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.weather-error .weather-retry {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+
+  margin-top: 8px;
+  padding: 7px 13px;
+
+  border: 1px solid rgba(168, 216, 110, 0.35);
+  border-radius: 999px;
+
+  background: rgba(168, 216, 110, 0.15);
+
+  color: #d5eeaa;
+
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.weather-error .weather-retry:hover {
+  background: rgba(168, 216, 110, 0.25);
+  border-color: rgba(168, 216, 110, 0.5);
+}
+
+.weather-error .weather-retry ion-icon {
+  font-size: 13px;
+}
+
+
+/* =========================================================
+   MÉTÉO - HAUT
+   ========================================================= */
+
+.weather-top {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+}
+
+.weather-icon {
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 13px;
+
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.weather-icon ion-icon {
+  font-size: 27px;
+
+  color: #a8d86e;
+}
+
+.weather-label {
+  display: block;
+
+  margin-bottom: 2px;
+
+  font-size: 9px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.08em;
+
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.weather-top strong {
+  display: block;
+
+  font-size: 28px;
+
+  line-height: 1;
+}
+
+
+/* =========================================================
+   LOCALISATION MÉTÉO
+   ========================================================= */
+
+.weather-location {
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+
+  margin-top: 17px;
+
+  font-size: 12px;
+
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.weather-location ion-icon {
+  font-size: 16px;
+
+  color: #a8d86e;
+
+  flex-shrink: 0;
+}
+
+
+/* =========================================================
+   DÉTAILS MÉTÉO
+   ========================================================= */
+
+.weather-details {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 12px;
+
+  margin-top: 17px;
+
+  padding-top: 14px;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.weather-details > div {
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  min-width: 0;
+}
+
+.weather-details ion-icon {
+  font-size: 18px;
+
+  color: #a8d86e;
+
+  flex-shrink: 0;
+}
+
+.weather-details span {
+  display: flex;
+  flex-direction: column;
+
+  min-width: 0;
+
+  font-size: 10px;
+
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.weather-details strong {
+  margin-top: 2px;
+
+  font-size: 12px;
+
+  color: white;
+}
+
+
+/* =========================================================
+   MESSAGE MÉTÉO
+   ========================================================= */
+
+.weather-message {
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  margin-top: 15px;
+
+  padding-top: 12px;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+
+  font-size: 10px;
+
+  line-height: 1.4;
+
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.weather-message ion-icon {
+  flex-shrink: 0;
+
+  font-size: 17px;
+
+  color: #a8d86e;
+}
+
+
+/* =========================================================
+   PETITES CARTES FLOTTANTES
+   ========================================================= */
+
+.hero-float {
+  bottom: 55px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  min-height: 58px;
+
+  padding: 8px 13px 8px 8px;
+
+  border-radius: 14px;
+
+  border: 1px solid rgba(255, 255, 255, 0.20);
+
+  background: rgba(35, 45, 25, 0.42);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  color: white;
+
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.15);
+
+  white-space: nowrap;
+}
+
+.parcel-float {
+  right: 24%;
+}
+
+.ai-float {
+  right: 8%;
+}
+
+
+/* =========================================================
+   ICÔNES PETITES CARTES
+   ========================================================= */
+
+.float-icon {
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 10px;
+
+  background: rgba(168, 216, 110, 0.16);
+}
+
+.float-icon ion-icon {
+  font-size: 20px;
+
+  color: #a8d86e;
+}
+
+
+/* =========================================================
+   TEXTE PETITES CARTES
+   ========================================================= */
+
+.hero-float > div:last-child {
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+
+  min-width: 0;
+}
+
+.hero-float span {
+  font-size: 9px;
+
+  line-height: 1.2;
+
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.hero-float strong {
+  margin-top: 3px;
+
+  font-size: 12px;
+
+  line-height: 1.2;
+
+  color: white;
+}
+
+
+/* =========================================================
+   TITRES DE SECTIONS
+   ========================================================= */
+
+.section-heading {
+  width: 100%;
+  max-width: 720px;
+
+  margin: 0 auto 40px;
+
+  text-align: center;
+}
+
+.section-label {
+  display: inline-block;
+
+  margin-bottom: 10px;
+
+  color: var(--sa-green);
+
+  font-size: 11px;
+
+  font-weight: 800;
+
+  letter-spacing: 0.12em;
+
+  text-transform: uppercase;
+}
+
+.section-heading h2 {
+  margin: 0 0 12px;
+
+  font-family: var(--sa-font-display);
+
+  color: var(--sa-text);
+
+  font-size: clamp(27px, 4vw, 42px);
+
+  line-height: 1.15;
+
+  font-weight: 750;
+
+  letter-spacing: -0.035em;
+}
+
+.section-heading h2 span {
+  color: var(--sa-green);
+}
+
+.section-heading p {
+  max-width: 600px;
+
+  margin: 0 auto;
+
+  color: var(--sa-text-muted);
+
+  font-size: 14px;
+
+  line-height: 1.6;
+}
+
+
+/* =========================================================
+   FONCTIONNALITÉS
+   ========================================================= */
+
+.features-section {
+  padding: 90px 6%;
+
+  background: var(--sa-bg);
+}
+
+.features-grid {
+  width: min(1150px, 100%);
+
+  margin: 0 auto;
+
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 18px;
+}
+
+
+/* Carte */
+
+.feature-card {
+  position: relative;
+
+  padding: 26px;
+
+  background: white;
+
+  border: 1px solid var(--sa-border);
+
+  border-radius: 20px;
+
+  box-shadow:
+    0 10px 30px -22px rgba(35, 41, 31, 0.28);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+
+  border-color: rgba(47, 107, 79, 0.25);
+
+  box-shadow:
+    0 18px 35px -20px rgba(35, 41, 31, 0.30);
+}
+
+
+/* Icône */
+
+.feature-icon {
+  width: 48px;
+  height: 48px;
+
+  margin-bottom: 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 14px;
+
+  background: var(--sa-green-light);
+}
+
+.feature-icon ion-icon {
+  font-size: 23px;
+
+  color: var(--sa-green-dark);
+}
+
+
+/* Texte */
+
+.feature-card h3 {
+  margin: 0 0 9px;
+
+  font-family: var(--sa-font-display);
+
+  font-size: 17px;
+
+  font-weight: 700;
+
+  color: var(--sa-text);
+}
+
+.feature-card p {
+  min-height: 66px;
+
+  margin: 0 0 18px;
+
+  color: var(--sa-text-muted);
+
+  font-size: 13px;
+
+  line-height: 1.55;
+}
+
+
+/* Lien */
+
+.feature-card a {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 6px;
+
+  color: var(--sa-green-dark);
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  text-decoration: none;
+}
+
+.feature-card a ion-icon {
+  font-size: 15px;
+
+  transition: transform 0.2s ease;
+}
+
+.feature-card a:hover ion-icon {
+  transform: translateX(4px);
+}
+
+
+/* =========================================================
+   COMMENT ÇA MARCHE
+   ========================================================= */
+
+.how-section {
+  padding: 90px 6%;
+
+  background: white;
+
+  border-top: 1px solid var(--sa-border);
+
+  border-bottom: 1px solid var(--sa-border);
+}
+
+.steps {
+  width: min(1050px, 100%);
+
+  margin: 0 auto;
+
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 30px;
+}
+
+
+/* Étape */
+
+.step {
+  position: relative;
+
+  text-align: center;
+
+  padding: 10px 25px;
+}
+
+.step-number {
+  position: absolute;
+
+  top: -4px;
+
+  right: 10%;
+
+  color: var(--sa-green-light);
+
+  font-family: var(--sa-font-display);
+
+  font-size: 58px;
+
+  line-height: 1;
+
+  font-weight: 800;
+
+  z-index: 0;
+}
+
+.step-icon {
+  position: relative;
+
+  z-index: 1;
+
+  width: 65px;
+  height: 65px;
+
+  margin: 0 auto 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 20px;
+
+  background: var(--sa-green);
+
+  box-shadow:
+    0 10px 24px -12px rgba(47, 107, 79, 0.55);
+}
+
+.step-icon ion-icon {
+  font-size: 27px;
+
+  color: white;
+}
+
+.step h3 {
+  position: relative;
+
+  z-index: 1;
+
+  margin: 0 0 8px;
+
+  font-family: var(--sa-font-display);
+
+  font-size: 17px;
+
+  font-weight: 700;
+
+  color: var(--sa-text);
+}
+
+.step p {
+  margin: 0;
+
+  color: var(--sa-text-muted);
+
+  font-size: 13px;
+
+  line-height: 1.55;
+}
+
+
+/* =========================================================
+   SECTION DIAGNOSTIC
+   ========================================================= */
+
+.diagnostic-section {
+  width: min(1150px, 88%);
+
+  margin: 90px auto;
+
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 60px;
+
+  align-items: center;
+}
+
+.diagnostic-image {
+  height: 480px;
+
+  overflow: hidden;
+
+  border-radius: 24px;
+
+  box-shadow:
+    0 20px 45px -25px rgba(35, 41, 31, 0.35);
+}
+
+.diagnostic-image img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+}
+
+.diagnostic-content .section-label {
+  margin-bottom: 12px;
+}
+
+.diagnostic-content h2 {
+  margin: 0 0 18px;
+
+  font-family: var(--sa-font-display);
+
+  font-size: clamp(28px, 4vw, 43px);
+
+  line-height: 1.12;
+
+  letter-spacing: -0.04em;
+
+  color: var(--sa-text);
+}
+
+.diagnostic-content h2 span {
+  display: block;
+
+  color: var(--sa-green);
+}
+
+.diagnostic-content > p {
+  margin: 0 0 25px;
+
+  color: var(--sa-text-muted);
+
+  font-size: 14px;
+
+  line-height: 1.7;
+}
+
+.diagnostic-points {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 13px;
+
+  margin-bottom: 28px;
+}
+
+.diagnostic-point {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  color: var(--sa-text);
+
+  font-size: 13px;
+
+  font-weight: 600;
+}
+
+.diagnostic-point ion-icon {
+  flex-shrink: 0;
+
+  width: 34px;
+  height: 34px;
+
+  padding: 7px;
+
+  box-sizing: border-box;
+
+  border-radius: 10px;
+
+  background: var(--sa-green-light);
+
+  color: var(--sa-green-dark);
+}
+
+.diagnostic-button {
+  --background: var(--sa-green);
+
+  --background-activated: var(--sa-green-dark);
+
+  --border-radius: 12px;
+
+  --box-shadow:
+    0 10px 25px -12px rgba(47, 107, 79, 0.55);
+
+  height: 50px;
+
+  font-weight: 700;
+
+  text-transform: none;
+}
+
+
+/* =========================================================
+   ASSISTANT IA
+   ========================================================= */
+
+.assistant-section {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  align-items: center;
+
+  gap: 70px;
+
+  padding: 90px 8%;
+
+  background: var(--sa-green-dark);
+
+  overflow: hidden;
+}
+
+.assistant-content {
+  max-width: 560px;
+}
+
+.assistant-content .section-label {
+  color: #c9e4cf;
+}
+
+.assistant-content h2 {
+  margin: 0 0 18px;
+
+  font-family: var(--sa-font-display);
+
+  font-size: clamp(28px, 4vw, 44px);
+
+  line-height: 1.12;
+
+  letter-spacing: -0.04em;
+
+  color: white;
+}
+
+.assistant-content h2 span {
+  display: block;
+
+  color: #d8efd9;
+}
+
+.assistant-content > p {
+  margin: 0 0 25px;
+
+  color: rgba(255, 255, 255, 0.78);
+
+  font-size: 14px;
+
+  line-height: 1.7;
+}
+
+.assistant-examples {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 10px;
+
+  margin-bottom: 28px;
+}
+
+.question {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  width: fit-content;
+
+  max-width: 100%;
+
+  padding: 11px 14px;
+
+  border-radius: 12px;
+
+  background: rgba(255, 255, 255, 0.08);
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+
+  color: rgba(255, 255, 255, 0.90);
+
+  font-size: 13px;
+}
+
+.question ion-icon {
+  color: #bfe1c4;
+
+  font-size: 17px;
+
+  flex-shrink: 0;
+}
+
+.assistant-button {
+  --background: white;
+
+  --color: var(--sa-green-dark);
+
+  --border-radius: 12px;
+
+  height: 50px;
+
+  font-weight: 700;
+
+  text-transform: none;
+}
+
+.assistant-visual {
+  display: flex;
+
+  justify-content: center;
+
+  perspective: 1000px;
+}
+
+.assistant-card {
+  width: min(430px, 100%);
+
+  padding: 22px;
+
+  box-sizing: border-box;
+
+  border-radius: 24px;
+
+  background: white;
+
+  box-shadow:
+    0 25px 60px -25px rgba(0, 0, 0, 0.45);
+
+  transform: rotate(1deg);
+}
+
+.assistant-card-header {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  padding-bottom: 18px;
+
+  margin-bottom: 16px;
+
+  border-bottom: 1px solid var(--sa-border);
+}
+
+.assistant-avatar {
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 13px;
+
+  background: var(--sa-green-light);
+}
+
+.assistant-avatar ion-icon {
+  font-size: 22px;
+
+  color: var(--sa-green-dark);
+}
+
+.assistant-card-header strong {
+  display: block;
+
+  color: var(--sa-text);
+
+  font-size: 14px;
+}
+
+.assistant-card-header small {
+  display: block;
+
+  margin-top: 3px;
+
+  color: var(--sa-green);
+
+  font-size: 11px;
+}
+
+.chat-message {
+  width: fit-content;
+
+  max-width: 82%;
+
+  padding: 11px 13px;
+
+  margin-bottom: 10px;
+
+  border-radius: 13px;
+
+  font-size: 12px;
+
+  line-height: 1.5;
+}
+
+.chat-message.bot {
+  margin-right: auto;
+
+  background: var(--sa-green-light);
+
+  color: var(--sa-text);
+}
+
+.chat-message.user {
+  margin-left: auto;
+
+  background: var(--sa-green);
+
+  color: white;
+}
+
+
+/* =========================================================
+   CTA FINAL
+   ========================================================= */
+
+.final-cta {
+  padding: 100px 6%;
+
+  text-align: center;
+
+  background: var(--sa-bg);
+}
+
+.final-cta-content {
+  max-width: 700px;
+
+  margin: 0 auto;
+}
+
+.final-icon {
+  width: 58px;
+  height: 58px;
+
+  margin: 0 auto 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 18px;
+
+  background: var(--sa-green);
+
+  box-shadow:
+    0 12px 28px -14px rgba(47, 107, 79, 0.55);
+}
+
+.final-icon ion-icon {
+  font-size: 27px;
+
+  color: white;
+}
+
+.final-cta h2 {
+  margin: 0 0 15px;
+
+  font-family: var(--sa-font-display);
+
+  color: var(--sa-text);
+
+  font-size: clamp(32px, 5vw, 50px);
+
+  line-height: 1.08;
+
+  letter-spacing: -0.045em;
+}
+
+.final-cta h2 span {
+  color: var(--sa-green);
+}
+
+.final-cta p {
+  max-width: 520px;
+
+  margin: 0 auto 25px;
+
+  color: var(--sa-text-muted);
+
+  font-size: 14px;
+
+  line-height: 1.6;
+}
+
+.final-actions {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  flex-wrap: wrap;
+}
+
+.cta-final-button {
+  --background: var(--sa-green);
+
+  --background-activated: var(--sa-green-dark);
+
+  --border-radius: 12px;
+
+  --box-shadow:
+    0 10px 25px -12px rgba(47, 107, 79, 0.55);
+
+  height: 50px;
+
+  font-weight: 700;
+
+  text-transform: none;
+}
+
+.final-login {
+  --color: var(--sa-green-dark);
+
+  font-weight: 600;
+
+  text-transform: none;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.accueil-footer {
+  padding: 45px 6% 20px;
+
+  background: #17251d;
+
+  color: white;
+}
+
+.footer-brand {
+  width: min(1150px, 100%);
+
+  margin: 0 auto 35px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 13px;
+}
+
+.footer-brand .brand-mark {
+  background: rgba(255, 255, 255, 0.10);
+
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.footer-brand .brand-mark ion-icon {
+  color: #d2ead6;
+}
+
+.footer-brand h3 {
+  margin: 0 0 4px;
+
+  font-family: var(--sa-font-display);
+
+  font-size: 18px;
+}
+
+.footer-brand p {
+  max-width: 500px;
+
+  margin: 0;
+
+  color: rgba(255, 255, 255, 0.62);
+
+  font-size: 12px;
+
+  line-height: 1.5;
+}
+
+.footer-links {
+  width: min(1150px, 100%);
+
+  margin: 0 auto 25px;
+
+  display: flex;
+
+  justify-content: center;
+
+  gap: 25px;
+
+  flex-wrap: wrap;
+}
+
+.footer-links a {
+  color: rgba(255, 255, 255, 0.75);
+
+  font-size: 12px;
+
+  text-decoration: none;
+
+  transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+  color: white;
+}
+
+.footer-bottom {
+  width: min(1150px, 100%);
+
+  margin: 0 auto;
+
+  padding-top: 20px;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  gap: 15px;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.10);
+
+  color: rgba(255, 255, 255, 0.45);
+
+  font-size: 10.5px;
+}
+
+
+/* =========================================================
+   TABLETTE LARGE — 1100px
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+  .hero-section {
+    padding-left: 6%;
+    padding-right: 6%;
+  }
+
+  .hero-content {
+    width: 55%;
+    max-width: 620px;
+  }
+
+  .hero-weather {
+    right: 5%;
+    width: 260px;
+  }
+
+  .parcel-float {
+    right: 26%;
+  }
+
+  .ai-float {
+    right: 5%;
+  }
+
+  .diagnostic-section {
+    gap: 40px;
+  }
+
+  .assistant-section {
+    gap: 45px;
+
+    padding-left: 6%;
+    padding-right: 6%;
+  }
+}
+
+
+/* =========================================================
+   TABLETTE — 900px
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  /* HERO */
+  .hero-section {
+    min-height: 780px;
+
+    padding: 65px 6% 220px;
+
+    align-items: flex-start;
+  }
+
+  .hero-overlay {
+    background:
+      linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 0.82) 0%,
+        rgba(0, 0, 0, 0.62) 55%,
+        rgba(0, 0, 0, 0.35) 100%
+      );
+  }
+
+  .hero-content {
+    width: 100%;
+    max-width: 650px;
+  }
+
+  .hero-content h1 {
+    font-size: 44px;
+  }
+
+  .hero-content p {
+    max-width: 600px;
+    font-size: 16px;
+  }
+
+  /* MÉTÉO */
+  .hero-weather {
+    top: auto;
+
+    right: 6%;
+    bottom: 135px;
+
+    width: 270px;
+
+    transform: none;
+  }
+
+  /* PETITES CARTES */
+  .hero-float {
+    bottom: 55px;
+  }
+
+  .parcel-float {
+    left: 6%;
+    right: auto;
+  }
+
+  .ai-float {
+    right: 6%;
+  }
+
+  /* FEATURES */
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* DIAGNOSTIC */
+  .diagnostic-section {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .diagnostic-image {
+    height: 380px;
+  }
+
+  /* ASSISTANT */
+  .assistant-section {
+    grid-template-columns: 1fr;
+    gap: 45px;
+    padding: 75px 6%;
+  }
+
+  .assistant-content {
+    max-width: 700px;
+  }
+
+  .assistant-visual {
+    justify-content: flex-start;
+  }
+}
+
+
+/* =========================================================
+   MOBILE — 600px
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+  /* HEADER */
+  .accueil-header {
+    min-height: 64px;
+    padding: 10px 18px;
+  }
+
+  .brand {
+    gap: 8px;
+  }
+
+  .brand-title {
+    font-size: 18px;
+  }
+
+  .brand-mark {
+    width: 38px;
+    height: 38px;
+    border-radius: 11px;
+  }
+
+  .brand-mark ion-icon {
+    font-size: 21px;
+  }
+
+  .login-link {
+    display: none;
+  }
+
+  .header-register {
+    height: 38px;
+    font-size: 11px;
+  }
+
+  .user-header {
+    gap: 7px;
+  }
+
+  .user-info {
+    display: none;
+  }
+
+  .user-avatar {
+    width: 36px;
+    height: 36px;
+  }
+
+  .logout-button {
+    height: 38px;
+    margin-left: 0;
+    font-size: 11px;
+  }
+
+
+  /* HERO */
+  .hero-section {
+    min-height: 900px;
+    padding: 50px 20px 215px;
+    align-items: flex-start;
+  }
+
+  .hero-overlay {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(20, 55, 38, 0.30) 0%,
+        rgba(20, 55, 38, 0.60) 45%,
+        rgba(20, 55, 38, 0.96) 100%
+      );
+  }
+
+  .hero-content {
+    width: 100%;
+    max-width: none;
+  }
+
+  .hero-badge {
+    max-width: 100%;
+    padding: 7px 11px;
+    margin-bottom: 18px;
+    font-size: 11px;
+  }
+
+  .hero-badge ion-icon {
+    font-size: 16px;
+  }
+
+  .hero-content h1 {
+    margin-bottom: 18px;
+    font-size: 36px;
+    line-height: 1.08;
+  }
+
+  .hero-content p {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .hero-action {
+    margin-top: 24px;
+  }
+
+  .hero-primary {
+    height: 48px;
+    font-size: 11px;
+  }
+
+  .hero-info {
+    gap: 10px;
+    margin-top: 20px;
+    font-size: 11px;
+  }
+
+
+  /* MÉTÉO MOBILE */
+  .hero-weather {
+    top: auto;
+    right: 20px;
+    left: 20px;
+    bottom: 140px;
+    width: auto;
+    min-height: auto;
+    padding: 16px;
+    border-radius: 15px;
+    transform: none;
+  }
+
+  .weather-loading,
+  .weather-error {
+    min-height: 150px;
+  }
+
+  .weather-top {
+    gap: 10px;
+  }
+
+  .weather-icon {
+    width: 42px;
+    height: 42px;
+  }
+
+  .weather-icon ion-icon {
+    font-size: 23px;
+  }
+
+  .weather-label {
+    font-size: 8px;
+  }
+
+  .weather-top strong {
+    font-size: 24px;
+  }
+
+  .weather-location {
+    margin-top: 13px;
+    font-size: 11px;
+  }
+
+  .weather-details {
+    margin-top: 13px;
+    padding-top: 12px;
+  }
+
+  .weather-message {
+    margin-top: 12px;
+    padding-top: 10px;
+    font-size: 9px;
+  }
+
+
+  /* PETITES CARTES MOBILE */
+  .hero-float {
+    bottom: 55px;
+    min-height: 52px;
+    padding: 6px 10px 6px 6px;
+    border-radius: 12px;
+    gap: 7px;
+  }
+
+  .parcel-float {
+    left: 20px;
+    right: auto;
+  }
+
+  .ai-float {
+    right: 20px;
+    left: auto;
+  }
+
+  .float-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+  }
+
+  .float-icon ion-icon {
+    font-size: 18px;
+  }
+
+  .hero-float span {
+    font-size: 8px;
+  }
+
+  .hero-float strong {
+    font-size: 10px;
+  }
+
+
+  /* SECTIONS */
+  .features-section,
+  .how-section {
+    padding: 65px 18px;
+  }
+
+  .section-heading {
+    margin-bottom: 30px;
+  }
+
+  .section-heading h2 {
+    font-size: 30px;
+  }
+
+
+  /* FEATURES */
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 13px;
+  }
+
+  .feature-card {
+    padding: 21px;
+  }
+
+  .feature-card p {
+    min-height: auto;
+  }
+
+
+  /* ÉTAPES */
+  .steps {
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+
+  .step {
+    padding: 0 20px;
+  }
+
+  .step-number {
+    right: 20%;
+  }
+
+
+  /* DIAGNOSTIC */
+  .diagnostic-section {
+    width: 88%;
+    margin: 65px auto;
+  }
+
+  .diagnostic-image {
+    height: 300px;
+    border-radius: 20px;
+  }
+
+  .diagnostic-content h2 {
+    font-size: 30px;
+  }
+
+
+  /* ASSISTANT */
+  .assistant-section {
+    padding: 65px 18px;
+  }
+
+  .assistant-content h2 {
+    font-size: 30px;
+  }
+
+  .assistant-card {
+    width: 100%;
+    transform: none;
+    padding: 17px;
+    border-radius: 19px;
+  }
+
+
+  /* CTA */
+  .final-cta {
+    padding: 70px 18px;
+  }
+
+  .final-cta h2 {
+    font-size: 34px;
+  }
+
+  .final-actions {
+    flex-direction: column;
+  }
+
+  .cta-final-button,
+  .final-login {
+    width: 100%;
+  }
+
+
+  /* FOOTER */
+  .accueil-footer {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .footer-brand {
+    align-items: flex-start;
+  }
+
+  .footer-links {
+    justify-content: flex-start;
+    gap: 15px;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 7px;
+  }
+}
+
+
+/* =========================================================
+   TRÈS PETITS ÉCRANS — 380px
+   ========================================================= */
+
+@media (max-width: 380px) {
+
+  .accueil-header {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .brand-title {
+    font-size: 17px;
+  }
+
+  .header-register {
+    padding-left: 8px;
+    padding-right: 8px;
+    font-size: 10px;
+  }
+
+  .hero-section {
+    min-height: 900px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .hero-content h1 {
+    font-size: 32px;
+  }
+
+  .hero-content p {
+    font-size: 13px;
+  }
+
+  .hero-info {
+    font-size: 10px;
+  }
+
+  .hero-weather {
+    right: 16px;
+    left: 16px;
+    bottom: 140px;
+    padding: 14px;
+  }
+
+  .hero-float {
+    bottom: 55px;
+  }
+
+  .parcel-float {
+    left: 16px;
+  }
+
+  .ai-float {
+    right: 16px;
+  }
+
+  .hero-float span {
+    font-size: 7px;
+  }
+
+  .hero-float strong {
+    font-size: 9px;
+  }
+
+  .float-icon {
+    width: 32px;
+    height: 32px;
+  }
+}

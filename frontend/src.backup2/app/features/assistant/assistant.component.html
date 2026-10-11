@@ -1,0 +1,113 @@
+<ion-content class="assistant-content" [fullscreen]="true">
+
+  <!-- =========================
+     HEADER ASSISTANT IA
+     ========================= -->
+
+<div class="assistant-header">
+
+  <!-- Partie gauche -->
+  <div class="header-left">
+
+    <!-- Retour vers l'accueil -->
+    <button
+      class="home-button"
+      routerLink="/accueil"
+      type="button">
+
+      <ion-icon name="home-outline"></ion-icon>
+
+      <span>Accueil</span>
+
+    </button>
+
+
+    <!-- Séparateur -->
+    <div class="header-divider"></div>
+
+
+    <!-- Titre -->
+    <div class="header-title">
+
+      <span class="header-label">
+        SUNUAGRI
+      </span>
+
+      <h1>
+        Assistant IA
+      </h1>
+
+    </div>
+
+  </div>
+
+
+  <!-- Partie droite -->
+  <div class="header-page-icon">
+
+    <div class="page-icon-circle">
+
+      <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
+
+    </div>
+
+    <div class="page-icon-text">
+
+      <span>
+        ASSISTANT
+      </span>
+
+      <strong>
+        INTELLIGENT
+      </strong>
+
+    </div>
+
+  </div>
+
+</div>
+
+  <div class="messages" #scrollArea>
+
+    <div class="bubble-row" *ngFor="let m of messages" [class.mine]="m.type === 'UTILISATEUR'">
+      <div class="avatar bot-avatar" *ngIf="m.type === 'ASSISTANT'">
+        <ion-icon name="leaf-outline"></ion-icon>
+      </div>
+
+      <div class="bubble" [class.bubble-mine]="m.type === 'UTILISATEUR'" [class.bubble-assistant]="m.type === 'ASSISTANT'">
+        {{ m.contenu }}
+      </div>
+    </div>
+
+    <div class="bubble-row" *ngIf="enTrainDecrire">
+      <div class="avatar bot-avatar">
+        <ion-icon name="leaf-outline"></ion-icon>
+      </div>
+      <div class="bubble bubble-assistant typing">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+
+    <div class="suggestions" *ngIf="messages.length <= 1">
+      <button class="suggestion-chip" *ngFor="let s of suggestions" (click)="envoyer(s)">
+        {{ s }}
+      </button>
+    </div>
+
+  </div>
+
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <div class="input-bar">
+    <input
+      type="text"
+      [(ngModel)]="saisie"
+      placeholder="Pose ta question..."
+      (keyup.enter)="envoyer()"
+    />
+    <button class="send-btn" (click)="envoyer()" [disabled]="!saisie.trim()">
+      <ion-icon name="send-outline"></ion-icon>
+    </button>
+  </div>
+</ion-footer>

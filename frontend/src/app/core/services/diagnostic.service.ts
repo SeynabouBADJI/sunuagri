@@ -2,13 +2,17 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { DiagnosticAnalyseResponse } from '../models/diagnostic-analyse.model';
+import { environment } from '../../../environments/environment';
+
+
 
 @Injectable({ providedIn: 'root' })
 export class DiagnosticService {
 
-  private apiUrl = 'http://localhost:8080/api';   // ⚠️ Voir note ci-dessous
-  // Sur émulateur Android : 10.0.2.2 = localhost du PC
-  // Sur téléphone physique : mets l'IP de ton PC (ex: 192.168.1.15)
+  //private apiUrl = 'http://localhost:8080/api';   
+  private apiUrl = environment.apiUrl;
+
+  
 
   constructor(private http: HttpClient) {}
 

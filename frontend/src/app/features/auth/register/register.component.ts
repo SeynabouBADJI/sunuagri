@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+import { IonicSharedModule } from '../../../shared/ionic-shared.module';
 import { Router, RouterLink } from '@angular/router';
 
 import { AuthService } from '../../../core/services/auth.service';
@@ -13,7 +13,7 @@ import { AuthService } from '../../../core/services/auth.service';
   imports: [
     CommonModule,
     FormsModule,
-    IonicModule,
+    IonicSharedModule,
     RouterLink
   ],
 

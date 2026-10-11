@@ -1,0 +1,417 @@
+<ion-content class="diagnostic-content" [fullscreen]="true">
+
+  <!-- =========================
+       HEADER DIAGNOSTIC
+       ========================= -->
+
+  <div class="diagnostic-header">
+
+    <div class="header-left">
+
+      <button
+        class="home-button"
+        routerLink="/accueil"
+        type="button">
+
+        <ion-icon name="home-outline"></ion-icon>
+        <span>Accueil</span>
+
+      </button>
+
+      <div class="header-divider"></div>
+
+      <div class="header-title">
+
+        <span class="header-label">SUNUAGRI</span>
+        <h1>Diagnostic agricole</h1>
+
+      </div>
+
+    </div>
+
+    <div class="header-page-icon">
+
+      <div class="page-icon-circle">
+        <ion-icon name="medkit-outline"></ion-icon>
+      </div>
+
+      <div class="page-icon-text">
+        <span>DIAGNOSTIC</span>
+        <strong>DES CULTURES</strong>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ========================================= -->
+  <!-- INTRODUCTION -->
+  <!-- ========================================= -->
+
+  <section class="diagnostic-intro">
+
+    <span class="section-label">INTELLIGENCE ARTIFICIELLE</span>
+
+    <h2>
+      Identifiez une maladie
+      <span>à partir d'une photo.</span>
+    </h2>
+
+    <p>
+      Photographiez une feuille ou sélectionnez une
+      image depuis votre galerie. SunuAgri analysera
+      la plante et vous proposera un diagnostic.
+    </p>
+
+  </section>
+
+
+  <!-- ========================================= -->
+  <!-- ZONE DE DIAGNOSTIC -->
+  <!-- ========================================= -->
+
+  <section class="diagnostic-card">
+
+    <!-- AVANT ANALYSE -->
+    <div class="upload-zone" *ngIf="!selectedImage">
+
+      <div class="upload-icon">
+        <ion-icon name="camera-outline"></ion-icon>
+      </div>
+
+      <h3>Analysez votre plante</h3>
+
+      <p>
+        Prenez une photo claire de la feuille
+        présentant les symptômes.
+      </p>
+
+      <div class="upload-actions">
+
+        <ion-button class="primary-button" (click)="takePhoto()">
+          <ion-icon slot="start" name="camera-outline"></ion-icon>
+          Prendre une photo
+        </ion-button>
+
+        <ion-button
+          fill="outline"
+          class="secondary-button"
+          (click)="selectFromGallery()">
+          <ion-icon slot="start" name="images-outline"></ion-icon>
+          Galerie
+        </ion-button>
+
+      </div>
+
+    </div>
+
+
+    <!-- IMAGE SÉLECTIONNÉE -->
+    <div class="selected-image-container" *ngIf="selectedImage">
+
+      <div class="image-header">
+
+        <div>
+          <span>IMAGE À ANALYSER</span>
+          <strong>{{ selectedFileName }}</strong>
+        </div>
+
+        <ion-button
+          fill="clear"
+          class="remove-button"
+          (click)="removeImage()">
+          <ion-icon slot="icon-only" name="close-circle-outline"></ion-icon>
+        </ion-button>
+
+      </div>
+
+      <div class="plant-image-wrapper">
+        <img [src]="selectedImage" alt="Image de la plante" class="plant-image" />
+      </div>
+
+      <!-- Erreur -->
+      <div class="error-box" *ngIf="erreur">
+        <ion-icon name="alert-circle-outline"></ion-icon>
+        <span>{{ erreur }}</span>
+      </div>
+
+      <!-- BOUTON ANALYSE -->
+      <ion-button
+        expand="block"
+        class="analyze-button"
+        [disabled]="isAnalyzing"
+        (click)="analyzeImage()">
+
+        <ion-spinner *ngIf="isAnalyzing" name="crescent"></ion-spinner>
+        <ion-icon *ngIf="!isAnalyzing" slot="start" name="scan-outline"></ion-icon>
+
+        {{ isAnalyzing ? 'Analyse en cours...' : 'Analyser la plante' }}
+
+      </ion-button>
+
+    </div>
+
+  </section>
+
+
+  <!-- ========================================= -->
+  <!-- CHARGEMENT -->
+  <!-- ========================================= -->
+
+  <section class="analysis-loading" *ngIf="isAnalyzing">
+
+    <div class="loading-icon">
+      <ion-icon name="analytics-outline"></ion-icon>
+    </div>
+
+    <h3>Analyse de votre plante...</h3>
+
+    <p>
+      Notre intelligence artificielle examine
+      les caractéristiques de la feuille.
+    </p>
+
+    <ion-progress-bar type="indeterminate"></ion-progress-bar>
+
+  </section>
+
+
+  <!-- ========================================= -->
+  <!-- RÉSULTAT -->
+  <!-- ========================================= -->
+
+  <section class="result-section" *ngIf="diagnosticResult && !isAnalyzing">
+
+    <div class="result-header">
+
+      <div>
+        <span class="section-label">RÉSULTAT DU DIAGNOSTIC</span>
+        <h2>Diagnostic terminé</h2>
+      </div>
+
+      <div class="success-icon">
+        <ion-icon name="checkmark-outline"></ion-icon>
+      </div>
+
+    </div>
+
+
+    <!-- Résultat principal -->
+    <div class="result-main-card" [class.saine]="diagnosticResult.saine">
+
+      <div class="disease-icon">
+        <ion-icon [name]="diagnosticResult.saine ? 'leaf-outline' : 'bug-outline'"></ion-icon>
+      </div>
+
+      <div class="disease-info">
+
+        <span>
+          {{ diagnosticResult.saine ? 'PLANTE SAINE' : 'MALADIE DÉTECTÉE' }}
+        </span>
+
+        <h3>{{ diagnosticResult.maladieNom }}</h3>
+
+        <p>Culture : {{ diagnosticResult.culture }}</p>
+
+      </div>
+
+    </div>
+
+
+    <!-- Niveau de confiance -->
+    <div class="confidence-card">
+
+      <div class="confidence-header">
+
+        <div>
+          <span>NIVEAU DE CONFIANCE</span>
+          <strong>{{ diagnosticResult.confiance }}%</strong>
+        </div>
+
+        <ion-icon name="analytics-outline"></ion-icon>
+
+      </div>
+
+      <ion-progress-bar [value]="diagnosticResult.confiance / 100"></ion-progress-bar>
+
+      <p>
+        Le modèle estime que cette prédiction
+        est fiable à {{ diagnosticResult.confiance }}%.
+      </p>
+
+    </div>
+
+
+    <!-- Top 3 -->
+    <div class="top3-card" *ngIf="diagnosticResult.top3 && diagnosticResult.top3.length > 0">
+
+      <div class="information-title">
+
+        <div class="small-icon">
+          <ion-icon name="list-outline"></ion-icon>
+        </div>
+
+        <h3>Autres hypothèses</h3>
+
+      </div>
+
+      <div class="top3-list">
+
+        <div class="top3-item" *ngFor="let item of diagnosticResult.top3">
+
+          <span class="top3-nom">{{ item.nomFr }}</span>
+          <span class="top3-conf">{{ item.confiance }}%</span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- Symptômes -->
+    <div class="information-card" *ngIf="diagnosticResult.symptomes">
+
+      <div class="information-title">
+
+        <div class="small-icon">
+          <ion-icon name="eye-outline"></ion-icon>
+        </div>
+
+        <h3>Symptômes</h3>
+
+      </div>
+
+      <p class="disease-description">
+        {{ diagnosticResult.symptomes }}
+      </p>
+
+    </div>
+
+
+    <!-- Traitement -->
+    <div class="recommendation-card" *ngIf="diagnosticResult.traitement">
+
+      <div class="information-title">
+
+        <div class="small-icon">
+          <ion-icon name="bulb-outline"></ion-icon>
+        </div>
+
+        <h3>Recommandations</h3>
+
+      </div>
+
+      <div class="recommendation">
+
+        <ion-icon name="checkmark-circle-outline"></ion-icon>
+        <span>{{ diagnosticResult.traitement }}</span>
+
+      </div>
+
+    </div>
+
+
+    <!-- Avertissement -->
+    <div class="result-warning">
+
+      <ion-icon name="information-circle-outline"></ion-icon>
+
+      <p>
+        Ce diagnostic est fourni à titre indicatif.
+        Pour une confirmation, consultez un technicien
+        agronome.
+      </p>
+
+    </div>
+
+
+    <ion-button
+      expand="block"
+      fill="outline"
+      class="new-diagnostic-button"
+      (click)="newDiagnostic()">
+
+      <ion-icon slot="start" name="refresh-outline"></ion-icon>
+      Nouveau diagnostic
+
+    </ion-button>
+
+  </section>
+
+
+  <!-- ========================================= -->
+  <!-- HISTORIQUE -->
+  <!-- ========================================= -->
+
+  <section class="history-section">
+
+    <div class="section-heading">
+
+      <div>
+        <span class="section-label">HISTORIQUE</span>
+        <h2>Diagnostics récents</h2>
+      </div>
+
+      <ion-button fill="clear" class="see-all-button">
+        Voir tout
+      </ion-button>
+
+    </div>
+
+
+    <div class="history-list">
+
+      <div class="history-card" *ngFor="let item of recentDiagnostics">
+
+        <div class="history-icon">
+          <ion-icon name="leaf-outline"></ion-icon>
+        </div>
+
+        <div class="history-info">
+          <h3>{{ item.maladieNom }}</h3>
+          <p>{{ item.culture }} • {{ item.dateDiagnostic }}</p>
+        </div>
+
+        <div class="history-confidence">
+          <strong>{{ item.confiance }}%</strong>
+          <span>confiance</span>
+        </div>
+
+      </div>
+
+      <!-- Vide -->
+      <p class="history-empty" *ngIf="recentDiagnostics.length === 0">
+        Aucun diagnostic pour l'instant.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- ========================================= -->
+  <!-- FOOTER -->
+  <!-- ========================================= -->
+
+  <footer class="diagnostic-footer">
+
+    <div class="footer-logo">
+
+      <div class="footer-mark">
+        <ion-icon name="leaf-outline"></ion-icon>
+      </div>
+
+      <strong>SunuAgri</strong>
+
+    </div>
+
+    <p>
+      Une agriculture plus intelligente,
+      au service des agriculteurs sénégalais.
+    </p>
+
+  </footer>
+
+</ion-content>

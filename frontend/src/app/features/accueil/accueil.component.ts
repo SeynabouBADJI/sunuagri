@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
+import { IonicSharedModule } from '../../shared/ionic-shared.module';
 import { Router, RouterLink } from '@angular/router';
 import { Geolocation } from '@capacitor/geolocation';
 
@@ -12,7 +12,7 @@ import { WeatherService } from '../../core/services/weather.service';
   standalone: true,
   imports: [
     CommonModule,
-    IonicModule,
+    IonicSharedModule,
     RouterLink
   ],
   templateUrl: './accueil.component.html',
